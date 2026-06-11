@@ -146,6 +146,7 @@
     .mobile-nav.open a:nth-child(3) { transition-delay: .15s; }
     .mobile-nav.open a:nth-child(4) { transition-delay: .22s; }
     .mobile-nav.open a:nth-child(5) { transition-delay: .29s; }
+    .mobile-nav.open a:nth-child(6) { transition-delay: .36s; }
     .mobile-nav-close {
       position: absolute; top: 14px; right: 18px;
       background: none; border: none; cursor: pointer;
@@ -652,6 +653,38 @@
     .plan-unico-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
     .plan-unico-right .split-label { text-align: right; }
 
+    /* ======== PRUEBA SOCIAL / CASOS ======== */
+    .casos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; padding-bottom: 72px;
+    }
+    .caso-card {
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: 4px; padding: 32px 26px;
+      display: flex; flex-direction: column;
+    }
+    .caso-tipo {
+      font-family: 'Poppins', sans-serif; font-size: 10px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 14px;
+    }
+    .caso-resultado {
+      font-size: clamp(18px, 2.2vw, 22px); font-weight: 600;
+      line-height: 1.25; letter-spacing: -.01em; margin-bottom: 20px;
+    }
+    .caso-resultado em { font-style: italic; color: var(--sage); }
+    .caso-quote {
+      flex: 1; font-size: 14.5px; color: var(--muted); line-height: 1.78;
+      padding-top: 18px; border-top: 1px solid var(--line);
+      font-style: italic;
+    }
+    .caso-firma {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .04em; color: var(--muted); font-weight: 500;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--line); font-style: normal;
+    }
+
     /* ======== RESPONSIVE ======== */
     @media (max-width: 860px) {
       .nav-links, .btn-nav { display: none; }
@@ -671,6 +704,7 @@
       .pstat:nth-child(1), .pstat:nth-child(2) { border-bottom: none; }
       .pstat { border-top: 1px solid var(--line); }
 
+      .casos-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
       .servicios-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
       .plan-unico { grid-template-columns: 1fr; gap: 20px; }
       .plan-unico-right { align-items: flex-start; }
@@ -727,6 +761,7 @@
   <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">×</button>
   <a href="#problema" onclick="closeMobile()">El problema</a>
   <a href="#proceso"  onclick="closeMobile()">Cómo trabajamos</a>
+  <a href="#casos"    onclick="closeMobile()">Resultados</a>
   <a href="#servicios" onclick="closeMobile()">Servicios</a>
   <a href="#contacto" onclick="closeMobile()">Contacto</a>
 </div>
@@ -746,9 +781,10 @@
       <ul class="nav-links">
         <li><a href="#problema">El problema</a></li>
         <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#casos">Resultados</a></li>
         <li><a href="#servicios">Servicios</a></li>
       </ul>
-      <a href="#contacto" class="btn-nav">Consulta gratuita</a>
+      <a href="#contacto" class="btn-nav">Diagnóstico gratis</a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -770,10 +806,10 @@
       <h1 class="hero-title" id="heroTitle" aria-label="Los abogados trabajan para ganar. Nosotros trabajamos para que los encuentren."></h1>
       <div class="hero-foot">
         <p class="hero-desc reveal d2">
-          La mayoría de los abogados argentinos trabaja sin presencia digital. Veredicto cambia eso: sitio web profesional, Google Maps optimizado y posicionamiento local exactamente donde están los clientes.
+          La mayoría de los estudios argentinos no aparece cuando el cliente busca. Hacemos un diagnóstico gratuito de tu presencia en Google y te decimos exactamente qué hay que cambiar, sin compromiso.
         </p>
         <div class="hero-actions reveal d3">
-          <a href="#contacto" class="btn-primary">Empezar ahora</a>
+          <a href="#contacto" class="btn-primary">Diagnóstico gratuito</a>
           <a href="#servicios" class="btn-ghost">Ver servicios</a>
         </div>
       </div>
@@ -787,7 +823,7 @@
         <div class="hero-bar-label">de personas busca<br>abogado en Google primero</div>
       </div>
       <div class="hero-bar-item reveal d2">
-        <div class="hero-bar-num"><span class="accent">+</span><span class="counter" data-target="60">0</span><span class="accent">%</span></div>
+        <div class="hero-bar-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
         <div class="hero-bar-label">de estudios no tiene<br>presencia digital real</div>
       </div>
       <div class="hero-bar-item reveal d3">
@@ -836,9 +872,9 @@
         <p class="pstat-desc">De cada 10 personas que necesitan un abogado, 8 empiezan en Google. No en el directorio, no por recomendación directa.</p>
       </div>
       <div class="pstat reveal d1">
-        <div class="pstat-num"><span class="accent">+</span><span class="counter" data-target="60">0</span><span class="accent">%</span></div>
+        <div class="pstat-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
         <div class="pstat-label">Sin presencia real</div>
-        <p class="pstat-desc">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza.</p>
+        <p class="pstat-desc">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza ni consultas.</p>
       </div>
       <div class="pstat reveal">
         <div class="pstat-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
@@ -910,11 +946,59 @@
   </div>
 </section>
 
-<!-- ===== SECCIÓN 03 · SERVICIOS ===== -->
+<!-- ===== SECCIÓN 03 · CASOS / PRUEBA SOCIAL ===== -->
+<section id="casos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">03 · Resultados</div>
+      <h2 class="sec-title reveal d1">Lo que dicen<br>los <em>estudios.</em></h2>
+      <p class="sec-intro reveal d2">Cada caso empieza igual: un estudio que no aparece en Google. Lo que cambia es el tiempo que tarda en cambiar eso.</p>
+    </div>
+
+    <div class="casos-grid">
+
+      <!-- CASO 01 — REEMPLAZAR con datos reales cuando estén disponibles -->
+      <div class="caso-card reveal">
+        <div class="caso-tipo">Estudio unipersonal · Córdoba</div>
+        <div class="caso-resultado">De 0 a <em>18 consultas</em><br>en el primer mes</div>
+        <div class="caso-quote">
+          <!-- TESTIMONIO: reemplazar con cita real del cliente -->
+          "Antes no aparecía en Google ni buscando el nombre del estudio. En tres semanas estaba en los primeros resultados y empezaron a llegar consultas por mail."
+          <div class="caso-firma">— Dr. [Nombre] · Derecho de familia</div>
+        </div>
+      </div>
+
+      <!-- CASO 02 — REEMPLAZAR con datos reales cuando estén disponibles -->
+      <div class="caso-card reveal d1">
+        <div class="caso-tipo">Estudio de 3 socios · Interior</div>
+        <div class="caso-resultado">Ficha Maps con <em>4,9 ★</em><br>y 47 reseñas nuevas</div>
+        <div class="caso-quote">
+          <!-- TESTIMONIO: reemplazar con cita real del cliente -->
+          "Teníamos una ficha en Maps sin fotos, sin descripción y sin una sola reseña. Hoy tenemos más reseñas que los estudios más grandes de la zona."
+          <div class="caso-firma">— Dra. [Nombre] · Derecho laboral</div>
+        </div>
+      </div>
+
+      <!-- CASO 03 — REEMPLAZAR con datos reales cuando estén disponibles -->
+      <div class="caso-card reveal d2">
+        <div class="caso-tipo">Estudio boutique · CABA</div>
+        <div class="caso-resultado">Sitio nuevo y <em>3× más</em><br>consultas digitales</div>
+        <div class="caso-quote">
+          <!-- TESTIMONIO: reemplazar con cita real del cliente -->
+          "El sitio anterior daba vergüenza mostrarlo. El nuevo lo mandamos a cada reunión y habla solo. Las consultas por mail se triplicaron en 60 días."
+          <div class="caso-firma">— Dr. [Nombre] · Derecho corporativo</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 04 · SERVICIOS ===== -->
 <section id="servicios">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num reveal">03 · Planes</div>
+      <div class="sec-num reveal">04 · Planes</div>
       <h2 class="sec-title reveal d1">Cuatro opciones.<br><em>Un solo objetivo:</em> aparecer.</h2>
       <p class="sec-intro reveal d2">Todos los planes combinan un setup único más un abono mensual. El abono cubre hosting, dominio y el trabajo activo que mantiene la presencia viva y visible.</p>
     </div>
@@ -929,12 +1013,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 190</div>
+            <div class="split-price">USD 250</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 35<span class="period">/mes</span></div>
+            <div class="split-price">USD 50<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -953,12 +1037,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 360</div>
+            <div class="split-price">USD 450</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 65<span class="period">/mes</span></div>
+            <div class="split-price">USD 90<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -977,12 +1061,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 500</div>
+            <div class="split-price">USD 650</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 120<span class="period">/mes</span></div>
+            <div class="split-price">USD 150<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -1009,7 +1093,7 @@
       </div>
       <div class="plan-unico-right">
         <div class="split-label">Pago único total</div>
-        <div class="plan-unico-price">USD 640</div>
+        <div class="plan-unico-price">USD 900</div>
         <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
       </div>
     </div>
@@ -1017,11 +1101,11 @@
   </div>
 </section>
 
-<!-- ===== SECCIÓN 04 · POR QUÉ VEREDICTO ===== -->
+<!-- ===== SECCIÓN 05 · POR QUÉ VEREDICTO ===== -->
 <section id="porque">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num reveal">04 · La diferencia</div>
+      <div class="sec-num reveal">05 · La diferencia</div>
       <h2 class="sec-title reveal d1">Especialistas en el<br>sector <em>jurídico.</em> Solo eso.</h2>
     </div>
 
@@ -1077,14 +1161,14 @@
   </div>
 </section>
 
-<!-- ===== SECCIÓN 05 · CONTACTO ===== -->
+<!-- ===== SECCIÓN 06 · CONTACTO ===== -->
 <section id="contacto" class="cta-section">
   <div class="wrap">
     <div class="cta-grid">
       <div class="cta-left">
-        <div class="sec-num reveal">05 · Contacto</div>
-        <h2 class="reveal d1">¿Listo para que<br>tu estudio <em>aparezca?</em></h2>
-        <p class="reveal d2">Una consulta inicial es gratuita y sin compromiso. Analizamos la situación del estudio y te decimos qué tiene sentido hacer, con qué presupuesto y en qué plazo.</p>
+        <div class="sec-num reveal">06 · Contacto</div>
+        <h2 class="reveal d1">Diagnóstico gratuito<br>de tu <em>presencia.</em></h2>
+        <p class="reveal d2">Analizamos en detalle cómo aparece el estudio en Google, qué hace la competencia local y qué cambios generarían más consultas. El diagnóstico es gratuito, personalizado y sin obligación de contratar.</p>
         <div class="contact-rows reveal d3">
           <div class="contact-row">
             <svg viewBox="0 0 16 16"><path d="M2 4h12v9H2zM2 4l6 5 6-5"/></svg>
@@ -1102,7 +1186,7 @@
       </div>
 
       <div class="contact-form reveal d2">
-        <div class="form-head">Consulta gratuita</div>
+        <div class="form-head">Diagnóstico gratuito</div>
         <form id="ctaForm">
           <div class="form-row">
             <label for="nombre">Nombre completo</label>
@@ -1116,18 +1200,18 @@
             <label for="plan">¿Qué plan le interesa?</label>
             <select id="plan" name="plan">
               <option value="">— Seleccionar —</option>
-              <option value="plan1">Plan 01 · Presencia (USD 190 + 35/mes)</option>
-              <option value="plan2">Plan 02 · Estudio Profesional (USD 360 + 65/mes)</option>
-              <option value="plan3">Plan 03 · Crecimiento + Redes (USD 500 + 120/mes)</option>
-              <option value="plan4">Plan 04 · Pago Único (USD 640)</option>
-              <option value="consulta">Solo quiero una consulta inicial</option>
+              <option value="plan1">Plan 01 · Presencia (USD 250 + 50/mes)</option>
+              <option value="plan2">Plan 02 · Estudio Profesional (USD 450 + 90/mes)</option>
+              <option value="plan3">Plan 03 · Crecimiento + Redes (USD 650 + 150/mes)</option>
+              <option value="plan4">Plan 04 · Pago Único (USD 900)</option>
+              <option value="consulta">Solo quiero el diagnóstico gratuito</option>
             </select>
           </div>
           <div class="form-row">
             <label for="situacion">Situación actual del estudio</label>
             <textarea id="situacion" name="situacion" placeholder="¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…"></textarea>
           </div>
-          <button type="submit" class="btn-submit" id="submitBtn">Enviar consulta →</button>
+          <button type="submit" class="btn-submit" id="submitBtn">Solicitar diagnóstico →</button>
         </form>
       </div>
     </div>
@@ -1152,10 +1236,10 @@
       <div class="footer-col">
         <h4>Servicios</h4>
         <ul>
-          <li><a href="#servicios">Plan Presencia</a></li>
-          <li><a href="#servicios">Plan Visibilidad</a></li>
-          <li><a href="#servicios">Plan Autoridad</a></li>
-          <li><a href="#servicios">À la carte</a></li>
+          <li><a href="#servicios">Plan 01 · Presencia</a></li>
+          <li><a href="#servicios">Plan 02 · Estudio Profesional</a></li>
+          <li><a href="#servicios">Plan 03 · Crecimiento + Redes</a></li>
+          <li><a href="#servicios">Plan 04 · Pago Único</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1278,7 +1362,7 @@ const counterObserver = new IntersectionObserver(entries => {
     })(performance.now());
     counterObserver.unobserve(el);
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
 /* -------- MAGNETIC BUTTONS (desktop only) -------- */
@@ -1348,11 +1432,11 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
   })
     .then(res => {
       if (res.ok) {
-        btn.textContent      = '¡Consulta recibida! Nos contactamos pronto.';
+        btn.textContent      = '¡Diagnóstico solicitado! Nos contactamos pronto.';
         btn.style.background = 'var(--sage)';
         this.reset();
         setTimeout(() => {
-          btn.textContent      = 'Enviar consulta →';
+          btn.textContent      = 'Solicitar diagnóstico →';
           btn.style.background = '';
           btn.disabled         = false;
         }, 5000);
