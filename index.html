@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agencia Veredicto · Marketing Jurídico</title>
+  <meta name="description" content="Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======== TOKENS ======== */
+    :root {
+      --ink:    #1C2B1E;
+      --sage:   #4A7C59;
+      --sage-l: #8BAF6E;
+      --cream:  #F7F5EF;
+      --paper:  #FFFFFF;
+      --line:   #E4E1D7;
+      --muted:  #5d6b5f;
+    }
+
+    /* ======== RESET ======== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ======== UTILITIES ======== */
+    .wrap      { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .eyebrow   {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600;
+    }
+    .sec-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600;
+      display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    }
+    .sec-num::after {
+      content: ''; display: block;
+      width: 36px; height: 1px; background: var(--sage-l);
+    }
+    h2.sec-title {
+      font-size: clamp(28px, 4vw, 50px);
+      font-weight: 600; line-height: 1.08; letter-spacing: -.025em;
+      margin-bottom: 20px;
+    }
+    h2.sec-title em { font-style: italic; color: var(--sage); }
+    .sec-intro {
+      font-size: 16.5px; color: var(--muted); max-width: 62ch;
+      line-height: 1.8; margin-bottom: 56px;
+    }
+    .sec-head { padding: 76px 0 0; }
+
+    /* ======== NAV ======== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 22px 0;
+      transition: padding .35s ease, background .35s ease, box-shadow .35s ease;
+    }
+    nav.scrolled {
+      padding: 14px 0;
+      background: rgba(247,245,239,.95);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--line);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .emblem {
+      display: flex; align-items: center; gap: 13px;
+      text-decoration: none; color: var(--ink);
+    }
+    .emblem svg { width: 36px; height: 40px; flex: none; }
+    .emblem .name {
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase; font-size: 13px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif; font-size: 12px; letter-spacing: .06em;
+      color: var(--muted); text-decoration: none; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .btn-nav {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--ink); color: var(--cream);
+      border: none; padding: 11px 22px; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-nav:hover { background: var(--sage); transform: translateY(-1px); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px; background: var(--ink);
+      transition: transform .3s, opacity .3s;
+    }
+
+    /* mobile overlay */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0;
+      background: var(--cream); z-index: 199;
+      flex-direction: column; justify-content: center;
+      align-items: center; gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Lora', serif; font-size: 30px; font-weight: 600;
+      color: var(--ink); text-decoration: none; letter-spacing: -.01em;
+      transition: color .2s;
+    }
+    .mobile-nav a:hover { color: var(--sage); }
+    .mobile-nav-close {
+      position: absolute; top: 22px; right: 28px;
+      background: none; border: none; cursor: pointer;
+      font-size: 30px; color: var(--muted); line-height: 1;
+    }
+
+    /* ======== HERO ======== */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding-top: 90px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden; position: relative;
+    }
+    .hero-content {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-bottom: 28px;
+    }
+    .hero-eyebrow { margin-bottom: 36px; }
+    h1.hero-title {
+      font-size: clamp(44px, 7.5vw, 96px);
+      font-weight: 600; line-height: 1.02; letter-spacing: -.03em;
+      max-width: 17ch; margin-bottom: 44px;
+    }
+    h1.hero-title em { font-style: italic; color: var(--sage); }
+    .hero-foot {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 40px;
+    }
+    .hero-desc {
+      font-size: 17.5px; color: var(--muted);
+      max-width: 50ch; line-height: 1.75;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+    .btn-primary {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      background: var(--ink); color: var(--cream);
+      border: none; padding: 16px 32px; border-radius: 2px;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500;
+      color: var(--muted); text-decoration: none; letter-spacing: .04em;
+      border-bottom: 1px solid var(--line); padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--sage-l); }
+
+    /* giant background number */
+    .hero-bg-num {
+      position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Lora', serif;
+      font-size: clamp(160px, 24vw, 320px);
+      font-weight: 600; color: transparent;
+      -webkit-text-stroke: 1.5px var(--line);
+      line-height: 1; letter-spacing: -.04em;
+      pointer-events: none; user-select: none;
+      animation: bg-drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes bg-drift {
+      from { transform: translateY(-52%) rotate(-.5deg); }
+      to   { transform: translateY(-48%) rotate(.5deg); }
+    }
+
+    /* hero bottom bar */
+    .hero-bar {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+    }
+    .hero-bar-item {
+      padding: 20px 0;
+      border-right: 1px solid var(--line);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-bar-item:last-child { border-right: none; padding-left: 28px; }
+    .hero-bar-item:not(:first-child) { padding-left: 28px; }
+    .hero-bar-num {
+      font-family: 'Lora', serif; font-size: 28px; font-weight: 600;
+      color: var(--ink); letter-spacing: -.02em; flex: none;
+    }
+    .hero-bar-num span { color: var(--sage); }
+    .hero-bar-label {
+      font-family: 'Poppins', sans-serif; font-size: 11.5px;
+      color: var(--muted); line-height: 1.4; letter-spacing: .01em;
+    }
+
+    /* ======== TICKER ======== */
+    .ticker {
+      overflow: hidden; padding: 15px 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .ticker-track {
+      display: flex; width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker-item {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); font-weight: 500;
+      padding: 0 36px; white-space: nowrap;
+      display: flex; align-items: center; gap: 36px;
+    }
+    .ticker-item::after {
+      content: '·'; color: var(--sage-l); font-size: 20px; line-height: 1;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ======== SECTIONS ======== */
+    section { border-bottom: 1px solid var(--line); }
+
+    /* ======== PROBLEMA ======== */
+    .problema-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      padding: 56px 0 72px;
+    }
+    .pstat {
+      padding: 44px 44px 44px 0;
+      border-right: 1px solid var(--line);
+    }
+    .pstat:nth-child(even) {
+      padding: 44px 0 44px 44px;
+      border-right: none;
+    }
+    .pstat:nth-child(1), .pstat:nth-child(2) {
+      border-bottom: 1px solid var(--line);
+    }
+    .pstat-num {
+      font-family: 'Lora', serif;
+      font-size: clamp(52px, 8vw, 88px);
+      font-weight: 600; line-height: 1; letter-spacing: -.03em;
+      color: var(--ink); margin-bottom: 14px;
+    }
+    .pstat-num .accent { color: var(--sage); }
+    .pstat-label {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 14px;
+    }
+    .pstat-desc {
+      font-size: 14.5px; color: var(--muted); max-width: 34ch; line-height: 1.75;
+    }
+
+    /* ======== DECLARATION ======== */
+    .declaration {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .declaration blockquote {
+      font-size: clamp(22px, 3.4vw, 42px);
+      font-weight: 600; line-height: 1.18; letter-spacing: -.02em;
+      max-width: 22ch; margin-bottom: 28px;
+    }
+    .declaration blockquote em { font-style: italic; color: var(--sage); }
+    .declaration cite {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); font-style: normal;
+    }
+
+    /* ======== PROCESO ======== */
+    .proceso-list { padding: 8px 0 72px; }
+    .proceso-item {
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 40px; padding: 44px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+      transition: background .2s;
+    }
+    .proceso-item:last-child { border-bottom: 1px solid var(--line); }
+    .proceso-num {
+      font-family: 'Lora', serif; font-size: 52px; font-weight: 600;
+      color: var(--line); letter-spacing: -.03em; line-height: 1;
+      padding-top: 2px;
+      transition: color .4s cubic-bezier(.16,1,.3,1);
+    }
+    .proceso-item:hover .proceso-num { color: var(--sage-l); }
+    .proceso-tag {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif; font-size: 10px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600;
+      border: 1px solid rgba(74,124,89,.3);
+      padding: 4px 10px; border-radius: 2px; margin-bottom: 13px;
+    }
+    .proceso-content h3 {
+      font-size: 21px; font-weight: 600;
+      margin-bottom: 10px; letter-spacing: -.01em;
+    }
+    .proceso-content p {
+      font-size: 15px; color: var(--muted);
+      max-width: 56ch; line-height: 1.8;
+    }
+
+    /* ======== SERVICIOS ======== */
+    .servicios-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; padding-bottom: 72px;
+    }
+    .plan-card {
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: 4px; padding: 34px 26px 30px;
+      display: flex; flex-direction: column; position: relative;
+      transition: transform .28s cubic-bezier(.16,1,.3,1),
+                  box-shadow .28s cubic-bezier(.16,1,.3,1);
+    }
+    .plan-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 22px 44px -20px rgba(28,43,30,.3);
+    }
+    .plan-card.featured { border-color: var(--sage); border-width: 1.5px; }
+    .plan-card.featured::before {
+      content: 'Plan objetivo';
+      position: absolute; top: -11px; left: 26px;
+      background: var(--ink); color: var(--cream);
+      font-family: 'Poppins', sans-serif; font-size: 10px;
+      letter-spacing: .18em; text-transform: uppercase; font-weight: 600;
+      padding: 5px 12px; border-radius: 2px;
+    }
+    .plan-tier {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 10px;
+    }
+    .plan-name { font-size: 26px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
+    .plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 22px; min-height: 42px; line-height: 1.6; }
+    .plan-price {
+      font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 600;
+      letter-spacing: -.02em;
+      padding-bottom: 20px; margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .plan-price .cur { font-size: 15px; font-weight: 500; color: var(--muted); }
+    .plan-price .period { font-size: 13px; color: var(--muted); font-weight: 400; }
+    .plan-feats {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 11px; flex: 1; margin-bottom: 26px;
+    }
+    .plan-feats li {
+      font-size: 14px; color: var(--ink);
+      padding-left: 22px; position: relative; line-height: 1.5;
+    }
+    .plan-feats li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 8px; height: 8px;
+      border: 1.5px solid var(--sage); border-radius: 50%; background: var(--sage);
+    }
+    .plan-feats li.off { color: #aab0a6; }
+    .plan-feats li.off::before { background: transparent; border-color: #cdd2c8; }
+    .btn-plan {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 13px 20px; border-radius: 2px;
+      cursor: pointer; text-decoration: none; display: block; text-align: center;
+      transition: background .2s, border-color .2s, color .2s, transform .15s;
+    }
+    .btn-plan-outline {
+      background: var(--cream); color: var(--ink); border: 1.5px solid var(--line);
+    }
+    .btn-plan-outline:hover {
+      background: var(--ink); color: var(--cream); border-color: var(--ink);
+    }
+    .btn-plan-solid {
+      background: var(--ink); color: var(--cream); border: 1.5px solid var(--ink);
+    }
+    .btn-plan-solid:hover { background: var(--sage); border-color: var(--sage); }
+    .btn-plan:hover { transform: translateY(-1px); }
+
+    /* ======== À LA CARTE NOTE ======== */
+    .alcarte-note {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
+      padding: 26px 28px; margin-bottom: 72px;
+      display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    }
+    .alcarte-note p {
+      font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 56ch;
+    }
+    .alcarte-note p strong { color: var(--ink); }
+
+    /* ======== DIFERENCIA ======== */
+    .dif-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; padding-bottom: 72px; align-items: start;
+    }
+    .dif-text h3 {
+      font-size: clamp(21px, 3vw, 30px); font-weight: 600;
+      letter-spacing: -.01em; margin-bottom: 18px; line-height: 1.25;
+    }
+    .dif-text p {
+      font-size: 15.5px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 14px;
+    }
+    .dif-list { display: flex; flex-direction: column; }
+    .dif-row {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 22px 0; border-top: 1px solid var(--line);
+    }
+    .dif-row:last-child { border-bottom: 1px solid var(--line); }
+    .dif-icon {
+      width: 34px; height: 34px; flex: none;
+      background: var(--cream); border: 1px solid var(--line); border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .dif-icon svg { width: 15px; height: 15px; stroke: var(--sage); fill: none; stroke-width: 1.5; }
+    .dif-body h4 {
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .dif-body p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ======== SCOPE ======== */
+    .scope-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-bottom: 72px;
+    }
+    .scope-col {
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: 4px; padding: 28px;
+    }
+    .scope-col h3 {
+      font-family: 'Poppins', sans-serif; font-size: 12px;
+      letter-spacing: .16em; text-transform: uppercase; font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .scope-col.yes h3 { color: var(--sage); }
+    .scope-col.no  h3 { color: #9a5a4a; }
+    .scope-col ul  { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .scope-col li  { font-size: 14px; padding-left: 22px; position: relative; color: var(--ink); line-height: 1.55; }
+    .scope-col.yes li::before { content: '+'; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
+    .scope-col.no  li::before { content: '–'; position: absolute; left: 0; color: #9a5a4a; font-weight: 700; }
+
+    /* ======== CTA ======== */
+    .cta-section { padding: 96px 0; border-bottom: none; }
+    .cta-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .cta-left .sec-num { margin-bottom: 16px; }
+    .cta-left h2 {
+      font-size: clamp(26px, 3.6vw, 46px);
+      font-weight: 600; line-height: 1.1; letter-spacing: -.025em;
+      margin-bottom: 18px;
+    }
+    .cta-left h2 em { font-style: italic; color: var(--sage); }
+    .cta-left p {
+      font-size: 15.5px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 32px;
+    }
+    .contact-rows { display: flex; flex-direction: column; gap: 13px; }
+    .contact-row {
+      display: flex; align-items: center; gap: 11px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--muted);
+    }
+    .contact-row svg { width: 15px; height: 15px; stroke: var(--sage); fill: none; stroke-width: 1.5; flex: none; }
+    .contact-row a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--sage-l); }
+
+    /* contact form */
+    .contact-form {
+      background: var(--paper); border: 1px solid var(--line);
+      border-radius: 4px; padding: 38px 34px;
+    }
+    .form-head {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 26px;
+    }
+    .form-row { margin-bottom: 18px; }
+    .form-row label {
+      display: block;
+      font-family: 'Poppins', sans-serif; font-size: 10.5px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600; margin-bottom: 7px;
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%; background: var(--cream);
+      border: 1px solid var(--line); border-radius: 2px;
+      padding: 12px 14px;
+      font-family: 'Lora', serif; font-size: 15px; color: var(--ink);
+      outline: none; transition: border-color .2s; -webkit-appearance: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { border-color: var(--sage); }
+    .form-row textarea { min-height: 94px; resize: vertical; }
+    .btn-submit {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      background: var(--ink); color: var(--cream);
+      border: none; padding: 15px 28px; border-radius: 2px;
+      cursor: pointer; width: 100%;
+      transition: background .2s, transform .15s;
+    }
+    .btn-submit:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .7; cursor: default; transform: none; }
+
+    /* ======== FOOTER ======== */
+    footer { padding: 56px 0 68px; border-top: 1px solid var(--line); }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 60px; margin-bottom: 44px;
+    }
+    .footer-brand .emblem { margin-bottom: 14px; }
+    .footer-brand p { font-size: 14px; color: var(--muted); max-width: 30ch; line-height: 1.7; }
+    .footer-col h4 {
+      font-family: 'Poppins', sans-serif; font-size: 11px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col li a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-col li a:hover { color: var(--ink); }
+    .footer-bottom {
+      padding-top: 24px; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p {
+      font-family: 'Poppins', sans-serif; font-size: 12px; color: #9aa093;
+      letter-spacing: .03em;
+    }
+
+    /* ======== ANIMATIONS ======== */
+    .reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity .75s cubic-bezier(.16,1,.3,1),
+                  transform .75s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+
+    /* hero word-by-word reveal */
+    .hero-word {
+      display: inline-block; opacity: 0; transform: translateY(16px);
+      animation: word-up .65s cubic-bezier(.16,1,.3,1) forwards;
+      margin-right: 0.28em;
+    }
+    .hero-word:last-child { margin-right: 0; }
+    @keyframes word-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stat counter */
+    .counter { font-variant-numeric: tabular-nums; }
+
+    /* ======== PLAN PRICING SPLIT ======== */
+    .plan-pricing-split {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 0; padding: 18px 0; margin-bottom: 20px;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+    .split-item { display: flex; flex-direction: column; gap: 5px; }
+    .split-item:last-child { text-align: right; }
+    .split-label {
+      font-family: 'Poppins', sans-serif; font-size: 9.5px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600;
+    }
+    .split-price {
+      font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600;
+      color: var(--ink); letter-spacing: -.02em;
+    }
+    .split-price .period { font-size: 12px; color: var(--muted); font-weight: 400; }
+    .split-sep { width: 1px; height: 36px; background: var(--line); margin: 0 14px; }
+
+    /* ======== PLAN ÚNICO CARD ======== */
+    .plan-unico {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
+      padding: 28px 32px; margin-bottom: 72px;
+      display: grid; grid-template-columns: 160px 1fr auto;
+      gap: 40px; align-items: center;
+      transition: box-shadow .25s ease;
+    }
+    .plan-unico:hover { box-shadow: 0 8px 24px -12px rgba(28,43,30,.2); }
+    .plan-unico-label {
+      display: inline-block; margin-top: 7px;
+      font-family: 'Poppins', sans-serif; font-size: 10px;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600;
+      border: 1px solid var(--line); padding: 4px 10px; border-radius: 2px;
+    }
+    .plan-unico-price {
+      font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 600;
+      color: var(--ink); letter-spacing: -.02em; margin: 6px 0 4px;
+    }
+    .plan-unico-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .plan-unico-right .split-label { text-align: right; }
+
+    /* ======== RESPONSIVE ======== */
+    @media (max-width: 860px) {
+      .nav-links, .btn-nav { display: none; }
+      .hamburger { display: flex; }
+
+      h1.hero-title { font-size: clamp(38px, 9vw, 60px); }
+      .hero-foot { flex-direction: column; align-items: flex-start; }
+      .hero-bg-num { display: none; }
+      .hero-bar { grid-template-columns: 1fr; }
+      .hero-bar-item { border-right: none; border-bottom: 1px solid var(--line); padding: 18px 0; }
+      .hero-bar-item:not(:first-child) { padding-left: 0; }
+      .hero-bar-item:last-child { padding-left: 0; border-bottom: none; }
+
+      .problema-stats { grid-template-columns: 1fr; }
+      .pstat { padding: 36px 0; border-right: none; }
+      .pstat:nth-child(even) { padding: 36px 0; }
+      .pstat:nth-child(1), .pstat:nth-child(2) { border-bottom: none; }
+      .pstat { border-top: 1px solid var(--line); }
+
+      .servicios-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .plan-unico { grid-template-columns: 1fr; gap: 20px; }
+      .plan-unico-right { align-items: flex-start; }
+      .dif-grid  { grid-template-columns: 1fr; }
+      .scope-grid { grid-template-columns: 1fr; }
+      .cta-grid  { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .proceso-item { grid-template-columns: 64px 1fr; gap: 24px; }
+      .proceso-num { font-size: 40px; }
+      .alcarte-note { flex-direction: column; gap: 18px; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 20px; }
+      .declaration { padding: 72px 0; }
+      .cta-section { padding: 72px 0; }
+      .contact-form { padding: 26px 20px; }
+      .hero-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== MOBILE NAV ===== -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">×</button>
+  <a href="#problema" onclick="closeMobile()">El problema</a>
+  <a href="#proceso"  onclick="closeMobile()">Cómo trabajamos</a>
+  <a href="#servicios" onclick="closeMobile()">Servicios</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav" aria-label="Navegación principal">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#" class="emblem" aria-label="Agencia Veredicto · Inicio">
+        <svg viewBox="0 0 42 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#1C2B1E" stroke-width="1.5"/>
+          <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="#4A7C59" stroke-width="1"/>
+          <path d="M14 17.5 21 30l7-12.5" stroke="#1C2B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="name">Agencia Veredicto</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#problema">El problema</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+      </ul>
+      <a href="#contacto" class="btn-nav">Consulta gratuita</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-label="Portada">
+  <div class="hero-bg-num" aria-hidden="true">80%</div>
+  <div class="wrap" style="display:flex;flex-direction:column;height:100%;">
+    <div style="margin-bottom:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;">
+      <div class="eyebrow">Marketing jurídico · Córdoba, Argentina</div>
+      <div class="eyebrow" style="color:var(--muted)">Est. 2024</div>
+    </div>
+
+    <div class="hero-content">
+      <div class="eyebrow hero-eyebrow reveal">Agencia especializada en estudios jurídicos</div>
+      <h1 class="hero-title" id="heroTitle" aria-label="Los abogados trabajan para ganar. Nosotros trabajamos para que los encuentren."></h1>
+      <div class="hero-foot">
+        <p class="hero-desc reveal d2">
+          La mayoría de los abogados argentinos trabaja sin presencia digital. Veredicto cambia eso: sitio web profesional, Google Maps optimizado y posicionamiento local exactamente donde están los clientes.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="#contacto" class="btn-primary">Empezar ahora</a>
+          <a href="#servicios" class="btn-ghost">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-bar" aria-label="Estadísticas clave">
+      <div class="hero-bar-item reveal d1">
+        <div class="hero-bar-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
+        <div class="hero-bar-label">de personas busca<br>abogado en Google primero</div>
+      </div>
+      <div class="hero-bar-item reveal d2">
+        <div class="hero-bar-num"><span class="accent">+</span><span class="counter" data-target="60">0</span><span class="accent">%</span></div>
+        <div class="hero-bar-label">de estudios no tiene<br>presencia digital real</div>
+      </div>
+      <div class="hero-bar-item reveal d3">
+        <div class="hero-bar-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
+        <div class="hero-bar-label">más consultas con<br>Google Maps activo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">Marketing jurídico</div>
+    <div class="ticker-item">Sitio web a medida</div>
+    <div class="ticker-item">Google Maps optimizado</div>
+    <div class="ticker-item">SEO local</div>
+    <div class="ticker-item">Estudios de abogados</div>
+    <div class="ticker-item">Córdoba, Argentina</div>
+    <div class="ticker-item">Presencia digital</div>
+    <div class="ticker-item">Agencia Veredicto</div>
+    <div class="ticker-item">Marketing jurídico</div>
+    <div class="ticker-item">Sitio web a medida</div>
+    <div class="ticker-item">Google Maps optimizado</div>
+    <div class="ticker-item">SEO local</div>
+    <div class="ticker-item">Estudios de abogados</div>
+    <div class="ticker-item">Córdoba, Argentina</div>
+    <div class="ticker-item">Presencia digital</div>
+    <div class="ticker-item">Agencia Veredicto</div>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN 01 · EL PROBLEMA ===== -->
+<section id="problema">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">01 · La realidad</div>
+      <h2 class="sec-title reveal d1">Los clientes buscan.<br>El estudio <em>no aparece.</em></h2>
+      <p class="sec-intro reveal d2">El 80% de las personas busca un abogado en Google antes de llamar. Si el estudio no aparece —o aparece mal— la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</p>
+    </div>
+
+    <div class="problema-stats">
+      <div class="pstat reveal">
+        <div class="pstat-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
+        <div class="pstat-label">Buscan en Google</div>
+        <p class="pstat-desc">De cada 10 personas que necesitan un abogado, 8 empiezan en Google. No en el directorio, no por recomendación directa.</p>
+      </div>
+      <div class="pstat reveal d1">
+        <div class="pstat-num"><span class="accent">+</span><span class="counter" data-target="60">0</span><span class="accent">%</span></div>
+        <div class="pstat-label">Sin presencia real</div>
+        <p class="pstat-desc">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza.</p>
+      </div>
+      <div class="pstat reveal">
+        <div class="pstat-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
+        <div class="pstat-label">Más consultas con Maps</div>
+        <p class="pstat-desc">Un perfil de Google Business bien optimizado genera entre 2 y 4 veces más llamadas que uno sin optimizar o sin ficha creada.</p>
+      </div>
+      <div class="pstat reveal d1">
+        <div class="pstat-num"><span class="counter" data-target="7">0</span><span class="accent">s</span></div>
+        <div class="pstat-label">Primera impresión</div>
+        <p class="pstat-desc">El potencial cliente tarda menos de 7 segundos en decidir si un sitio transmite profesionalismo. Un mal diseño cierra la conversación antes de empezar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DECLARACIÓN ===== -->
+<div class="declaration">
+  <div class="wrap">
+    <blockquote class="reveal">
+      "Un estudio sin presencia digital no tiene<br><em>ninguna visibilidad</em> ante el cliente moderno."
+    </blockquote>
+    <cite class="reveal d1">Agencia Veredicto · Marketing Jurídico · Córdoba, 2024</cite>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN 02 · PROCESO ===== -->
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">02 · El proceso</div>
+      <h2 class="sec-title reveal d1">Cuatro pasos.<br><em>Un estudio</em> en Google.</h2>
+      <p class="sec-intro reveal d2">No vendemos paquetes genéricos. Cada trabajo empieza con un diagnóstico honesto y termina con resultados medibles. Sin reuniones eternas, sin entregas interminables.</p>
+    </div>
+
+    <div class="proceso-list">
+      <div class="proceso-item reveal">
+        <div class="proceso-num">01</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Diagnóstico</span>
+          <h3>Evaluamos la situación real del estudio</h3>
+          <p>Antes de hacer nada, analizamos en profundidad: si tiene sitio web, cómo está posicionado en Google, qué dice el perfil de Maps, qué hace la competencia local. La verdad primero, siempre.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d1">
+        <div class="proceso-num">02</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Diseño y estrategia</span>
+          <h3>Creamos la presencia correcta para cada estudio</h3>
+          <p>Diseñamos el sitio web a medida —sin plantillas genéricas— y definimos la estrategia de posicionamiento local. Cada estudio tiene su voz; la construimos para que sea creíble y profesional.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d2">
+        <div class="proceso-num">03</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Ejecución</span>
+          <h3>Publicamos y optimizamos para que el estudio aparezca</h3>
+          <p>Ponemos el sitio online con dominio propio, SSL y hosting estable. Optimizamos Google Business: fotos, categorías, palabras clave locales, descripción y horarios. El estudio empieza a aparecer donde buscan los clientes.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d3">
+        <div class="proceso-num">04</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Mantenimiento y seguimiento</span>
+          <h3>Mantenemos todo vivo y trabajando</h3>
+          <p>El trabajo no termina con el lanzamiento. Gestionamos reseñas, actualizamos contenido, respondemos cambios del algoritmo y reportamos mes a mes qué está pasando con la visibilidad del estudio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 03 · SERVICIOS ===== -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">03 · Planes</div>
+      <h2 class="sec-title reveal d1">Cuatro opciones.<br><em>Un solo objetivo:</em> aparecer.</h2>
+      <p class="sec-intro reveal d2">Todos los planes combinan un setup único más un abono mensual. El abono cubre hosting, dominio y el trabajo activo que mantiene la presencia viva y visible.</p>
+    </div>
+
+    <!-- Planes 1–3: modelo recurrente -->
+    <div class="servicios-grid" style="margin-bottom:20px;">
+
+      <div class="plan-card reveal">
+        <div class="plan-tier">Plan 01</div>
+        <div class="plan-name">Presencia</div>
+        <div class="plan-desc">Para el abogado individual o estudio chico que recién arranca en el mundo digital.</div>
+        <div class="plan-pricing-split">
+          <div class="split-item">
+            <div class="split-label">Setup inicial</div>
+            <div class="split-price">USD 220</div>
+          </div>
+          <div class="split-sep"></div>
+          <div class="split-item">
+            <div class="split-label">Abono mensual</div>
+            <div class="split-price">USD 45<span class="period">/mes</span></div>
+          </div>
+        </div>
+        <ul class="plan-feats">
+          <li>Google Business: puesta a punto completa + gestión básica</li>
+          <li>Respuesta a reseñas + 1 publicación mensual</li>
+          <li>Web landing de una sola página (Inicio + Contacto)</li>
+          <li>Mantenimiento técnico y hosting incluidos en el abono</li>
+        </ul>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar este plan</a>
+      </div>
+
+      <div class="plan-card featured reveal d1">
+        <div class="plan-tier">Plan 02</div>
+        <div class="plan-name">Estudio Profesional</div>
+        <div class="plan-desc">Para el estudio establecido que quiere verse serio en internet y captar clientes activamente.</div>
+        <div class="plan-pricing-split">
+          <div class="split-item">
+            <div class="split-label">Setup inicial</div>
+            <div class="split-price">USD 420</div>
+          </div>
+          <div class="split-sep"></div>
+          <div class="split-item">
+            <div class="split-label">Abono mensual</div>
+            <div class="split-price">USD 90<span class="period">/mes</span></div>
+          </div>
+        </div>
+        <ul class="plan-feats">
+          <li>Web completa multi-sección: Inicio · Áreas · Sobre el estudio · Contacto</li>
+          <li>Google Business gestión activa: reseñas + publicaciones regulares</li>
+          <li>Monitoreo de posición + reporte mensual de estadísticas</li>
+          <li>Mantenimiento, hosting y cambios menores incluidos</li>
+        </ul>
+        <a href="#contacto" class="btn-plan btn-plan-solid">Consultar este plan</a>
+      </div>
+
+      <div class="plan-card reveal d2">
+        <div class="plan-tier">Plan 03</div>
+        <div class="plan-name">Crecimiento + Redes</div>
+        <div class="plan-desc">Para el estudio que quiere crecer activamente y tener presencia visible en redes sociales.</div>
+        <div class="plan-pricing-split">
+          <div class="split-item">
+            <div class="split-label">Setup inicial</div>
+            <div class="split-price">USD 590</div>
+          </div>
+          <div class="split-sep"></div>
+          <div class="split-item">
+            <div class="split-label">Abono mensual</div>
+            <div class="split-price">USD 170<span class="period">/mes</span></div>
+          </div>
+        </div>
+        <ul class="plan-feats">
+          <li>Todo lo del plan Estudio Profesional</li>
+          <li>Web con blog jurídico (artículos de valor del estudio)</li>
+          <li>Google Business más intensivo: mayor frecuencia y seguimiento</li>
+          <li>Gestión de redes sociales con community manager externo</li>
+          <li>Reportes detallados mensuales</li>
+        </ul>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar este plan</a>
+      </div>
+
+    </div>
+
+    <!-- Plan 4: pago único, modelo diferente -->
+    <div class="plan-unico reveal">
+      <div>
+        <div class="plan-tier">Plan 04</div>
+        <div class="plan-name" style="font-size:21px;margin-bottom:6px;">Pago Único</div>
+        <span class="plan-unico-label">Sin mensualidad</span>
+      </div>
+      <div>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;">Web completa equivalente al plan Profesional más Google Business setup inicial. Sin gestión mensual, sin abono, sin soporte continuo. Para quien quiere la presencia armada y prefiere no comprometerse a un abono.</p>
+      </div>
+      <div class="plan-unico-right">
+        <div class="split-label">Pago único total</div>
+        <div class="plan-unico-price">USD 750</div>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 04 · POR QUÉ VEREDICTO ===== -->
+<section id="porque">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">04 · La diferencia</div>
+      <h2 class="sec-title reveal d1">Especialistas en el<br>sector <em>jurídico.</em> Solo eso.</h2>
+    </div>
+
+    <div class="dif-grid">
+      <div class="dif-text reveal">
+        <h3>No somos una agencia para todo el mundo.</h3>
+        <p>No hacemos sitios para peluquerías, restaurantes ni tiendas. Todo nuestro conocimiento, vocabulario y procesos están diseñados para el mundo legal.</p>
+        <p>Eso significa que entendemos la complejidad de presentar un servicio de confianza, el lenguaje que genera credibilidad y las búsquedas específicas que hacen los clientes de abogados en Argentina.</p>
+        <p>La especialización no es un slogan. Es la razón por la que los resultados son mejores.</p>
+      </div>
+
+      <div class="dif-list">
+        <div class="dif-row reveal d1">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M8 2l1.5 3.1L13 5.7l-2.5 2.4.6 3.4L8 9.8l-3.1 1.7.6-3.4L3 5.7l3.5-.6L8 2z"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Especialistas en el sector legal</h4>
+            <p>Conocemos el vocabulario, las búsquedas y las dudas de los clientes de estudios jurídicos argentinos.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d2">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5v2.5l1.5 1.5"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Entrega rápida y sin vueltas</h4>
+            <p>El sitio publicado en días, no en semanas. Sin reuniones eternas ni revisiones que no terminan.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d3">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Transparencia total en precios</h4>
+            <p>Todos los valores están publicados. Sin sorpresas, sin "depende", sin cotización que cambia a mitad del proyecto.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d4">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5 6.5-7"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Bajo expectativa, sobre entrega</h4>
+            <p>La regla de Veredicto: solo prometemos lo que podemos cumplir incluso con la agenda llena.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-bottom:72px;"></div>
+  </div>
+</section>
+
+<!-- ===== SECCIÓN 05 · CONTACTO ===== -->
+<section id="contacto" class="cta-section">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="cta-left">
+        <div class="sec-num reveal">05 · Contacto</div>
+        <h2 class="reveal d1">¿Listo para que<br>tu estudio <em>aparezca?</em></h2>
+        <p class="reveal d2">Una consulta inicial es gratuita y sin compromiso. Analizamos la situación del estudio y te decimos qué tiene sentido hacer, con qué presupuesto y en qué plazo.</p>
+        <div class="contact-rows reveal d3">
+          <div class="contact-row">
+            <svg viewBox="0 0 16 16"><path d="M2 4h12v9H2zM2 4l6 5 6-5"/></svg>
+            <a href="mailto:agenciaveredicto@gmail.com">agenciaveredicto@gmail.com</a>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 16 16"><path d="M11 9.5c.5.5.5 1.5 0 2l-.5.5c-1.5 1.5-5.5-2-7-4S1.5 3.5 3 2l.5-.5c.5-.5 1.5-.5 2 0L7 3c.5.5.5 1 .2 1.5-.2.5-.7 1-.7 1.5 0 1 3.5 4.5 4.5 4.5.5 0 1-.5 1.5-.7.5-.3 1-.3 1.5.2l1 1z"/></svg>
+            <span>WhatsApp <a href="https://wa.me/5493519164203">+54 351 916 4203</a></span>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="7" r="2.5"/><path d="M8 1.5C5.5 1.5 3.5 3.4 3.5 5.8c0 3.5 4.5 8.7 4.5 8.7s4.5-5.2 4.5-8.7C12.5 3.4 10.5 1.5 8 1.5z"/></svg>
+            <span>Córdoba, Argentina</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal d2">
+        <div class="form-head">Consulta gratuita</div>
+        <form id="ctaForm">
+          <div class="form-row">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Dr. / Dra. …" required autocomplete="name">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="correo@estudio.com" required autocomplete="email">
+          </div>
+          <div class="form-row">
+            <label for="plan">¿Qué plan le interesa?</label>
+            <select id="plan" name="plan">
+              <option value="">— Seleccionar —</option>
+              <option value="presencia">Plan Presencia (USD 250–320)</option>
+              <option value="visibilidad">Plan Visibilidad (USD 430–540)</option>
+              <option value="autoridad">Plan Autoridad (USD 650–820)</option>
+              <option value="carta">Servicio suelto / à la carte</option>
+              <option value="consulta">Solo quiero una consulta inicial</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="situacion">Situación actual del estudio</label>
+            <textarea id="situacion" name="situacion" placeholder="¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">Enviar consulta →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="emblem" aria-label="Agencia Veredicto · Inicio">
+          <svg viewBox="0 0 42 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#1C2B1E" stroke-width="1.5"/>
+            <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="#4A7C59" stroke-width="1"/>
+            <path d="M14 17.5 21 30l7-12.5" stroke="#1C2B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="name">Agencia Veredicto</span>
+        </a>
+        <p>Marketing jurídico para estudios de abogados. Presencia digital que genera confianza y consultas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Plan Presencia</a></li>
+          <li><a href="#servicios">Plan Visibilidad</a></li>
+          <li><a href="#servicios">Plan Autoridad</a></li>
+          <li><a href="#servicios">À la carte</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Agencia</h4>
+        <ul>
+          <li><a href="#proceso">Cómo trabajamos</a></li>
+          <li><a href="#porque">Por qué Veredicto</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="mailto:agenciaveredicto@gmail.com">Email directo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Agencia Veredicto · Córdoba, Argentina</p>
+      <p>Marketing Jurídico · Diseño y Posicionamiento para Estudios de Abogados</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* -------- HERO TITLE ANIMATION -------- */
+(function(){
+  const title = document.getElementById('heroTitle');
+  const lines = [
+    { text: 'Los abogados trabajan para ganar.', italic: false },
+    { text: 'Nosotros trabajamos para', italic: false },
+    { text: 'que los encuentren.', italic: true }
+  ];
+  let delay = 0.3;
+  lines.forEach((line, li) => {
+    const words = line.text.split(' ');
+    const wrapper = document.createElement('span');
+    wrapper.style.display = 'block';
+    words.forEach((w, wi) => {
+      const span = document.createElement('span');
+      span.className = 'hero-word' + (line.italic ? ' hero-word-em' : '');
+      span.style.animationDelay = delay + 's';
+      span.textContent = w;
+      if (line.italic) span.style.fontStyle = 'italic';
+      if (line.italic) span.style.color = 'var(--sage)';
+      wrapper.appendChild(span);
+      delay += 0.07;
+    });
+    title.appendChild(wrapper);
+  });
+})();
+
+/* -------- NAV SCROLL -------- */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+/* -------- MOBILE NAV -------- */
+const hamburger = document.getElementById('hamburger');
+const mobileNav  = document.getElementById('mobileNav');
+function openMobile()  { mobileNav.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); }
+function closeMobile() { mobileNav.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+hamburger.addEventListener('click', openMobile);
+document.getElementById('navClose').addEventListener('click', closeMobile);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobile(); });
+
+/* -------- INTERSECTION OBSERVER (reveal) -------- */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* -------- COUNTER ANIMATION -------- */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target, 10);
+    let start = null;
+    const dur = 1200;
+    const tick = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(tick);
+    counterObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+/* -------- FORM SUBMIT -------- */
+document.getElementById('ctaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Enviando…';
+  btn.disabled = true;
+  // Simulate async — replace with real fetch() to your backend
+  setTimeout(() => {
+    btn.textContent = '¡Consulta recibida! Nos contactamos pronto.';
+    btn.style.background = 'var(--sage)';
+    this.reset();
+    setTimeout(() => {
+      btn.textContent = 'Enviar consulta →';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 5000);
+  }, 1000);
+});
+
+/* -------- REDUCED MOTION -------- */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.hero-word').forEach(el => {
+    el.style.animation = 'none';
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+  document.querySelectorAll('.hero-bg-num').forEach(el => {
+    el.style.animation = 'none';
+  });
+}
+</script>
+
+</body>
+</html>
