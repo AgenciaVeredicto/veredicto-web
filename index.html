@@ -237,7 +237,8 @@
       display: flex; width: max-content;
       animation: marquee 35s linear infinite;
     }
-    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker:hover .ticker-track,
+    .ticker.paused .ticker-track { animation-play-state: paused; }
     .ticker-item {
       font-family: 'Poppins', sans-serif; font-size: 11px;
       letter-spacing: .22em; text-transform: uppercase;
@@ -916,12 +917,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 220</div>
+            <div class="split-price">USD 190</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 45<span class="period">/mes</span></div>
+            <div class="split-price">USD 40<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -940,12 +941,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 420</div>
+            <div class="split-price">USD 360</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 90<span class="period">/mes</span></div>
+            <div class="split-price">USD 75<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -964,12 +965,12 @@
         <div class="plan-pricing-split">
           <div class="split-item">
             <div class="split-label">Setup inicial</div>
-            <div class="split-price">USD 590</div>
+            <div class="split-price">USD 500</div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
             <div class="split-label">Abono mensual</div>
-            <div class="split-price">USD 170<span class="period">/mes</span></div>
+            <div class="split-price">USD 140<span class="period">/mes</span></div>
           </div>
         </div>
         <ul class="plan-feats">
@@ -996,7 +997,7 @@
       </div>
       <div class="plan-unico-right">
         <div class="split-label">Pago único total</div>
-        <div class="plan-unico-price">USD 750</div>
+        <div class="plan-unico-price">USD 640</div>
         <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
       </div>
     </div>
@@ -1103,10 +1104,10 @@
             <label for="plan">¿Qué plan le interesa?</label>
             <select id="plan" name="plan">
               <option value="">— Seleccionar —</option>
-              <option value="plan1">Plan 01 · Presencia (USD 220 + 45/mes)</option>
-              <option value="plan2">Plan 02 · Estudio Profesional (USD 420 + 90/mes)</option>
-              <option value="plan3">Plan 03 · Crecimiento + Redes (USD 590 + 170/mes)</option>
-              <option value="plan4">Plan 04 · Pago Único (USD 750)</option>
+              <option value="plan1">Plan 01 · Presencia (USD 190 + 40/mes)</option>
+              <option value="plan2">Plan 02 · Estudio Profesional (USD 360 + 75/mes)</option>
+              <option value="plan3">Plan 03 · Crecimiento + Redes (USD 500 + 140/mes)</option>
+              <option value="plan4">Plan 04 · Pago Único (USD 640)</option>
               <option value="consulta">Solo quiero una consulta inicial</option>
             </select>
           </div>
@@ -1311,22 +1312,47 @@ if (!window.matchMedia('(hover: none)').matches) {
   });
 }
 
-/* -------- FORM SUBMIT -------- */
+/* -------- TICKER CLICK TOGGLE -------- */
+document.querySelector('.ticker').addEventListener('click', function () {
+  this.classList.toggle('paused');
+});
+
+/* -------- FORM SUBMIT (Formspree) -------- */
+// Reemplazá 'XXXXXXXX' con tu endpoint de formspree.io/f/XXXXXXXX
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXXX';
+
 document.getElementById('ctaForm').addEventListener('submit', function (e) {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
+  const btn  = document.getElementById('submitBtn');
+  const data = new FormData(this);
+
   btn.textContent = 'Enviando…';
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent    = '¡Consulta recibida! Nos contactamos pronto.';
-    btn.style.background = 'var(--sage)';
-    this.reset();
-    setTimeout(() => {
-      btn.textContent    = 'Enviar consulta →';
-      btn.style.background = '';
-      btn.disabled       = false;
-    }, 5000);
-  }, 1000);
+  btn.disabled    = true;
+
+  fetch(FORMSPREE_ENDPOINT, {
+    method:  'POST',
+    body:    data,
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(res => {
+      if (res.ok) {
+        btn.textContent      = '¡Consulta recibida! Nos contactamos pronto.';
+        btn.style.background = 'var(--sage)';
+        this.reset();
+        setTimeout(() => {
+          btn.textContent      = 'Enviar consulta →';
+          btn.style.background = '';
+          btn.disabled         = false;
+        }, 5000);
+      } else {
+        btn.textContent = 'Error al enviar. Escribinos por WhatsApp.';
+        btn.disabled    = false;
+      }
+    })
+    .catch(() => {
+      btn.textContent = 'Sin conexión. Escribinos por WhatsApp.';
+      btn.disabled    = false;
+    });
 });
 
 /* -------- REDUCED MOTION -------- */
