@@ -114,23 +114,33 @@
 
     /* mobile overlay */
     .mobile-nav {
-      display: none; position: fixed; inset: 0;
-      background: var(--cream); z-index: 199;
-      flex-direction: column; justify-content: center;
+      position: fixed; inset: 0;
+      background: var(--cream); z-index: 201;
+      display: flex; flex-direction: column; justify-content: center;
       align-items: center; gap: 28px;
+      opacity: 0; visibility: hidden; transform: translateY(-10px);
+      transition: opacity .38s ease, visibility .38s, transform .42s cubic-bezier(.16,1,.3,1);
     }
-    .mobile-nav.open { display: flex; }
+    .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); }
     .mobile-nav a {
       font-family: 'Lora', serif; font-size: 30px; font-weight: 600;
       color: var(--ink); text-decoration: none; letter-spacing: -.01em;
-      transition: color .2s;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .3s ease, transform .38s cubic-bezier(.16,1,.3,1), color .15s;
     }
     .mobile-nav a:hover { color: var(--sage); }
+    .mobile-nav.open a        { opacity: 1; transform: none; }
+    .mobile-nav.open a:nth-child(2) { transition-delay: .08s; }
+    .mobile-nav.open a:nth-child(3) { transition-delay: .15s; }
+    .mobile-nav.open a:nth-child(4) { transition-delay: .22s; }
+    .mobile-nav.open a:nth-child(5) { transition-delay: .29s; }
     .mobile-nav-close {
-      position: absolute; top: 22px; right: 28px;
+      position: absolute; top: 14px; right: 18px;
       background: none; border: none; cursor: pointer;
-      font-size: 30px; color: var(--muted); line-height: 1;
+      font-size: 28px; color: var(--muted); line-height: 1;
+      padding: 10px; transition: color .2s; border-radius: 2px;
     }
+    .mobile-nav-close:hover { color: var(--ink); }
 
     /* ======== HERO ======== */
     .hero {
@@ -668,9 +678,36 @@
       .contact-form { padding: 26px 20px; }
       .hero-bar { display: none; }
     }
+
+    /* ======== SCROLL PROGRESS ======== */
+    #scrollProgress {
+      position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+      background: var(--sage); z-index: 300;
+      transform-origin: left center; transform: scaleX(0);
+      pointer-events: none;
+    }
+
+    /* ======== NAV ACTIVE LINK ======== */
+    .nav-links a.active { color: var(--ink); }
+
+    /* ======== HAMBURGER → X MORPH ======== */
+    .hamburger span {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .25s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ======== BODY SCROLL LOCK (mobile menu open) ======== */
+    body.menu-open { overflow: hidden; }
+
+    /* ======== CARD TILT SETUP ======== */
+    .plan-card { will-change: transform; }
   </style>
 </head>
 <body>
+
+<div id="scrollProgress" aria-hidden="true"></div>
 
 <!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav">
@@ -1066,10 +1103,10 @@
             <label for="plan">¿Qué plan le interesa?</label>
             <select id="plan" name="plan">
               <option value="">— Seleccionar —</option>
-              <option value="presencia">Plan Presencia (USD 250–320)</option>
-              <option value="visibilidad">Plan Visibilidad (USD 430–540)</option>
-              <option value="autoridad">Plan Autoridad (USD 650–820)</option>
-              <option value="carta">Servicio suelto / à la carte</option>
+              <option value="plan1">Plan 01 · Presencia (USD 220 + 45/mes)</option>
+              <option value="plan2">Plan 02 · Estudio Profesional (USD 420 + 90/mes)</option>
+              <option value="plan3">Plan 03 · Crecimiento + Redes (USD 590 + 170/mes)</option>
+              <option value="plan4">Plan 04 · Pago Único (USD 750)</option>
               <option value="consulta">Solo quiero una consulta inicial</option>
             </select>
           </div>
@@ -1126,26 +1163,35 @@
 </footer>
 
 <script>
+/* -------- SCROLL PROGRESS BAR -------- */
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  function update() {
+    const h = document.documentElement;
+    const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) || 0;
+    bar.style.transform = 'scaleX(' + Math.min(pct, 1) + ')';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
 /* -------- HERO TITLE ANIMATION -------- */
-(function(){
+(function () {
   const title = document.getElementById('heroTitle');
   const lines = [
     { text: 'Los abogados trabajan para ganar.', italic: false },
-    { text: 'Nosotros trabajamos para', italic: false },
-    { text: 'que los encuentren.', italic: true }
+    { text: 'Nosotros trabajamos para',          italic: false },
+    { text: 'que los encuentren.',               italic: true  }
   ];
   let delay = 0.3;
-  lines.forEach((line, li) => {
-    const words = line.text.split(' ');
+  lines.forEach(line => {
     const wrapper = document.createElement('span');
     wrapper.style.display = 'block';
-    words.forEach((w, wi) => {
+    line.text.split(' ').forEach(w => {
       const span = document.createElement('span');
-      span.className = 'hero-word' + (line.italic ? ' hero-word-em' : '');
+      span.className = 'hero-word';
       span.style.animationDelay = delay + 's';
       span.textContent = w;
-      if (line.italic) span.style.fontStyle = 'italic';
-      if (line.italic) span.style.color = 'var(--sage)';
+      if (line.italic) { span.style.fontStyle = 'italic'; span.style.color = 'var(--sage)'; }
       wrapper.appendChild(span);
       delay += 0.07;
     });
@@ -1159,58 +1205,126 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 }, { passive: true });
 
+/* -------- ACTIVE SECTION TRACKING -------- */
+(function () {
+  const links   = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = document.querySelectorAll('section[id]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => obs.observe(s));
+})();
+
 /* -------- MOBILE NAV -------- */
 const hamburger = document.getElementById('hamburger');
-const mobileNav  = document.getElementById('mobileNav');
-function openMobile()  { mobileNav.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); }
-function closeMobile() { mobileNav.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
-hamburger.addEventListener('click', openMobile);
+const mobileNav = document.getElementById('mobileNav');
+
+function openMobile() {
+  mobileNav.classList.add('open');
+  hamburger.classList.add('active');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.classList.add('menu-open');
+}
+function closeMobile() {
+  mobileNav.classList.remove('open');
+  hamburger.classList.remove('active');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+}
+hamburger.addEventListener('click', () =>
+  mobileNav.classList.contains('open') ? closeMobile() : openMobile()
+);
 document.getElementById('navClose').addEventListener('click', closeMobile);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobile(); });
 
-/* -------- INTERSECTION OBSERVER (reveal) -------- */
-const revealObserver = new IntersectionObserver((entries) => {
+/* -------- REVEAL ON SCROLL -------- */
+const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 /* -------- COUNTER ANIMATION -------- */
-const counterObserver = new IntersectionObserver((entries) => {
+const counterObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target;
     const target = parseInt(el.dataset.target, 10);
     let start = null;
     const dur = 1200;
-    const tick = ts => {
+    (function tick(ts) {
       if (!start) start = ts;
-      const p = Math.min((ts - start) / dur, 1);
+      const p  = Math.min((ts - start) / dur, 1);
       const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.floor(ease * target);
+      el.textContent = p < 1 ? Math.floor(ease * target) : target;
       if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = target;
-    };
-    requestAnimationFrame(tick);
+    })(performance.now());
     counterObserver.unobserve(el);
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
+/* -------- MAGNETIC BUTTONS (desktop only) -------- */
+if (!window.matchMedia('(hover: none)').matches) {
+  document.querySelectorAll('.btn-primary, .btn-nav, .btn-submit').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width  / 2) * 0.2;
+      const y = (e.clientY - r.top  - r.height / 2) * 0.2;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1), background .2s';
+      btn.style.transform  = '';
+      setTimeout(() => { btn.style.transition = ''; }, 450);
+    });
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'transform .1s ease, background .2s';
+    });
+  });
+}
+
+/* -------- CARD 3-D TILT (desktop only) -------- */
+if (!window.matchMedia('(hover: none)').matches) {
+  document.querySelectorAll('.plan-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transition = 'box-shadow .28s cubic-bezier(.16,1,.3,1)';
+      card.style.transform  =
+        `translateY(-7px) perspective(700px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+      card.style.boxShadow  = '0 22px 44px -20px rgba(28,43,30,.3)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1)';
+      card.style.transform  = '';
+      card.style.boxShadow  = '';
+    });
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'box-shadow .28s cubic-bezier(.16,1,.3,1)';
+    });
+  });
+}
+
 /* -------- FORM SUBMIT -------- */
-document.getElementById('ctaForm').addEventListener('submit', function(e) {
+document.getElementById('ctaForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
   btn.textContent = 'Enviando…';
   btn.disabled = true;
-  // Simulate async — replace with real fetch() to your backend
   setTimeout(() => {
-    btn.textContent = '¡Consulta recibida! Nos contactamos pronto.';
+    btn.textContent    = '¡Consulta recibida! Nos contactamos pronto.';
     btn.style.background = 'var(--sage)';
     this.reset();
     setTimeout(() => {
-      btn.textContent = 'Enviar consulta →';
+      btn.textContent    = 'Enviar consulta →';
       btn.style.background = '';
-      btn.disabled = false;
+      btn.disabled       = false;
     }, 5000);
   }, 1000);
 });
@@ -1218,13 +1332,9 @@ document.getElementById('ctaForm').addEventListener('submit', function(e) {
 /* -------- REDUCED MOTION -------- */
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.querySelectorAll('.hero-word').forEach(el => {
-    el.style.animation = 'none';
-    el.style.opacity = '1';
-    el.style.transform = 'none';
+    el.style.animation = 'none'; el.style.opacity = '1'; el.style.transform = 'none';
   });
-  document.querySelectorAll('.hero-bg-num').forEach(el => {
-    el.style.animation = 'none';
-  });
+  document.querySelectorAll('.hero-bg-num').forEach(el => { el.style.animation = 'none'; });
 }
 </script>
 
