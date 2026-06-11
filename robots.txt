@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://veredicto-web.pages.dev/sitemap.xml
