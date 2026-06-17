@@ -958,8 +958,16 @@
         <div class="plan-tier">Plan 01</div>
         <div class="plan-name">Landing Profesional</div>
         <div class="plan-desc">Para el estudio que quiere una presencia digital sólida y en funcionamiento en días.</div>
-        <div class="plan-price">
-          <span class="cur">$</span>130.000<span class="period"> · pago único</span>
+        <div class="plan-pricing-split">
+          <div class="split-item">
+            <div class="split-label">Pago único</div>
+            <div class="split-price"><span class="cur">$</span>130.000</div>
+          </div>
+          <div class="split-sep"></div>
+          <div class="split-item">
+            <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+            <div class="split-price"><span class="cur">$</span>18.000<span class="period">/mes</span></div>
+          </div>
         </div>
         <ul class="plan-feats">
           <li>Diseño personalizado de una página</li>
@@ -978,8 +986,16 @@
         <div class="plan-tier">Plan 02</div>
         <div class="plan-name">Sitio Completo + SEO</div>
         <div class="plan-desc">Para el estudio que quiere aparecer en Google cuando sus clientes lo buscan.</div>
-        <div class="plan-price">
-          <span class="cur">$</span>240.000<span class="period"> · pago único</span>
+        <div class="plan-pricing-split">
+          <div class="split-item">
+            <div class="split-label">Pago único</div>
+            <div class="split-price"><span class="cur">$</span>240.000</div>
+          </div>
+          <div class="split-sep"></div>
+          <div class="split-item">
+            <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+            <div class="split-price"><span class="cur">$</span>28.000<span class="period">/mes</span></div>
+          </div>
         </div>
         <ul class="plan-feats">
           <li>Todo lo incluido en el Plan Landing</li>
@@ -1026,10 +1042,10 @@
 
     <div class="dif-grid">
       <div class="dif-text reveal">
-        <h3>Especialización total en el sector legal.</h3>
-        <p>Todo nuestro conocimiento, vocabulario y procesos están construidos alrededor del mundo jurídico argentino. No adaptamos metodologías genéricas: trabajamos exclusivamente con estudios de abogados.</p>
-        <p>Entendemos cómo presentar un servicio de confianza, qué lenguaje genera credibilidad ante el potencial cliente y qué buscan exactamente las personas que necesitan un abogado en Córdoba y en el resto del país.</p>
-        <p>La especialización no es un slogan. Es la razón por la que los resultados son mejores.</p>
+        <h3>Somos un programador y un estudiante de Derecho. De Córdoba.</h3>
+        <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
+        <p>Uno construye sitios que cargan rápido, se ven bien en el celular y aparecen en las búsquedas. El otro entiende cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal argentino.</p>
+        <p>No trabajamos con todos. Trabajamos con estudios de abogados, y punto. Eso es lo que nos permite hacer el trabajo bien.</p>
       </div>
 
       <div class="dif-list">
@@ -1072,36 +1088,6 @@
       </div>
     </div>
 
-    <div class="reveal" style="border-top: 1px solid var(--line); padding: 48px 0 72px;">
-      <div class="sec-num" style="margin-bottom: 22px;">Quiénes somos</div>
-      <div class="dif-grid">
-        <div class="dif-text">
-          <h3>Un programador y un estudiante de derecho.</h3>
-          <p>Fundamos Veredicto en Córdoba con una convicción: los estudios jurídicos en Argentina merecen una presencia digital construida por quienes entienden tanto el código como el mundo legal.</p>
-          <p>La combinación no es casual. Un lado construye el sitio; el otro sabe qué lenguaje genera credibilidad ante el cliente de un abogado. El resultado: sitios que se ven bien y que dicen lo correcto.</p>
-        </div>
-        <div class="dif-list">
-          <div class="dif-row">
-            <div class="dif-icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><path d="M9 11.5h5M11.5 9v5"/></svg>
-            </div>
-            <div class="dif-body">
-              <h4>Desarrollador web</h4>
-              <p>Diseño, código y todo lo técnico que hace que un sitio funcione rápido, se vea bien en cualquier dispositivo y aparezca en Google.</p>
-            </div>
-          </div>
-          <div class="dif-row">
-            <div class="dif-icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><path d="M8 1.5 3 4.5v7l5 3 5-3v-7L8 1.5z"/><path d="M8 1.5v10M3 4.5l5 3 5-3"/></svg>
-            </div>
-            <div class="dif-body">
-              <h4>Estudiante de Derecho</h4>
-              <p>El conocimiento del sector que hace que cada texto y cada propuesta tenga credibilidad ante el abogado y ante su cliente.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1144,8 +1130,10 @@
             <label for="plan">¿Qué plan le interesa?</label>
             <select id="plan" name="plan">
               <option value="">— Seleccionar —</option>
-              <option value="plan1">Plan 01 · Landing Profesional ($130.000)</option>
-              <option value="plan2">Plan 02 · Sitio Completo + SEO ($240.000)</option>
+              <option value="plan1">Plan 01 · Landing Profesional ($130.000 único)</option>
+              <option value="plan1-abono">Plan 01 + Gestión mensual ($130.000 + $18.000/mes)</option>
+              <option value="plan2">Plan 02 · Sitio Completo + SEO ($240.000 único)</option>
+              <option value="plan2-abono">Plan 02 + Gestión mensual ($240.000 + $28.000/mes)</option>
               <option value="gbusiness">Adicional · Google Business ($55.000)</option>
               <option value="consulta">Solo quiero el diagnóstico gratuito</option>
             </select>
