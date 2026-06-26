@@ -7,6 +7,8 @@
   <meta name="description" content="Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://veredicto-web.pages.dev">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://formspree.io; img-src 'self' data:; object-src 'none';">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
@@ -817,7 +819,6 @@
     </div>
 
     <div class="hero-content">
-      <div class="eyebrow hero-eyebrow reveal">Agencia especializada en estudios jurídicos</div>
       <h1 class="hero-title" id="heroTitle" aria-label="Los abogados trabajan para ganar. Nosotros trabajamos para que los encuentren."></h1>
       <div class="hero-foot">
         <p class="hero-desc reveal d2">
@@ -1160,6 +1161,7 @@
             <label for="situacion">Situación actual del estudio</label>
             <textarea id="situacion" name="situacion" placeholder="¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…"></textarea>
           </div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
           <button type="submit" class="btn-submit" id="submitBtn">Solicitar diagnóstico →</button>
         </form>
       </div>
