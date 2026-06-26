@@ -111,7 +111,10 @@
       cursor: pointer; text-decoration: none;
       transition: background .2s, transform .15s;
     }
-    .btn-nav:hover { background: var(--sage); transform: translateY(-1px); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-nav:hover { background: var(--sage); transform: translateY(-1px); }
+    }
+    .btn-nav:active { transform: scale(0.97); }
 
     /* hamburger */
     .hamburger {
@@ -191,7 +194,10 @@
       cursor: pointer; text-decoration: none; display: inline-block;
       transition: background .2s, transform .2s;
     }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    }
+    .btn-primary:active { transform: scale(0.97); }
     .btn-ghost {
       font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500;
       color: var(--muted); text-decoration: none; letter-spacing: .04em;
@@ -364,9 +370,11 @@
       transition: transform .28s cubic-bezier(.16,1,.3,1),
                   box-shadow .28s cubic-bezier(.16,1,.3,1);
     }
-    .plan-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 22px 44px -20px rgba(28,43,30,.3);
+    @media (hover: hover) and (pointer: fine) {
+      .plan-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 22px 44px -20px rgba(28,43,30,.3);
+      }
     }
     .plan-card.featured { border-color: var(--sage); border-width: 1.5px; }
     .plan-card.featured::before {
@@ -418,14 +426,15 @@
     .btn-plan-outline {
       background: var(--cream); color: var(--ink); border: 1.5px solid var(--line);
     }
-    .btn-plan-outline:hover {
-      background: var(--ink); color: var(--cream); border-color: var(--ink);
+    @media (hover: hover) and (pointer: fine) {
+      .btn-plan-outline:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+      .btn-plan-solid:hover { background: var(--sage); border-color: var(--sage); }
+      .btn-plan:hover { transform: translateY(-1px); }
     }
     .btn-plan-solid {
       background: var(--ink); color: var(--cream); border: 1.5px solid var(--ink);
     }
-    .btn-plan-solid:hover { background: var(--sage); border-color: var(--sage); }
-    .btn-plan:hover { transform: translateY(-1px); }
+    .btn-plan:active { transform: scale(0.97); }
 
     /* ======== À LA CARTE NOTE ======== */
     .alcarte-note {
@@ -556,7 +565,10 @@
       cursor: pointer; width: 100%;
       transition: background .2s, transform .15s;
     }
-    .btn-submit:hover { background: var(--sage); transform: translateY(-1px); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-submit:hover { background: var(--sage); transform: translateY(-1px); }
+    }
+    .btn-submit:active:not(:disabled) { transform: scale(0.98); }
     .btn-submit:disabled { opacity: .7; cursor: default; transform: none; }
 
     /* ======== FOOTER ======== */
@@ -587,8 +599,8 @@
     /* ======== ANIMATIONS ======== */
     .reveal {
       opacity: 0; transform: translateY(26px);
-      transition: opacity .75s cubic-bezier(.16,1,.3,1),
-                  transform .75s cubic-bezier(.16,1,.3,1);
+      transition: opacity .55s cubic-bezier(.16,1,.3,1),
+                  transform .55s cubic-bezier(.16,1,.3,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .d1 { transition-delay: .1s; }
@@ -1058,9 +1070,9 @@
 
     <div class="dif-grid">
       <div class="dif-text reveal">
-        <h3>Somos un programador y un estudiante de Derecho. De Córdoba.</h3>
+        <h3>Un equipo de Córdoba, con raíces en el derecho y en la tecnología.</h3>
         <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
-        <p>Uno construye sitios que cargan rápido, se ven bien en el celular y aparecen en las búsquedas. El otro entiende cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal argentino.</p>
+        <p>Nuestro equipo reúne experiencia en desarrollo web y programación con conocimiento real del mundo jurídico argentino. Entendemos cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal.</p>
         <p>No trabajamos con todos. Trabajamos con estudios de abogados, y punto. Eso es lo que nos permite hacer el trabajo bien.</p>
       </div>
 
@@ -1352,7 +1364,7 @@ if (!window.matchMedia('(hover: none)').matches) {
       card.style.boxShadow  = '0 22px 44px -20px rgba(28,43,30,.3)';
     });
     card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1)';
+      card.style.transition = 'transform .35s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1)';
       card.style.transform  = '';
       card.style.boxShadow  = '';
     });
