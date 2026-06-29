@@ -575,27 +575,27 @@
     .btn-submit:disabled { opacity: .7; cursor: default; transform: none; }
 
     /* ======== FOOTER ======== */
-    footer { padding: 56px 0 68px; border-top: 1px solid var(--line); }
+    footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
     .footer-grid {
       display: grid; grid-template-columns: 1.4fr 1fr 1fr;
       gap: 60px; margin-bottom: 44px;
     }
     .footer-brand .emblem { margin-bottom: 14px; }
-    .footer-brand p { font-size: 14px; color: var(--muted); max-width: 30ch; line-height: 1.7; }
+    .footer-brand p { font-size: 14px; color: rgba(247,245,239,.5); max-width: 30ch; line-height: 1.7; }
     .footer-col h4 {
       font-family: 'Poppins', sans-serif; font-size: 11px;
       letter-spacing: .2em; text-transform: uppercase;
-      color: var(--sage); font-weight: 600; margin-bottom: 16px;
+      color: var(--sage-l); font-weight: 600; margin-bottom: 16px;
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col li a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .footer-col li a:hover { color: var(--ink); }
+    .footer-col li a { font-size: 14px; color: rgba(247,245,239,.5); text-decoration: none; transition: color .2s; }
+    .footer-col li a:hover { color: var(--cream); }
     .footer-bottom {
-      padding-top: 24px; border-top: 1px solid var(--line);
+      padding-top: 24px; border-top: 1px solid rgba(247,245,239,.1);
       display: flex; justify-content: space-between; align-items: center;
     }
     .footer-bottom p {
-      font-family: 'Poppins', sans-serif; font-size: 12px; color: #9aa093;
+      font-family: 'Poppins', sans-serif; font-size: 12px; color: rgba(247,245,239,.3);
       letter-spacing: .03em;
     }
 
@@ -1230,9 +1230,9 @@
       <div class="footer-brand">
         <a href="#" class="emblem" aria-label="Agencia Veredicto · Inicio">
           <svg viewBox="0 0 42 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#1C2B1E" stroke-width="1.5"/>
-            <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="#4A7C59" stroke-width="1"/>
-            <path d="M14 17.5 21 30l7-12.5" stroke="#1C2B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#F7F5EF" stroke-width="1.5"/>
+            <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="rgba(247,245,239,.5)" stroke-width="1"/>
+            <path d="M14 17.5 21 30l7-12.5" stroke="#F7F5EF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="name">Agencia Veredicto</span>
         </a>
