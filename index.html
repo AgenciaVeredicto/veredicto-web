@@ -78,18 +78,19 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 22px 0;
+      background: var(--sage);
       transition: padding .35s ease, background .35s ease, box-shadow .35s ease;
     }
     nav.scrolled {
       padding: 14px 0;
-      background: rgba(247,245,239,.95);
+      background: var(--sage);
       backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 var(--line);
+      box-shadow: 0 1px 0 rgba(0,0,0,.12);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .emblem {
       display: flex; align-items: center; gap: 13px;
-      text-decoration: none; color: var(--ink);
+      text-decoration: none; color: var(--cream);
     }
     .emblem svg { width: 36px; height: 40px; flex: none; }
     .emblem .name {
@@ -99,10 +100,10 @@
     .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
       font-family: 'Poppins', sans-serif; font-size: 12px; letter-spacing: .06em;
-      color: var(--muted); text-decoration: none; font-weight: 500;
+      color: rgba(247,245,239,.8); text-decoration: none; font-weight: 500;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover { color: var(--cream); }
     .btn-nav {
       font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
       letter-spacing: .1em; text-transform: uppercase;
@@ -112,7 +113,7 @@
       transition: background .2s, transform .15s;
     }
     @media (hover: hover) and (pointer: fine) {
-      .btn-nav:hover { background: var(--sage); transform: translateY(-1px); }
+      .btn-nav:hover { background: var(--cream); color: var(--ink); transform: translateY(-1px); }
     }
     .btn-nav:active { transform: scale(0.97); }
 
@@ -122,7 +123,7 @@
       cursor: pointer; background: none; border: none; padding: 4px;
     }
     .hamburger span {
-      display: block; width: 22px; height: 1.5px; background: var(--ink);
+      display: block; width: 22px; height: 1.5px; background: var(--cream);
       transition: transform .3s, opacity .3s;
     }
 
@@ -766,7 +767,7 @@
     }
 
     /* ======== NAV ACTIVE LINK ======== */
-    .nav-links a.active { color: var(--ink); }
+    .nav-links a.active { color: var(--cream); }
 
     /* ======== HAMBURGER → X MORPH ======== */
     .hamburger span {
@@ -783,12 +784,12 @@
     .lang-flags { display: flex; gap: 2px; margin-left: 8px; }
     .lang-flag {
       font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700;
-      letter-spacing: .1em; color: var(--ink);
+      letter-spacing: .1em; color: var(--cream);
       background: none; border: 1px solid transparent; cursor: pointer;
       padding: 4px 8px; border-radius: 2px;
-      transition: border-color .2s, opacity .15s; opacity: .38;
+      transition: border-color .2s, opacity .15s; opacity: .55;
     }
-    .lang-flag.active { border-color: var(--sage-l); opacity: 1; }
+    .lang-flag.active { border-color: rgba(247,245,239,.6); opacity: 1; }
     @media (hover: hover) and (pointer: fine) {
       .lang-flag:not(.active):hover { opacity: .7; }
     }
@@ -830,9 +831,9 @@
     <div class="nav-inner">
       <a href="#" class="emblem" aria-label="Agencia Veredicto · Inicio">
         <svg viewBox="0 0 42 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#1C2B1E" stroke-width="1.5"/>
-          <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="#4A7C59" stroke-width="1"/>
-          <path d="M14 17.5 21 30l7-12.5" stroke="#1C2B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z" stroke="#F7F5EF" stroke-width="1.5"/>
+          <path d="M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z" stroke="rgba(247,245,239,.5)" stroke-width="1"/>
+          <path d="M14 17.5 21 30l7-12.5" stroke="#F7F5EF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <span class="name">Agencia Veredicto</span>
       </a>
