@@ -78,14 +78,14 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 22px 0;
-      background: var(--sage);
+      background: var(--ink);
       transition: padding .35s ease, background .35s ease, box-shadow .35s ease;
     }
     nav.scrolled {
       padding: 14px 0;
-      background: var(--sage);
+      background: var(--ink);
       backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(0,0,0,.12);
+      box-shadow: 0 1px 0 rgba(0,0,0,.25);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; }
     .emblem {
@@ -309,19 +309,21 @@
     /* ======== DECLARATION ======== */
     .declaration {
       padding: 96px 0;
-      border-bottom: 1px solid var(--line);
+      background: var(--sage);
+      border-bottom: none;
     }
     .declaration blockquote {
       font-family: 'Lora', Georgia, serif;
       font-size: clamp(22px, 3.4vw, 42px);
       font-weight: 600; line-height: 1.18; letter-spacing: -.02em;
       max-width: 22ch; margin-bottom: 28px;
+      color: var(--cream);
     }
-    .declaration blockquote em { font-style: italic; color: var(--sage); }
+    .declaration blockquote em { font-style: italic; color: var(--sage-l); }
     .declaration cite {
       font-family: 'Poppins', sans-serif; font-size: 11px;
       letter-spacing: .22em; text-transform: uppercase;
-      color: var(--muted); font-style: normal;
+      color: rgba(247,245,239,.6); font-style: normal;
     }
 
     /* ======== PROCESO ======== */
