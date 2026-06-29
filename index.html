@@ -1470,7 +1470,7 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
   })
     .then(res => {
       if (res.ok) {
-        btn.textContent      = isEn ? '✓ Audit requested! We'll be in touch.' : '¡Diagnóstico solicitado! Nos contactamos pronto.';
+        btn.textContent      = isEn ? '✓ Audit requested! We will be in touch.' : '¡Diagnóstico solicitado! Nos contactamos pronto.';
         btn.style.background = 'var(--sage)';
         this.reset();
         setTimeout(() => {
