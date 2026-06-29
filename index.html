@@ -780,13 +780,17 @@
     body.menu-open { overflow: hidden; }
 
     /* ======== LANGUAGE TOGGLE ======== */
-    .lang-btn {
-      background: none; border: 1px solid var(--line); cursor: pointer;
-      font-size: 15px; line-height: 1; padding: 5px 9px; border-radius: 2px;
-      transition: border-color .2s, opacity .2s; opacity: .75; margin-left: 8px;
+    .lang-flags { display: flex; gap: 3px; margin-left: 8px; }
+    .lang-flag {
+      background: none; border: 1px solid transparent; cursor: pointer;
+      font-size: 15px; line-height: 1; padding: 4px 7px; border-radius: 2px;
+      transition: border-color .2s, opacity .15s; opacity: .45;
     }
-    .lang-btn:hover { opacity: 1; border-color: var(--sage-l); }
-    .lang-btn:active { transform: scale(0.97); }
+    .lang-flag.active { border-color: var(--sage-l); opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .lang-flag:not(.active):hover { opacity: .8; }
+    }
+    .lang-flag:active { transform: scale(0.97); }
 
     body.lang-en .es-only { display: none !important; }
     body:not(.lang-en) .en-only { display: none !important; }
@@ -814,7 +818,7 @@
   <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">×</button>
   <a href="#problema" onclick="closeMobile()"><span class="es-only">El problema</span><span class="en-only">The Problem</span></a>
   <a href="#proceso"  onclick="closeMobile()"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></a>
-  <a href="#servicios" onclick="closeMobile()">Servicios / Services</a>
+  <a href="#servicios" onclick="closeMobile()">Servicios</a>
   <a href="#contacto" onclick="closeMobile()"><span class="es-only">Contacto</span><span class="en-only">Contact</span></a>
 </div>
 
@@ -833,10 +837,13 @@
       <ul class="nav-links">
         <li><a href="#problema"><span class="es-only">El problema</span><span class="en-only">The Problem</span></a></li>
         <li><a href="#proceso"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></a></li>
-        <li><a href="#servicios">Servicios / Services</a></li>
+        <li><a href="#servicios">Servicios</a></li>
       </ul>
       <a href="#contacto" class="btn-nav"><span class="es-only">Diagnóstico gratis</span><span class="en-only">Free Audit</span></a>
-      <button class="lang-btn" id="langToggle" aria-label="Switch to English" title="Switch to English">🇺🇸</button>
+      <div class="lang-flags">
+        <button class="lang-flag active" id="flagES" aria-label="Español" title="Español">🇦🇷</button>
+        <button class="lang-flag" id="flagEN" aria-label="English" title="English">🇺🇸</button>
+      </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -1309,14 +1316,16 @@ buildHeroTitle('es');
 
 /* -------- LANGUAGE TOGGLE -------- */
 (function () {
-  var btn = document.getElementById('langToggle');
-  btn.addEventListener('click', function () {
-    var isEn = document.body.classList.toggle('lang-en');
-    this.textContent = isEn ? '🇦🇷' : '🇺🇸';
-    this.title = isEn ? 'Cambiar a español' : 'Switch to English';
-    this.setAttribute('aria-label', isEn ? 'Cambiar a español' : 'Switch to English');
-    document.documentElement.lang = isEn ? 'en' : 'es';
-    buildHeroTitle(isEn ? 'en' : 'es');
+  var flagES = document.getElementById('flagES');
+  var flagEN = document.getElementById('flagEN');
+
+  function setLang(lang) {
+    var isEn = lang === 'en';
+    document.body.classList.toggle('lang-en', isEn);
+    document.documentElement.lang = lang;
+    flagES.classList.toggle('active', !isEn);
+    flagEN.classList.toggle('active', isEn);
+    buildHeroTitle(lang);
     var ta = document.getElementById('situacion');
     if (ta) ta.placeholder = isEn
       ? 'Do you have a website? Do you appear on Google Maps? Any context helps…'
@@ -1332,7 +1341,10 @@ buildHeroTitle('es');
     ];
     var sel = document.getElementById('plan');
     if (sel) planOpts.forEach(function(o, i) { if (sel.options[i]) sel.options[i].text = o[1]; });
-  });
+  }
+
+  flagES.addEventListener('click', function() { setLang('es'); });
+  flagEN.addEventListener('click', function() { setLang('en'); });
 })();
 
 /* -------- NAV SCROLL -------- */
