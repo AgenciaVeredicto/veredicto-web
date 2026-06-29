@@ -780,15 +780,17 @@
     body.menu-open { overflow: hidden; }
 
     /* ======== LANGUAGE TOGGLE ======== */
-    .lang-flags { display: flex; gap: 3px; margin-left: 8px; }
+    .lang-flags { display: flex; gap: 2px; margin-left: 8px; }
     .lang-flag {
+      font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; color: var(--ink);
       background: none; border: 1px solid transparent; cursor: pointer;
-      font-size: 15px; line-height: 1; padding: 4px 7px; border-radius: 2px;
-      transition: border-color .2s, opacity .15s; opacity: .45;
+      padding: 4px 8px; border-radius: 2px;
+      transition: border-color .2s, opacity .15s; opacity: .38;
     }
     .lang-flag.active { border-color: var(--sage-l); opacity: 1; }
     @media (hover: hover) and (pointer: fine) {
-      .lang-flag:not(.active):hover { opacity: .8; }
+      .lang-flag:not(.active):hover { opacity: .7; }
     }
     .lang-flag:active { transform: scale(0.97); }
 
@@ -841,8 +843,8 @@
       </ul>
       <a href="#contacto" class="btn-nav"><span class="es-only">Diagnóstico gratis</span><span class="en-only">Free Audit</span></a>
       <div class="lang-flags">
-        <button class="lang-flag active" id="flagES" aria-label="Español" title="Español">🇦🇷</button>
-        <button class="lang-flag" id="flagEN" aria-label="English" title="English">🇺🇸</button>
+        <button class="lang-flag active" id="flagES" aria-label="Español" title="Español">ES</button>
+        <button class="lang-flag" id="flagEN" aria-label="English" title="English">EN</button>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -1343,8 +1345,29 @@ buildHeroTitle('es');
     if (sel) planOpts.forEach(function(o, i) { if (sel.options[i]) sel.options[i].text = o[1]; });
   }
 
-  flagES.addEventListener('click', function() { setLang('es'); });
-  flagEN.addEventListener('click', function() { setLang('en'); });
+  var tickerItems = {
+    es: ['Marketing jurídico','Sitio web a medida','Google Maps optimizado','SEO local','Estudios de abogados','Córdoba, Argentina','Presencia digital','Agencia Veredicto'],
+    en: ['Legal Marketing','Custom website','Google Maps optimized','Local SEO','Law firms','Córdoba, Argentina','Digital presence','Agencia Veredicto']
+  };
+
+  function buildTicker(lang) {
+    var track = document.querySelector('.ticker-track');
+    if (!track) return;
+    var items = tickerItems[lang];
+    var html = '';
+    [0,1].forEach(function() {
+      items.forEach(function(t) { html += '<div class="ticker-item">' + t + '</div>'; });
+    });
+    track.innerHTML = html;
+  }
+
+  function setLangFull(lang) {
+    setLang(lang);
+    buildTicker(lang);
+  }
+
+  flagES.addEventListener('click', function() { setLangFull('es'); });
+  flagEN.addEventListener('click', function() { setLangFull('en'); });
 })();
 
 /* -------- NAV SCROLL -------- */
