@@ -1015,7 +1015,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title reveal"><span class="es-only" style="display:block">Planes promocionales.<br>Todo listo para <em>empezar.</em></span><span class="en-only" style="display:block">Promotional plans.<br>Everything ready to <em>get started.</em></span></h2>
-      <p class="sec-intro reveal d2"><span class="es-only">Dos planes de presencia digital completa, más un servicio de posicionamiento en Google Maps. Precio fijo, sin abonos obligatorios, sin sorpresas.</span><span class="en-only">Two complete digital presence plans, plus a Google Maps positioning service. Fixed price, no mandatory subscriptions, no surprises.</span></p>
+      <p class="sec-intro reveal d2"><span class="es-only">Dos planes de presencia digital completa, más servicios de posicionamiento en Google Maps y gestión de redes sociales. Precio fijo, sin abonos obligatorios, sin sorpresas.</span><span class="en-only">Two complete digital presence plans, plus Google Maps positioning and social media management services. Fixed price, no mandatory subscriptions, no surprises.</span></p>
     </div>
 
     <div class="servicios-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 20px;">
@@ -1028,7 +1028,7 @@
           <div class="split-item">
             <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
             <div class="split-price"><span class="cur">$</span>190.000<span class="cur-badge">ARS</span></div>
-            <div class="price-intl">≈ <strong>USD 100</strong></div>
+            <div class="price-intl">≈ <strong>USD 126</strong></div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
@@ -1058,7 +1058,7 @@
           <div class="split-item">
             <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
             <div class="split-price"><span class="cur">$</span>310.000<span class="cur-badge">ARS</span></div>
-            <div class="price-intl">≈ <strong>USD 185</strong></div>
+            <div class="price-intl">≈ <strong>USD 207</strong></div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
@@ -1096,6 +1096,23 @@
         <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
         <div class="plan-unico-price">$55.000<span class="cur-badge">ARS</span></div>
         <div class="price-intl" style="margin-bottom:12px;">≈ <strong>USD 42</strong></div>
+        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
+      </div>
+    </div>
+
+    <!-- Gestión de Redes Sociales: servicio adicional -->
+    <div class="plan-unico reveal">
+      <div>
+        <div class="plan-tier">Adicional</div>
+        <div class="plan-name" style="font-size:21px;margin-bottom:6px;"><span class="es-only">Gestión de Redes Sociales</span><span class="en-only">Social Media Management</span></div>
+        <span class="plan-unico-label"><span class="es-only">Distintos planes según tu estudio</span><span class="en-only">Different plans for your firm</span></span>
+      </div>
+      <div>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;"><span class="es-only">Creamos y gestionamos la presencia del estudio en redes sociales: contenido profesional, diseño de publicaciones, calendario de contenidos y comunicación con la comunidad. Trabajamos con distintos planes según los objetivos, las redes y el volumen de contenido de cada estudio.</span><span class="en-only">We create and manage the firm's presence on social media: professional content, post design, content calendar and community engagement. We offer different plans depending on each firm's goals, networks and content volume.</span></p>
+      </div>
+      <div class="plan-unico-right">
+        <div class="split-label"><span class="es-only">Planes a medida</span><span class="en-only">Custom plans</span></div>
+        <div class="plan-unico-price" style="margin-bottom:12px;"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></div>
         <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
       </div>
     </div>
@@ -1207,6 +1224,7 @@
               <option value="plan1-abono">Plan 01 + Gestión mensual ($190.000 + $18.000/mes)</option>
               <option value="plan2">Plan 02 · Sitio Completo + SEO ($310.000 único)</option>
               <option value="plan2-abono">Plan 02 + Gestión mensual ($310.000 + $28.000/mes)</option>
+              <option value="redes">Gestión de Redes Sociales (consultar · planes a medida)</option>
               <option value="gbusiness">Adicional · Google Business ($55.000)</option>
               <option value="consulta">Solo quiero el diagnóstico gratuito</option>
             </select>
@@ -1337,10 +1355,11 @@ buildHeroTitle('es');
       : '¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…';
     var planOpts = [
       ['', isEn ? '— Select —' : '— Seleccionar —'],
-      ['plan1',      isEn ? 'Plan 01 · Professional Landing (USD 100 one-time)'     : 'Plan 01 · Landing Profesional ($190.000 único)'],
-      ['plan1-abono',isEn ? 'Plan 01 + Monthly mgmt (USD 100 + USD 14/mo)'          : 'Plan 01 + Gestión mensual ($190.000 + $18.000/mes)'],
-      ['plan2',      isEn ? 'Plan 02 · Full Site + SEO (USD 185 one-time)'          : 'Plan 02 · Sitio Completo + SEO ($310.000 único)'],
-      ['plan2-abono',isEn ? 'Plan 02 + Monthly mgmt (USD 185 + USD 22/mo)'          : 'Plan 02 + Gestión mensual ($310.000 + $28.000/mes)'],
+      ['plan1',      isEn ? 'Plan 01 · Professional Landing (USD 126 one-time)'     : 'Plan 01 · Landing Profesional ($190.000 único)'],
+      ['plan1-abono',isEn ? 'Plan 01 + Monthly mgmt (USD 126 + USD 14/mo)'          : 'Plan 01 + Gestión mensual ($190.000 + $18.000/mes)'],
+      ['plan2',      isEn ? 'Plan 02 · Full Site + SEO (USD 207 one-time)'          : 'Plan 02 · Sitio Completo + SEO ($310.000 único)'],
+      ['plan2-abono',isEn ? 'Plan 02 + Monthly mgmt (USD 207 + USD 22/mo)'          : 'Plan 02 + Gestión mensual ($310.000 + $28.000/mes)'],
+      ['redes',      isEn ? 'Social Media Management (inquire · custom plans)'      : 'Gestión de Redes Sociales (consultar · planes a medida)'],
       ['gbusiness',  isEn ? 'Add-on · Google Business (USD 42)'                     : 'Adicional · Google Business ($55.000)'],
       ['consulta',   isEn ? 'Just the free audit'                                   : 'Solo quiero el diagnóstico gratuito']
     ];
