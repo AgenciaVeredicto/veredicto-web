@@ -18,7 +18,23 @@
   <meta name="twitter:card"       content="summary">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg viewBox='0 0 42 46' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M21 1.5 40 12.5v21L21 44.5 2 33.5v-21L21 1.5Z' fill='%23F7F5EF' stroke='%231C2B1E' stroke-width='1.5'/><path d='M21 7 34.5 15v15.5L21 38.5 7.5 30.5V15L21 7Z' stroke='%234A7C59' fill='none' stroke-width='1'/><path d='M14 17.5 21 30l7-12.5' stroke='%231C2B1E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.svg">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Agencia Veredicto",
+    "description": "Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local.",
+    "url": "https://agenciaveredicto.com",
+    "logo": "https://agenciaveredicto.com/favicon.svg",
+    "address": { "@type": "PostalAddress", "addressLocality": "Córdoba", "addressCountry": "AR" },
+    "areaServed": "AR",
+    "serviceType": "Marketing jurídico"
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1100,6 +1116,24 @@
       </div>
     </div>
 
+    <!-- Renovación / Actualización de sitio web -->
+    <div class="plan-unico reveal">
+      <div>
+        <div class="plan-tier"><span class="es-only">Adicional</span><span class="en-only">Add-on</span></div>
+        <div class="plan-name" style="font-size:21px;margin-bottom:6px;"><span class="es-only">Renovación de sitio web</span><span class="en-only">Website Renewal</span></div>
+        <span class="plan-unico-label"><span class="es-only">Para estudios que ya tienen sitio pero necesitan actualizarlo</span><span class="en-only">For firms that already have a site but need to modernize it</span></span>
+      </div>
+      <div>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;"><span class="es-only">Analizamos el sitio actual, identificamos qué está frenando las consultas y lo rediseñamos desde cero conservando lo que funciona. Nuevo diseño, textos actualizados, velocidad optimizada y SEO local corregido. Ideal para estudios con presencia antigua que no genera resultados.</span><span class="en-only">We analyze the current site, identify what is blocking inquiries and redesign it from scratch while keeping what works. New design, updated copy, optimized speed and corrected local SEO. Ideal for firms with an outdated presence that isn't generating results.</span></p>
+      </div>
+      <div class="plan-unico-right">
+        <div class="split-label"><span class="es-only">Precio</span><span class="en-only">Price</span></div>
+        <div class="plan-unico-price" style="font-size:22px;"><span class="es-only">A consultar</span><span class="en-only">On request</span></div>
+        <div class="price-intl" style="margin-bottom:12px;opacity:.7;"><span class="es-only">Depende del alcance del proyecto</span><span class="en-only">Depends on project scope</span></div>
+        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1208,6 +1242,7 @@
               <option value="plan2">Plan 02 · Sitio Completo + SEO ($240.000 único)</option>
               <option value="plan2-abono">Plan 02 + Gestión mensual ($240.000 + $28.000/mes)</option>
               <option value="gbusiness">Adicional · Google Business ($55.000)</option>
+              <option value="renovacion">Renovación de sitio web (a consultar)</option>
               <option value="consulta">Solo quiero el diagnóstico gratuito</option>
             </select>
           </div>
@@ -1342,6 +1377,7 @@ buildHeroTitle('es');
       ['plan2',      isEn ? 'Plan 02 · Full Site + SEO (USD 185 one-time)'          : 'Plan 02 · Sitio Completo + SEO ($240.000 único)'],
       ['plan2-abono',isEn ? 'Plan 02 + Monthly mgmt (USD 185 + USD 22/mo)'          : 'Plan 02 + Gestión mensual ($240.000 + $28.000/mes)'],
       ['gbusiness',  isEn ? 'Add-on · Google Business (USD 42)'                     : 'Adicional · Google Business ($55.000)'],
+      ['renovacion', isEn ? 'Website Renewal (on request)'                          : 'Renovación de sitio web (a consultar)'],
       ['consulta',   isEn ? 'Just the free audit'                                   : 'Solo quiero el diagnóstico gratuito']
     ];
     var sel = document.getElementById('plan');
