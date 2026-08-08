@@ -1,0 +1,9 @@
+.venv/
+build/
+output/
+# Datos personales/identificables — NUNCA se publican:
+pii_targets.local.json
+__pycache__/
+*.pyc
+assets/fonts/*.ttf
+assets/fonts/*.otf

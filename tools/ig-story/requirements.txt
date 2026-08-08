@@ -1,0 +1,8 @@
+# Generador de Instagram Story (web -> video vertical)
+# Python 3.10+
+playwright>=1.44
+moviepy>=2.1
+Pillow>=10.0
+numpy>=1.24
+imageio-ffmpeg>=0.5      # provee un ffmpeg con libx264 si el SO no tiene uno
+pytesseract>=0.3.10      # QA por OCR (requiere el binario 'tesseract' del SO)
