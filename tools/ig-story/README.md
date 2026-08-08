@@ -75,7 +75,21 @@ assets/fonts/Montserrat-Medium.ttf
 Descargá Montserrat/Poppins gratis de Google Fonts (licencia OFL). Si no hay
 ninguna, cae a una fuente del sistema (DejaVu/Arial) como último recurso.
 
-## Uso
+## Opción sin instalar nada: editor en el navegador
+
+`browser-editor/index.html` es un editor de un solo archivo que corre en Chrome:
+abrilo, cargá una captura por sección (hero, áreas, servicios, reseñas,
+contacto) con la privacidad ya aplicada, y apretá **Grabar**. Renderiza mi
+edición completa (Ken Burns, paneos, highlights, texto animado, márgenes
+seguros) sobre un canvas 1080×1920 y descarga el video.
+
+- Intenta **MP4 (H.264)**; en un Chrome de escritorio normalmente sale MP4 listo
+  para Instagram. Si el navegador no soporta H.264, baja WebM (convertilo con
+  `ffmpeg -i in.webm -c:v libx264 -pix_fmt yuv420p out.mp4`).
+- No requiere Python ni ffmpeg. El botón **"Ver demo"** arma paneles de ejemplo
+  para previsualizar el ritmo sin cargar nada.
+
+## Uso (script Python, MP4 H.264 directo)
 
 ```bash
 python make_story.py               # captura → edición → export → QA
