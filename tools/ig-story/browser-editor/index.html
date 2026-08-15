@@ -1,0 +1,253 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veredicto · Editor de Story (navegador)</title>
+<style>
+  :root{--ink:#141816;--gold:#C9A247;--cream:#f4efe6;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Montserrat,-apple-system,Segoe UI,Roboto,sans-serif;
+       background:#0e1210;color:var(--cream);display:flex;min-height:100vh}
+  .side{width:360px;padding:22px;background:#121714;border-right:1px solid #223}
+  .stage{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
+  h1{font-size:18px;margin:0 0 4px}
+  p.small{font-size:12px;opacity:.7;line-height:1.5}
+  .slot{border:1px dashed #3a463f;border-radius:10px;padding:10px;margin:8px 0;
+        font-size:13px;display:flex;align-items:center;gap:10px;cursor:pointer;
+        transition:.15s;background:#0f1411}
+  .slot:hover{border-color:var(--gold)}
+  .slot.filled{border-style:solid;border-color:var(--gold)}
+  .slot .k{font-weight:700;color:var(--gold);min-width:78px}
+  .slot .st{margin-left:auto;font-size:11px;opacity:.65}
+  .thumb{width:34px;height:60px;object-fit:cover;border-radius:4px;background:#222}
+  button{width:100%;padding:13px;border:0;border-radius:10px;font-weight:700;
+         font-size:15px;cursor:pointer;margin-top:12px;font-family:inherit}
+  #rec{background:var(--gold);color:#1a1206}
+  #rec:disabled{opacity:.45;cursor:not-allowed}
+  canvas{height:82vh;max-height:1600px;aspect-ratio:9/16;background:#000;
+         border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .status{font-size:12px;margin-top:10px;min-height:16px;color:var(--gold)}
+  a.dl{display:block;text-align:center;margin-top:10px;color:var(--gold);font-size:13px}
+  code{background:#0a0d0b;padding:1px 5px;border-radius:4px;font-size:11px}
+</style>
+
+<div class="side">
+  <h1>Editor de Story · Veredicto</h1>
+  <p class="small">Cargá una captura por sección (PNG/JPG, vertical, alta resolución,
+  con la privacidad ya aplicada). El editor arma el video con mi edición y lo
+  descarga. Sin instalar nada.</p>
+
+  <div id="slots"></div>
+
+  <button id="demo">Ver demo (paneles de ejemplo)</button>
+  <button id="rec" disabled>● Grabar y descargar video</button>
+  <div class="status" id="status"></div>
+  <a class="dl" id="dl" style="display:none"></a>
+
+  <p class="small" style="margin-top:16px">
+  Salida: intenta <b>MP4 (H.264)</b>; si tu navegador no lo soporta, baja
+  <b>WebM</b> (convertilo a MP4 con cualquier conversor o
+  <code>ffmpeg -i in.webm -c:v libx264 -pix_fmt yuv420p out.mp4</code>).
+  Para MP4 directo garantizado, usá el script Python del repo.</p>
+</div>
+
+<div class="stage"><canvas id="c" width="1080" height="1920"></canvas></div>
+
+<script>
+// ===================== CONFIG / STORYBOARD =========================
+const W=1080,H=1920,FPS=30;
+const SAFE_TOP=250, SAFE_BOTTOM=380, SAFE_SIDE=90;
+const GOLD="#C9A247", INK="20,24,22";
+const CROSS=0.5;
+const SECTIONS=[
+  {key:"hero",     dur:3.5, motion:"kenburns", focus:"top", z0:1.03,z1:1.13},
+  {key:"areas",    dur:5.5, motion:"pan",      z:1.05, highlights:[0.8,2.3,3.8]},
+  {key:"servicios",dur:4.5, motion:"pan",      z:1.05},
+  {key:"resenas",  dur:4.5, motion:"kenburns", focus:"top", z0:1.05,z1:1.12},
+  {key:"contacto", dur:5.5, motion:"pan",      z:1.04},
+];
+// tiempos absolutos con solape de crossfade
+let acc=0; for(const s of SECTIONS){s.start=acc; acc+=s.dur-CROSS;}
+const TOTAL=acc+CROSS;
+const st=k=>SECTIONS.find(s=>s.key===k).start;
+const TEXTS=[
+  {t:0.3,  d:2.9, y:0.30, big:true,
+   s:"Así quedó la web de un estudio penalista en Córdoba."},
+  {t:st("servicios")+0.2, d:3.6, y:0.30,
+   s:"Cada servicio tiene su propia página, optimizada para cómo la gente busca en Google (SEO)."},
+  {t:st("resenas")+0.2, d:3.2, y:0.68,
+   s:"5.0 en Google. La web muestra esa confianza desde el primer segundo."},
+  {t:TOTAL-2.2, d:2.2, pin:true,
+   s:"Hacemos esto para estudios jurídicos en Argentina. Bajo expectativa, sobre entrega."},
+];
+const HL=[[0.10,0.30,0.80,0.11],[0.10,0.46,0.80,0.11],[0.10,0.62,0.80,0.11]];
+
+// ===================== STATE / UI ==================================
+const imgs={};
+const slotsEl=document.getElementById('slots');
+const statusEl=document.getElementById('status');
+SECTIONS.forEach(s=>{
+  const el=document.createElement('label'); el.className='slot'; el.dataset.k=s.key;
+  el.innerHTML=`<span class="k">${s.key}</span>
+    <img class="thumb" style="display:none"><span class="st">vacío</span>
+    <input type="file" accept="image/*" hidden>`;
+  const inp=el.querySelector('input');
+  inp.onchange=e=>{const f=e.target.files[0]; if(!f)return;
+    const url=URL.createObjectURL(f); const im=new Image();
+    im.onload=()=>{imgs[s.key]=im; el.classList.add('filled');
+      const th=el.querySelector('.thumb'); th.src=url; th.style.display='';
+      el.querySelector('.st').textContent=im.naturalWidth+'×'+im.naturalHeight;
+      refresh();};
+    im.src=url;};
+  slotsEl.appendChild(el);
+});
+function refresh(){
+  const ready=SECTIONS.every(s=>imgs[s.key]);
+  document.getElementById('rec').disabled=!ready;
+  if(ready) statusEl.textContent="Listo para grabar.";
+}
+
+// ===================== DRAWING HELPERS =============================
+const c=document.getElementById('c'), g=c.getContext('2d');
+function cover(im,scale){ // devuelve {w,h} cubriendo por ancho
+  const s=(W/im.naturalWidth)*scale; return {w:im.naturalWidth*s,h:im.naturalHeight*s};
+}
+function drawSection(s,lt){ // lt = tiempo local dentro de la sección
+  const im=imgs[s.key]; if(!im) return;
+  const p=Math.min(1,Math.max(0,lt/s.dur));
+  let scale, dx, dy;
+  if(s.motion==="kenburns"){
+    scale=(s.z0+(s.z1-s.z0)*p); const d=cover(im,scale);
+    dx=(W-d.w)/2; dy = s.focus==="top"? 0 : (s.focus==="bottom"? H-d.h : (H-d.h)/2);
+    g.drawImage(im,dx,dy,d.w,d.h);
+  } else { // pan vertical
+    scale=(s.z*(1+0.0)) ; const d=cover(im,scale);
+    dx=(W-d.w)/2; const travel=Math.max(0,d.h-H); dy=-travel*p;
+    g.drawImage(im,dx,dy,d.w,d.h);
+  }
+}
+function roundRect(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);
+  g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);
+  g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function wrap(text,maxw,font){g.font=font;const words=text.split(' ');
+  const lines=[];let line='';for(const w of words){const test=line?line+' '+w:w;
+   if(g.measureText(test).width>maxw&&line){lines.push(line);line=w;}else line=test;}
+  if(line)lines.push(line);return lines;}
+function drawText(o,t){
+  const dt=t-o.t; if(dt<0||dt>o.d) return;
+  const fin=Math.min(1,dt/0.3), fout=Math.min(1,(o.d-dt)/0.35);
+  const alpha=Math.min(fin,fout); const slide=26*Math.max(0,1-dt/0.4);
+  const fs=o.big?74:56; const font=`700 ${fs}px Montserrat, sans-serif`;
+  const maxw=W-2*SAFE_SIDE-88;
+  const lines=wrap(o.s,maxw,font); const lh=fs*1.18;
+  const th=lines.length*lh; const padx=44,pady=30;
+  const bw=Math.min(W-2*SAFE_SIDE, maxw+2*padx);
+  const bh=th+2*pady;
+  let by; if(o.pin) by=H-SAFE_BOTTOM-bh; else by=(o.y*H)-bh/2;
+  by=Math.max(SAFE_TOP,Math.min(by,H-SAFE_BOTTOM-bh)); by+=slide;
+  const bx=(W-bw)/2;
+  g.save(); g.globalAlpha=alpha;
+  g.fillStyle=`rgba(${INK},0.60)`; roundRect(bx,by,bw,bh,26); g.fill();
+  g.lineWidth=3; g.strokeStyle=GOLD; roundRect(bx,by,bw,bh,26); g.stroke();
+  g.font=font; g.textAlign='center'; g.textBaseline='top';
+  g.shadowColor='rgba(0,0,0,.6)'; g.shadowBlur=8;
+  lines.forEach((ln,i)=>{const ty=by+pady+i*lh;
+    g.lineWidth=6; g.strokeStyle='rgba(0,0,0,.55)'; g.strokeText(ln,W/2,ty);
+    g.fillStyle='#fff'; g.fillText(ln,W/2,ty);});
+  g.restore();
+}
+function drawHighlights(t){
+  const s=SECTIONS.find(x=>x.key==="areas"); if(!s.highlights) return;
+  s.highlights.forEach((off,i)=>{
+    const start=s.start+off, dur=1.3, dt=t-start; if(dt<0||dt>dur)return;
+    const a=Math.min(Math.min(1,dt/0.35),Math.min(1,(dur-dt)/0.5));
+    const [x,y,w,h]=HL[i];
+    g.save(); g.globalAlpha=a; g.strokeStyle=GOLD; g.lineWidth=6;
+    roundRect(x*W,y*H,w*W,h*H,28); g.stroke(); g.restore();
+  });
+}
+function activeSections(t){ // devuelve [{s,lt,alpha}] con crossfade
+  const out=[];
+  for(const s of SECTIONS){
+    const lt=t-s.start; if(lt< -0.001 || lt> s.dur) continue;
+    let a=1;
+    if(lt<CROSS && s!==SECTIONS[0]) a=lt/CROSS;              // fade in
+    if(lt>s.dur-CROSS && s!==SECTIONS[SECTIONS.length-1]) a=Math.min(a,(s.dur-lt)/CROSS);
+    out.push({s,lt,a});
+  }
+  return out;
+}
+function renderFrame(t){
+  g.fillStyle='#000'; g.fillRect(0,0,W,H);
+  for(const it of activeSections(t)){ g.save(); g.globalAlpha=it.a;
+    drawSection(it.s,it.lt); g.restore(); }
+  drawHighlights(t);
+  for(const o of TEXTS) drawText(o,t);
+}
+
+// ===================== DEMO PANELS =================================
+function demoPanels(){
+  const labels={hero:["ESTUDIO","Hero"],areas:["ÁREAS DE TRABAJO","Querella · Defensa penal · Delitos económicos"],
+    servicios:["SERVICIOS","Declaración · Prisión preventiva · Excarcelación"],
+    resenas:["★ 5.0","Reseñas en Google"],contacto:["CONTACTO","CTA final"]};
+  const cols={hero:"#1d2b24",areas:"#22303a",servicios:"#2a2438",resenas:"#33291a",contacto:"#1a2620"};
+  SECTIONS.forEach((s,i)=>{
+    const cv=document.createElement('canvas'); cv.width=1290; cv.height=(s.key==="hero"||s.key==="resenas")?2200:3400;
+    const x=cv.getContext('2d'); const grd=x.createLinearGradient(0,0,0,cv.height);
+    grd.addColorStop(0,cols[s.key]); grd.addColorStop(1,"#0e1210");
+    x.fillStyle=grd; x.fillRect(0,0,cv.width,cv.height);
+    x.fillStyle=GOLD; x.font="700 120px sans-serif"; x.textAlign="center";
+    x.fillText(labels[s.key][0],cv.width/2,360);
+    x.fillStyle="#eee"; x.font="600 54px sans-serif";
+    x.fillText(labels[s.key][1],cv.width/2,470);
+    // filas simuladas
+    x.fillStyle="rgba(255,255,255,.08)";
+    for(let r=0;r<6;r++) x.fillRect(150,700+r*260,cv.width-300,180);
+    const im=new Image(); im.onload=()=>{imgs[s.key]=im;
+      document.querySelector(`.slot[data-k="${s.key}"]`).classList.add('filled');
+      refresh();}; im.src=cv.toDataURL();
+  });
+}
+
+// ===================== RECORD =====================================
+function pickMime(){
+  const c=['video/mp4;codecs=avc1.640028','video/mp4;codecs=h264','video/mp4',
+           'video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
+  for(const m of c){ if(window.MediaRecorder&&MediaRecorder.isTypeSupported(m)) return m; }
+  return 'video/webm';
+}
+async function record(){
+  const btn=document.getElementById('rec'); btn.disabled=true;
+  const mime=pickMime(); statusEl.textContent="Grabando… ("+mime.split(';')[0]+")";
+  const stream=c.captureStream(FPS);
+  const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4500000});
+  const chunks=[]; rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+  const done=new Promise(res=>rec.onstop=res);
+  rec.start(100);
+  const t0=performance.now();
+  await new Promise(res=>{
+    function loop(){ const t=(performance.now()-t0)/1000;
+      renderFrame(Math.min(t,TOTAL));
+      if(t>=TOTAL+0.1) res(); else requestAnimationFrame(loop); }
+    requestAnimationFrame(loop);
+  });
+  rec.stop(); await done;
+  const ext=mime.startsWith('video/mp4')?'mp4':'webm';
+  const blob=new Blob(chunks,{type:mime.split(';')[0]});
+  const url=URL.createObjectURL(blob);
+  const a=document.getElementById('dl');
+  a.href=url; a.download='veredicto_story.'+ext; a.style.display='block';
+  a.textContent='⬇ Descargar veredicto_story.'+ext+' ('+(blob.size/1e6).toFixed(1)+' MB)';
+  statusEl.textContent='Listo: '+(blob.size/1e6).toFixed(1)+' MB · '+ext.toUpperCase();
+  btn.disabled=false;
+  a.click(); // dispara descarga
+  window.__done={size:blob.size,ext,mime}; // hook para test
+}
+document.getElementById('rec').onclick=record;
+document.getElementById('demo').onclick=demoPanels;
+
+// draw a first frame
+renderFrame(0);
+// auto-hooks para testing headless
+const q=new URLSearchParams(location.search);
+if(q.get('demo')) demoPanels();
+if(q.get('autorecord')) { const iv=setInterval(()=>{ if(SECTIONS.every(s=>imgs[s.key])){clearInterval(iv);record();} },200); }
+</script>

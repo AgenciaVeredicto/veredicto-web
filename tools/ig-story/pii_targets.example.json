@@ -1,0 +1,15 @@
+{
+  "__comment": "Copiá este archivo a pii_targets.local.json y completá tus datos reales. El .local.json esta gitignored: NUNCA se publica. Estos placeholders son ficticios a proposito; con ellos la Fase 1 aborta (fail-loud) hasta que crees el .local.json.",
+  "target_url": "https://ejemplo-sitio.com.ar",
+  "lawyer_name": "NOMBRE APELLIDO",
+  "photo_src_hint": "foto-perfil",
+  "matricula": "MP.0-00000",
+  "phone": "+54 9 000 000 0000",
+  "address": "CALLE 000",
+  "domain": "ejemplo-sitio.com.ar",
+  "reviewers": [
+    "RESENADOR UNO",
+    "RESENADOR DOS",
+    "RESENADOR TRES"
+  ]
+}
