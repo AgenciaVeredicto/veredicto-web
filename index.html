@@ -43,7 +43,6 @@
     "logo": "https://agenciaveredicto.com/favicon.svg",
     "image": "https://agenciaveredicto.com/og-image.png",
     "email": "agenciaveredicto@gmail.com",
-    "telephone": "+5493518162771",
     "foundingDate": "2024",
     "sameAs": [
       "https://www.instagram.com/agenciaveredicto/",
@@ -61,7 +60,13 @@
     ],
     "serviceType": "Marketing jurídico",
     "priceRange": "ARS 55.000 - ARS 310.000",
-    "knowsLanguage": ["es", "en"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "knowsLanguage": "es",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Servicios",
@@ -585,6 +590,7 @@
     }
     .contact-row svg { width: 15px; height: 15px; stroke: var(--sage); fill: none; stroke-width: 1.5; flex: none; }
     .contact-row a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--sage-l); }
+    .contact-hours { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
 
     /* contact form */
     .contact-form {
@@ -838,24 +844,6 @@
     /* ======== BODY SCROLL LOCK (mobile menu open) ======== */
     body.menu-open { overflow: hidden; }
 
-    /* ======== LANGUAGE TOGGLE ======== */
-    .lang-flags { display: flex; gap: 2px; margin-left: 8px; }
-    .lang-flag {
-      font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700;
-      letter-spacing: .1em; color: var(--cream);
-      background: none; border: 1px solid transparent; cursor: pointer;
-      padding: 4px 8px; border-radius: 2px;
-      transition: border-color .2s, opacity .15s; opacity: .55;
-    }
-    .lang-flag.active { border-color: rgba(247,245,239,.6); opacity: 1; }
-    @media (hover: hover) and (pointer: fine) {
-      .lang-flag:not(.active):hover { opacity: .7; }
-    }
-    .lang-flag:active { transform: scale(0.97); }
-
-    body.lang-en .es-only { display: none !important; }
-    body:not(.lang-en) .en-only { display: none !important; }
-
     /* ======== DUAL PRICING (services) ======== */
     .price-intl {
       font-size: 11.5px; color: var(--muted); margin-top: 5px; letter-spacing: .01em;
@@ -877,10 +865,10 @@
 <!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">×</button>
-  <a href="#problema" onclick="closeMobile()"><span class="es-only">El problema</span><span class="en-only">The Problem</span></a>
-  <a href="#proceso"  onclick="closeMobile()"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></a>
+  <a href="#problema" onclick="closeMobile()">El problema</a>
+  <a href="#proceso"  onclick="closeMobile()">Cómo trabajamos</a>
   <a href="#servicios" onclick="closeMobile()">Servicios</a>
-  <a href="#contacto" onclick="closeMobile()"><span class="es-only">Contacto</span><span class="en-only">Contact</span></a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
 </div>
 
 <!-- ===== NAV ===== -->
@@ -896,15 +884,11 @@
         <span class="name">Agencia Veredicto</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#problema"><span class="es-only">El problema</span><span class="en-only">The Problem</span></a></li>
-        <li><a href="#proceso"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></a></li>
+        <li><a href="#problema">El problema</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
         <li><a href="#servicios">Servicios</a></li>
       </ul>
-      <a href="#contacto" class="btn-nav"><span class="es-only">Diagnóstico gratis</span><span class="en-only">Free Audit</span></a>
-      <div class="lang-flags">
-        <button class="lang-flag active" id="flagES" aria-label="Español" title="Español">ES</button>
-        <button class="lang-flag" id="flagEN" aria-label="English" title="English">EN</button>
-      </div>
+      <a href="#contacto" class="btn-nav">Diagnóstico gratis</a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -917,7 +901,7 @@
   <div class="hero-bg-num" aria-hidden="true">V</div>
   <div class="wrap" style="display:flex;flex-direction:column;height:100%;">
     <div style="margin-bottom:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;">
-      <div class="eyebrow"><span class="es-only">Marketing jurídico · Córdoba, Argentina</span><span class="en-only">Legal Marketing · Córdoba, Argentina</span></div>
+      <div class="eyebrow">Marketing jurídico · Córdoba, Argentina</div>
       <div class="eyebrow" style="color:var(--muted)">Est. 2024</div>
     </div>
 
@@ -925,12 +909,12 @@
       <h1 class="hero-title" id="heroTitle" aria-label="Tus clientes están buscando. Nos aseguramos de que te encuentren."></h1>
       <div class="hero-foot">
         <p class="hero-desc reveal d2">
-          <span class="es-only">La mayoría de los estudios argentinos no aparece cuando el cliente busca. Hacemos un diagnóstico gratuito de tu presencia en Google y te decimos exactamente qué hay que cambiar, sin compromiso.</span>
-          <span class="en-only">Most law firms don't show up when potential clients search. We run a free audit of your Google presence and tell you exactly what needs to change, no commitment required.</span>
+          La mayoría de los estudios argentinos no aparece cuando el cliente busca. Hacemos un diagnóstico gratuito de tu presencia en Google y te decimos exactamente qué hay que cambiar, sin compromiso.
+          
         </p>
         <div class="hero-actions reveal d3">
-          <a href="#contacto" class="btn-primary"><span class="es-only">Diagnóstico gratuito</span><span class="en-only">Free Audit</span></a>
-          <a href="#servicios" class="btn-ghost"><span class="es-only">Ver servicios</span><span class="en-only">View Services</span></a>
+          <a href="#contacto" class="btn-primary">Diagnóstico gratuito</a>
+          <a href="#servicios" class="btn-ghost">Ver servicios</a>
         </div>
       </div>
     </div>
@@ -940,15 +924,15 @@
     <div class="hero-bar" aria-label="Estadísticas clave">
       <div class="hero-bar-item reveal d1">
         <div class="hero-bar-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
-        <div class="hero-bar-label"><span class="es-only">de personas busca<br>abogado en Google primero</span><span class="en-only">of people search for a<br>lawyer on Google first</span></div>
+        <div class="hero-bar-label">de personas busca<br>abogado en Google primero</div>
       </div>
       <div class="hero-bar-item reveal d2">
         <div class="hero-bar-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
-        <div class="hero-bar-label"><span class="es-only">de estudios no tiene<br>presencia digital real</span><span class="en-only">of firms have no real<br>digital presence</span></div>
+        <div class="hero-bar-label">de estudios no tiene<br>presencia digital real</div>
       </div>
       <div class="hero-bar-item reveal d3">
         <div class="hero-bar-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
-        <div class="hero-bar-label"><span class="es-only">más consultas con<br>Google Maps activo</span><span class="en-only">more inquiries with an<br>active Google Maps profile</span></div>
+        <div class="hero-bar-label">más consultas con<br>Google Maps activo</div>
       </div>
     </div>
   </div>
@@ -980,30 +964,30 @@
 <section id="problema">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title reveal"><span class="es-only" style="display:block">Los clientes buscan.<br>El estudio <em>no aparece.</em></span><span class="en-only" style="display:block">Clients search.<br>Your firm <em>doesn't show up.</em></span></h2>
-      <p class="sec-intro reveal d2"><span class="es-only">El 80% de las personas busca un abogado en Google antes de llamar. Si el estudio no aparece, o aparece mal, la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</span><span class="en-only">80% of people search for a lawyer on Google before calling. If your firm doesn't show up, or shows up poorly, the inquiry goes to a competitor. Not because they're better. Because they appear first.</span></p>
+      <h2 class="sec-title reveal">Los clientes buscan.<br>El estudio <em>no aparece.</em></h2>
+      <p class="sec-intro reveal d2">El 80% de las personas busca un abogado en Google antes de llamar. Si el estudio no aparece, o aparece mal, la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</p>
     </div>
 
     <div class="problema-stats">
       <div class="pstat reveal">
         <div class="pstat-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
-        <div class="pstat-label"><span class="es-only">Buscan en Google</span><span class="en-only">Search on Google</span></div>
-        <p class="pstat-desc"><span class="es-only">De cada 10 personas que necesitan un abogado, 8 empiezan en Google. No en el directorio, no por recomendación directa.</span><span class="en-only">8 out of 10 people who need a lawyer start on Google, not a directory, not a direct referral.</span></p>
+        <div class="pstat-label">Buscan en Google</div>
+        <p class="pstat-desc">De cada 10 personas que necesitan un abogado, 8 empiezan en Google. No en el directorio, no por recomendación directa.</p>
       </div>
       <div class="pstat reveal d1">
         <div class="pstat-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
-        <div class="pstat-label"><span class="es-only">Sin presencia real</span><span class="en-only">No real presence</span></div>
-        <p class="pstat-desc"><span class="es-only">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza ni consultas.</span><span class="en-only">More than half of law firms in Argentina have no website, or one so outdated it generates neither trust nor inquiries.</span></p>
+        <div class="pstat-label">Sin presencia real</div>
+        <p class="pstat-desc">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza ni consultas.</p>
       </div>
       <div class="pstat reveal">
         <div class="pstat-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
-        <div class="pstat-label"><span class="es-only">Más consultas con Maps</span><span class="en-only">More inquiries with Maps</span></div>
-        <p class="pstat-desc"><span class="es-only">Un perfil de Google Business bien optimizado genera entre 2 y 4 veces más llamadas que uno sin optimizar o sin ficha creada.</span><span class="en-only">A well-optimized Google Business profile generates 2–4× more calls than an unoptimized or missing listing.</span></p>
+        <div class="pstat-label">Más consultas con Maps</div>
+        <p class="pstat-desc">Un perfil de Google Business bien optimizado genera entre 2 y 4 veces más llamadas que uno sin optimizar o sin ficha creada.</p>
       </div>
       <div class="pstat reveal d1">
         <div class="pstat-num"><span class="counter" data-target="7">0</span><span class="accent">s</span></div>
-        <div class="pstat-label"><span class="es-only">Primera impresión</span><span class="en-only">First impression</span></div>
-        <p class="pstat-desc"><span class="es-only">El potencial cliente tarda menos de 7 segundos en decidir si un sitio transmite profesionalismo. Un mal diseño cierra la conversación antes de empezar.</span><span class="en-only">A potential client takes less than 7 seconds to decide if a site feels professional. Poor design ends the conversation before it starts.</span></p>
+        <div class="pstat-label">Primera impresión</div>
+        <p class="pstat-desc">El potencial cliente tarda menos de 7 segundos en decidir si un sitio transmite profesionalismo. Un mal diseño cierra la conversación antes de empezar.</p>
       </div>
     </div>
   </div>
@@ -1013,10 +997,10 @@
 <div class="declaration">
   <div class="wrap">
     <blockquote class="reveal">
-      <span class="es-only" style="display:block">"Un estudio sin presencia digital no tiene<br><em>ninguna visibilidad</em> ante el cliente moderno."</span>
-      <span class="en-only" style="display:block">"A law firm without a digital presence has<br><em>no visibility</em> to the modern client."</span>
+      "Un estudio sin presencia digital no tiene<br><em>ninguna visibilidad</em> ante el cliente moderno."
+      
     </blockquote>
-    <cite class="reveal d1"><span class="es-only">Agencia Veredicto · Marketing Jurídico · Córdoba, 2024</span><span class="en-only">Agencia Veredicto · Legal Marketing · Córdoba, 2024</span></cite>
+    <cite class="reveal d1">Agencia Veredicto · Marketing Jurídico · Córdoba, 2024</cite>
   </div>
 </div>
 
@@ -1024,42 +1008,42 @@
 <section id="proceso">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num reveal"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></div>
-      <h2 class="sec-title reveal d1"><span class="es-only" style="display:block">Cuatro pasos.<br><em>Un estudio</em> en Google.</span><span class="en-only" style="display:block">Four steps.<br><em>Your firm</em> on Google.</span></h2>
-      <p class="sec-intro reveal d2"><span class="es-only">No vendemos paquetes genéricos. Cada trabajo empieza con un diagnóstico honesto y termina con resultados medibles. Sin reuniones eternas, sin entregas interminables.</span><span class="en-only">We don't sell generic packages. Every engagement starts with an honest audit and ends with measurable results. No endless meetings, no dragging timelines.</span></p>
+      <div class="sec-num reveal">Cómo trabajamos</div>
+      <h2 class="sec-title reveal d1">Cuatro pasos.<br><em>Un estudio</em> en Google.</h2>
+      <p class="sec-intro reveal d2">No vendemos paquetes genéricos. Cada trabajo empieza con un diagnóstico honesto y termina con resultados medibles. Sin reuniones eternas, sin entregas interminables.</p>
     </div>
 
     <div class="proceso-list">
       <div class="proceso-item reveal">
         <div class="proceso-num">01</div>
         <div class="proceso-content">
-          <span class="proceso-tag"><span class="es-only">Diagnóstico</span><span class="en-only">Audit</span></span>
-          <h3><span class="es-only">Evaluamos la situación real del estudio</span><span class="en-only">We assess the firm's real situation</span></h3>
-          <p><span class="es-only">Antes de hacer nada, analizamos en profundidad: si tiene sitio web, cómo está posicionado en Google, qué dice el perfil de Maps, qué hace la competencia local. La verdad primero, siempre.</span><span class="en-only">Before doing anything, we analyze in depth: website status, Google ranking, Maps profile, local competition. The truth first, always.</span></p>
+          <span class="proceso-tag">Diagnóstico</span>
+          <h3>Evaluamos la situación real del estudio</h3>
+          <p>Antes de hacer nada, analizamos en profundidad: si tiene sitio web, cómo está posicionado en Google, qué dice el perfil de Maps, qué hace la competencia local. La verdad primero, siempre.</p>
         </div>
       </div>
       <div class="proceso-item reveal d1">
         <div class="proceso-num">02</div>
         <div class="proceso-content">
-          <span class="proceso-tag"><span class="es-only">Diseño y estrategia</span><span class="en-only">Design &amp; strategy</span></span>
-          <h3><span class="es-only">Creamos la presencia correcta para cada estudio</span><span class="en-only">We build the right presence for each firm</span></h3>
-          <p><span class="es-only">Diseñamos el sitio web a medida, sin plantillas genéricas, y definimos la estrategia de posicionamiento local. Cada estudio tiene su voz; la construimos para que sea creíble y profesional.</span><span class="en-only">We design a custom website, no generic templates, and define the local positioning strategy. Each firm has its own voice; we build it to be credible and professional.</span></p>
+          <span class="proceso-tag">Diseño y estrategia</span>
+          <h3>Creamos la presencia correcta para cada estudio</h3>
+          <p>Diseñamos el sitio web a medida, sin plantillas genéricas, y definimos la estrategia de posicionamiento local. Cada estudio tiene su voz; la construimos para que sea creíble y profesional.</p>
         </div>
       </div>
       <div class="proceso-item reveal d2">
         <div class="proceso-num">03</div>
         <div class="proceso-content">
-          <span class="proceso-tag"><span class="es-only">Ejecución</span><span class="en-only">Execution</span></span>
-          <h3><span class="es-only">Publicamos y optimizamos para que el estudio aparezca</span><span class="en-only">We launch and optimize so the firm gets found</span></h3>
-          <p><span class="es-only">Ponemos el sitio online con dominio propio, SSL y hosting estable. Optimizamos Google Business: fotos, categorías, palabras clave locales, descripción y horarios. El estudio empieza a aparecer donde buscan los clientes.</span><span class="en-only">We go live with a custom domain, SSL and stable hosting. We optimize Google Business: photos, categories, local keywords, description and hours. The firm starts appearing where clients search.</span></p>
+          <span class="proceso-tag">Ejecución</span>
+          <h3>Publicamos y optimizamos para que el estudio aparezca</h3>
+          <p>Ponemos el sitio online con dominio propio, SSL y hosting estable. Optimizamos Google Business: fotos, categorías, palabras clave locales, descripción y horarios. El estudio empieza a aparecer donde buscan los clientes.</p>
         </div>
       </div>
       <div class="proceso-item reveal d3">
         <div class="proceso-num">04</div>
         <div class="proceso-content">
-          <span class="proceso-tag"><span class="es-only">Mantenimiento y seguimiento</span><span class="en-only">Maintenance &amp; follow-up</span></span>
-          <h3><span class="es-only">Mantenemos todo vivo y trabajando</span><span class="en-only">We keep everything live and working</span></h3>
-          <p><span class="es-only">El trabajo no termina con el lanzamiento. Gestionamos reseñas, actualizamos contenido, respondemos cambios del algoritmo y reportamos mes a mes qué está pasando con la visibilidad del estudio.</span><span class="en-only">The work doesn't end at launch. We manage reviews, update content, respond to algorithm changes and report monthly on the firm's visibility progress.</span></p>
+          <span class="proceso-tag">Mantenimiento y seguimiento</span>
+          <h3>Mantenemos todo vivo y trabajando</h3>
+          <p>El trabajo no termina con el lanzamiento. Gestionamos reseñas, actualizamos contenido, respondemos cambios del algoritmo y reportamos mes a mes qué está pasando con la visibilidad del estudio.</p>
         </div>
       </div>
     </div>
@@ -1070,70 +1054,70 @@
 <section id="servicios">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title reveal"><span class="es-only" style="display:block">Planes promocionales.<br>Todo listo para <em>empezar.</em></span><span class="en-only" style="display:block">Promotional plans.<br>Everything ready to <em>get started.</em></span></h2>
-      <p class="sec-intro reveal d2"><span class="es-only">Tres planes de presencia digital, web, SEO y redes sociales, más el posicionamiento en Google Business como servicio adicional. Precio fijo, sin abonos obligatorios, sin sorpresas.</span><span class="en-only">Three digital presence plans, web, SEO and social media, plus Google Business positioning as an add-on. Fixed price, no mandatory subscriptions, no surprises.</span></p>
+      <h2 class="sec-title reveal">Planes promocionales.<br>Todo listo para <em>empezar.</em></h2>
+      <p class="sec-intro reveal d2">Tres planes de presencia digital, web, SEO y redes sociales, más el posicionamiento en Google Business como servicio adicional. Precio fijo, sin abonos obligatorios, sin sorpresas.</p>
     </div>
 
     <div class="servicios-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 20px;">
 
       <div class="plan-card reveal">
         <div class="plan-tier">Plan 01</div>
-        <div class="plan-name"><span class="es-only">Landing Profesional</span><span class="en-only">Professional Landing</span></div>
-        <div class="plan-desc"><span class="es-only">Para el estudio que quiere una presencia digital sólida y en funcionamiento en días.</span><span class="en-only">For the firm that wants a solid digital presence up and running in days.</span></div>
+        <div class="plan-name">Landing Profesional</div>
+        <div class="plan-desc">Para el estudio que quiere una presencia digital sólida y en funcionamiento en días.</div>
         <div class="plan-pricing-split">
           <div class="split-item">
-            <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
+            <div class="split-label">Pago único</div>
             <div class="split-price"><span class="cur">$</span>190.000<span class="cur-badge">ARS</span></div>
             <div class="price-intl">≈ <strong>USD 126</strong></div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
-            <div class="split-label"><span class="es-only">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></span><span class="en-only">Monthly mgmt <span style="font-size:10px;opacity:.7">(optional)</span></span></div>
-            <div class="split-price"><span class="cur">$</span>18.000<span class="period"><span class="es-only">/mes</span><span class="en-only">/mo</span></span><span class="cur-badge">ARS</span></div>
+            <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+            <div class="split-price"><span class="cur">$</span>18.000<span class="period">/mes</span><span class="cur-badge">ARS</span></div>
             <div class="price-intl">≈ <strong>USD 14</strong><span class="period">/mo</span></div>
           </div>
         </div>
         <ul class="plan-feats">
-          <li><span class="es-only">Diseño personalizado de una página</span><span class="en-only">Custom single-page design</span></li>
-          <li><span class="es-only">Secciones: Presentación · Áreas de práctica · Quiénes somos · Contacto</span><span class="en-only">Sections: Intro · Practice Areas · About · Contact</span></li>
-          <li><span class="es-only">Redacción de todos los textos a medida del estudio</span><span class="en-only">Custom copywriting tailored to the firm</span></li>
-          <li><span class="es-only">Dominio .com + hosting por 12 meses incluidos</span><span class="en-only">.com domain + 12-month hosting included</span></li>
-          <li><span class="es-only">Formulario de contacto directo al email</span><span class="en-only">Contact form delivered directly to email</span></li>
-          <li><span class="es-only">Versión mobile optimizada desde el primer día</span><span class="en-only">Mobile-optimized from day one</span></li>
-          <li><span class="es-only">Certificado SSL (https) incluido</span><span class="en-only">SSL certificate (https) included</span></li>
-          <li><span class="es-only">Entrega en menos de 7 días hábiles</span><span class="en-only">Delivered in under 7 business days</span></li>
+          <li>Diseño personalizado de una página</li>
+          <li>Secciones: Presentación · Áreas de práctica · Quiénes somos · Contacto</li>
+          <li>Redacción de todos los textos a medida del estudio</li>
+          <li>Dominio .com + hosting por 12 meses incluidos</li>
+          <li>Formulario de contacto directo al email</li>
+          <li>Versión mobile optimizada desde el primer día</li>
+          <li>Certificado SSL (https) incluido</li>
+          <li>Entrega en menos de 7 días hábiles</li>
         </ul>
-        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar este plan</span><span class="en-only">Inquire about this plan</span></a>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar este plan</a>
       </div>
 
       <div class="plan-card featured reveal d1">
         <div class="plan-tier">Plan 02</div>
-        <div class="plan-name"><span class="es-only">Sitio Completo + SEO</span><span class="en-only">Full Site + SEO</span></div>
-        <div class="plan-desc"><span class="es-only">Para el estudio que quiere aparecer en Google cuando sus clientes lo buscan.</span><span class="en-only">For the firm that wants to rank on Google when clients search for them.</span></div>
+        <div class="plan-name">Sitio Completo + SEO</div>
+        <div class="plan-desc">Para el estudio que quiere aparecer en Google cuando sus clientes lo buscan.</div>
         <div class="plan-pricing-split">
           <div class="split-item">
-            <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
+            <div class="split-label">Pago único</div>
             <div class="split-price"><span class="cur">$</span>310.000<span class="cur-badge">ARS</span></div>
             <div class="price-intl">≈ <strong>USD 207</strong></div>
           </div>
           <div class="split-sep"></div>
           <div class="split-item">
-            <div class="split-label"><span class="es-only">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></span><span class="en-only">Monthly mgmt <span style="font-size:10px;opacity:.7">(optional)</span></span></div>
-            <div class="split-price"><span class="cur">$</span>28.000<span class="period"><span class="es-only">/mes</span><span class="en-only">/mo</span></span><span class="cur-badge">ARS</span></div>
+            <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+            <div class="split-price"><span class="cur">$</span>28.000<span class="period">/mes</span><span class="cur-badge">ARS</span></div>
             <div class="price-intl">≈ <strong>USD 22</strong><span class="period">/mo</span></div>
           </div>
         </div>
         <ul class="plan-feats">
-          <li><span class="es-only">Todo lo incluido en el Plan Landing</span><span class="en-only">Everything in the Landing Plan</span></li>
-          <li><span class="es-only">Múltiples páginas: Inicio · Áreas · Sobre el estudio · Blog · Contacto</span><span class="en-only">Multi-page: Home · Practice Areas · About · Blog · Contact</span></li>
-          <li><span class="es-only">Indexación en Google (Search Console + sitemap)</span><span class="en-only">Google indexing (Search Console + sitemap)</span></li>
-          <li><span class="es-only">SEO on-page: palabras clave locales, meta tags, velocidad</span><span class="en-only">On-page SEO: local keywords, meta tags, speed</span></li>
-          <li><span class="es-only">Sección de blog jurídico lista para publicar artículos</span><span class="en-only">Legal blog section ready to publish articles</span></li>
-          <li><span class="es-only">Core Web Vitals optimizados para mejor posición</span><span class="en-only">Core Web Vitals optimized for better ranking</span></li>
-          <li><span class="es-only">Informe inicial de posicionamiento en Google</span><span class="en-only">Initial Google ranking report</span></li>
-          <li><span class="es-only">Entrega en menos de 10 días hábiles</span><span class="en-only">Delivered in under 10 business days</span></li>
+          <li>Todo lo incluido en el Plan Landing</li>
+          <li>Múltiples páginas: Inicio · Áreas · Sobre el estudio · Blog · Contacto</li>
+          <li>Indexación en Google (Search Console + sitemap)</li>
+          <li>SEO on-page: palabras clave locales, meta tags, velocidad</li>
+          <li>Sección de blog jurídico lista para publicar artículos</li>
+          <li>Core Web Vitals optimizados para mejor posición</li>
+          <li>Informe inicial de posicionamiento en Google</li>
+          <li>Entrega en menos de 10 días hábiles</li>
         </ul>
-        <a href="#contacto" class="btn-plan btn-plan-solid"><span class="es-only">Consultar este plan</span><span class="en-only">Inquire about this plan</span></a>
+        <a href="#contacto" class="btn-plan btn-plan-solid">Consultar este plan</a>
       </div>
 
     </div>
@@ -1142,22 +1126,22 @@
     <div class="plan-unico reveal">
       <div>
         <div class="plan-tier">Plan 03</div>
-        <div class="plan-name" style="font-size:21px;margin-bottom:6px;"><span class="es-only">Gestión de Redes Sociales</span><span class="en-only">Social Media Management</span></div>
-        <span class="plan-unico-label"><span class="es-only">Contenido y comunidad para tu estudio</span><span class="en-only">Content &amp; community for your firm</span></span>
+        <div class="plan-name" style="font-size:21px;margin-bottom:6px;">Gestión de Redes Sociales</div>
+        <span class="plan-unico-label">Contenido y comunidad para tu estudio</span>
       </div>
       <div>
-        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;margin-bottom:14px;"><span class="es-only">Gestionamos la presencia del estudio en redes sociales con contenido profesional y una estrategia pensada para el sector jurídico. Trabajamos con distintos planes según los objetivos, las redes y el volumen de contenido.</span><span class="en-only">We manage the firm's social media presence with professional content and a strategy built for the legal sector. We offer different plans based on goals, networks and content volume.</span></p>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;margin-bottom:14px;">Gestionamos la presencia del estudio en redes sociales con contenido profesional y una estrategia pensada para el sector jurídico. Trabajamos con distintos planes según los objetivos, las redes y el volumen de contenido.</p>
         <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--ink);">
-          <li><span class="es-only">· Diseño de publicaciones</span><span class="en-only">· Post design</span></li>
-          <li><span class="es-only">· Calendario de contenidos</span><span class="en-only">· Content calendar</span></li>
-          <li><span class="es-only">· Gestión de comunidad</span><span class="en-only">· Community management</span></li>
-          <li><span class="es-only">· Informe de métricas mensual</span><span class="en-only">· Monthly metrics report</span></li>
+          <li>· Diseño de publicaciones</li>
+          <li>· Calendario de contenidos</li>
+          <li>· Gestión de comunidad</li>
+          <li>· Informe de métricas mensual</li>
         </ul>
       </div>
       <div class="plan-unico-right">
-        <div class="split-label"><span class="es-only">Planes a medida</span><span class="en-only">Custom plans</span></div>
-        <div class="plan-unico-price" style="margin-bottom:12px;"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></div>
-        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
+        <div class="split-label">Planes a medida</div>
+        <div class="plan-unico-price" style="margin-bottom:12px;">Consultar</div>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
       </div>
     </div>
 
@@ -1166,34 +1150,34 @@
       <div>
         <div class="plan-tier">Adicional</div>
         <div class="plan-name" style="font-size:21px;margin-bottom:6px;">Google Business</div>
-        <span class="plan-unico-label"><span class="es-only">Solo o combinado con cualquier plan</span><span class="en-only">Standalone or combined with any plan</span></span>
+        <span class="plan-unico-label">Solo o combinado con cualquier plan</span>
       </div>
       <div>
-        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;"><span class="es-only">Creamos o reclamamos el perfil de Google Business del estudio y lo optimizamos por completo: descripción, categorías, fotos, horarios y preguntas frecuentes. El estudio empieza a aparecer en el mapa cuando alguien busca "abogado en Córdoba", o en cualquier ciudad del país.</span><span class="en-only">We create or claim the firm's Google Business profile and fully optimize it: description, categories, photos, hours and FAQs. The firm starts appearing on the map when someone searches "lawyer in Córdoba", or any city in Argentina.</span></p>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;">Creamos o reclamamos el perfil de Google Business del estudio y lo optimizamos por completo: descripción, categorías, fotos, horarios y preguntas frecuentes. El estudio empieza a aparecer en el mapa cuando alguien busca "abogado en Córdoba", o en cualquier ciudad del país.</p>
       </div>
       <div class="plan-unico-right">
-        <div class="split-label"><span class="es-only">Pago único</span><span class="en-only">One-time</span></div>
+        <div class="split-label">Pago único</div>
         <div class="plan-unico-price">$55.000<span class="cur-badge">ARS</span></div>
         <div class="price-intl" style="margin-bottom:12px;">≈ <strong>USD 42</strong></div>
-        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
       </div>
     </div>
 
     <!-- Renovación / Actualización de sitio web -->
     <div class="plan-unico reveal">
       <div>
-        <div class="plan-tier"><span class="es-only">Adicional</span><span class="en-only">Add-on</span></div>
-        <div class="plan-name" style="font-size:21px;margin-bottom:6px;"><span class="es-only">Renovación de sitio web</span><span class="en-only">Website Renewal</span></div>
-        <span class="plan-unico-label"><span class="es-only">Para estudios que ya tienen sitio pero necesitan actualizarlo</span><span class="en-only">For firms that already have a site but need to modernize it</span></span>
+        <div class="plan-tier">Adicional</div>
+        <div class="plan-name" style="font-size:21px;margin-bottom:6px;">Renovación de sitio web</div>
+        <span class="plan-unico-label">Para estudios que ya tienen sitio pero necesitan actualizarlo</span>
       </div>
       <div>
-        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;"><span class="es-only">Analizamos el sitio actual, identificamos qué está frenando las consultas y lo rediseñamos desde cero conservando lo que funciona. Nuevo diseño, textos actualizados, velocidad optimizada y SEO local corregido. Ideal para estudios con presencia antigua que no genera resultados.</span><span class="en-only">We analyze the current site, identify what is blocking inquiries and redesign it from scratch while keeping what works. New design, updated copy, optimized speed and corrected local SEO. Ideal for firms with an outdated presence that isn't generating results.</span></p>
+        <p style="font-size:14.5px;color:var(--muted);line-height:1.75;max-width:52ch;">Analizamos el sitio actual, identificamos qué está frenando las consultas y lo rediseñamos desde cero conservando lo que funciona. Nuevo diseño, textos actualizados, velocidad optimizada y SEO local corregido. Ideal para estudios con presencia antigua que no genera resultados.</p>
       </div>
       <div class="plan-unico-right">
-        <div class="split-label"><span class="es-only">Precio</span><span class="en-only">Price</span></div>
-        <div class="plan-unico-price" style="font-size:22px;"><span class="es-only">A consultar</span><span class="en-only">On request</span></div>
-        <div class="price-intl" style="margin-bottom:12px;opacity:.7;"><span class="es-only">Depende del alcance del proyecto</span><span class="en-only">Depends on project scope</span></div>
-        <a href="#contacto" class="btn-plan btn-plan-outline"><span class="es-only">Consultar</span><span class="en-only">Inquire</span></a>
+        <div class="split-label">Precio</div>
+        <div class="plan-unico-price" style="font-size:22px;">A consultar</div>
+        <div class="price-intl" style="margin-bottom:12px;opacity:.7;">Depende del alcance del proyecto</div>
+        <a href="#contacto" class="btn-plan btn-plan-outline">Consultar</a>
       </div>
     </div>
 
@@ -1204,15 +1188,15 @@
 <section id="porque">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title reveal"><span class="es-only" style="display:block">Especialistas en el<br>sector <em>jurídico.</em> Solo eso.</span><span class="en-only" style="display:block">Specialists in the<br><em>legal sector.</em> That's it.</span></h2>
+      <h2 class="sec-title reveal">Especialistas en el<br>sector <em>jurídico.</em> Solo eso.</h2>
     </div>
 
     <div class="dif-grid">
       <div class="dif-text reveal">
-        <h3><span class="es-only">Un equipo de Córdoba, con raíces en el derecho y en la tecnología.</span><span class="en-only">A team from Córdoba, rooted in law and technology.</span></h3>
-        <p><span class="es-only">Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</span><span class="en-only">We started Veredicto because we kept seeing the same thing: serious law firms, with years of experience, that didn't show up on Google or had a website they were embarrassed to share.</span></p>
-        <p><span class="es-only">Nuestro equipo reúne experiencia en desarrollo web y programación con conocimiento real del mundo jurídico argentino. Entendemos cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal.</span><span class="en-only">Our team combines web development and programming experience with real knowledge of the Argentine legal world. We understand how lawyers communicate, what their clients expect and what language builds trust in the legal sector.</span></p>
-        <p><span class="es-only">No trabajamos con todos. Trabajamos con estudios de abogados, y punto. Eso es lo que nos permite hacer el trabajo bien.</span><span class="en-only">We don't work with everyone. We work with law firms, period. That's what allows us to do the work well.</span></p>
+        <h3>Un equipo de Córdoba, con raíces en el derecho y en la tecnología.</h3>
+        <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
+        <p>Nuestro equipo reúne experiencia en desarrollo web y programación con conocimiento real del mundo jurídico argentino. Entendemos cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal.</p>
+        <p>No trabajamos con todos. Trabajamos con estudios de abogados, y punto. Eso es lo que nos permite hacer el trabajo bien.</p>
       </div>
 
       <div class="dif-list">
@@ -1221,8 +1205,8 @@
             <svg viewBox="0 0 16 16"><path d="M8 2l1.5 3.1L13 5.7l-2.5 2.4.6 3.4L8 9.8l-3.1 1.7.6-3.4L3 5.7l3.5-.6L8 2z"/></svg>
           </div>
           <div class="dif-body">
-            <h4><span class="es-only">Especialistas en el sector legal</span><span class="en-only">Legal sector specialists</span></h4>
-            <p><span class="es-only">Conocemos el vocabulario, las búsquedas y las dudas de los clientes de estudios jurídicos argentinos.</span><span class="en-only">We know the vocabulary, search behavior and concerns of Argentine law firm clients.</span></p>
+            <h4>Especialistas en el sector legal</h4>
+            <p>Conocemos el vocabulario, las búsquedas y las dudas de los clientes de estudios jurídicos argentinos.</p>
           </div>
         </div>
         <div class="dif-row reveal d2">
@@ -1230,8 +1214,8 @@
             <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5v2.5l1.5 1.5"/></svg>
           </div>
           <div class="dif-body">
-            <h4><span class="es-only">Entrega rápida y sin vueltas</span><span class="en-only">Fast delivery, no runaround</span></h4>
-            <p><span class="es-only">El sitio publicado en días, no en semanas. Sin reuniones eternas ni revisiones que no terminan.</span><span class="en-only">Site live in days, not weeks. No endless meetings or never-ending revisions.</span></p>
+            <h4>Entrega rápida y sin vueltas</h4>
+            <p>El sitio publicado en días, no en semanas. Sin reuniones eternas ni revisiones que no terminan.</p>
           </div>
         </div>
         <div class="dif-row reveal d3">
@@ -1239,8 +1223,8 @@
             <svg viewBox="0 0 16 16"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
           </div>
           <div class="dif-body">
-            <h4><span class="es-only">Transparencia total en precios</span><span class="en-only">Full price transparency</span></h4>
-            <p><span class="es-only">Todos los valores están publicados. Sin sorpresas, sin "depende", sin cotización que cambia a mitad del proyecto.</span><span class="en-only">All prices are published. No surprises, no "it depends", no quotes that change mid-project.</span></p>
+            <h4>Transparencia total en precios</h4>
+            <p>Todos los valores están publicados. Sin sorpresas, sin "depende", sin cotización que cambia a mitad del proyecto.</p>
           </div>
         </div>
         <div class="dif-row reveal d4">
@@ -1248,8 +1232,8 @@
             <svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5 6.5-7"/></svg>
           </div>
           <div class="dif-body">
-            <h4><span class="es-only">Bajo expectativa, sobre entrega</span><span class="en-only">Under-promise, over-deliver</span></h4>
-            <p><span class="es-only">La regla de Veredicto: solo prometemos lo que podemos cumplir incluso con la agenda llena.</span><span class="en-only">Veredicto's rule: we only promise what we can deliver even with a full schedule.</span></p>
+            <h4>Bajo expectativa, sobre entrega</h4>
+            <p>La regla de Veredicto: solo prometemos lo que podemos cumplir incluso con la agenda llena.</p>
           </div>
         </div>
       </div>
@@ -1263,20 +1247,12 @@
   <div class="wrap">
     <div class="cta-grid">
       <div class="cta-left">
-        <h2 class="reveal"><span class="es-only" style="display:block">Diagnóstico gratuito<br>de tu <em>presencia.</em></span><span class="en-only" style="display:block">Free audit<br>of your <em>online presence.</em></span></h2>
-        <p class="reveal d2"><span class="es-only">Analizamos en detalle cómo aparece el estudio en Google, qué hace la competencia local y qué cambios generarían más consultas. El diagnóstico es gratuito, personalizado y sin obligación de contratar.</span><span class="en-only">We analyze in detail how the firm appears on Google, what local competitors are doing and what changes would generate more inquiries. The audit is free, personalized and with no obligation to hire.</span></p>
+        <h2 class="reveal">Diagnóstico gratuito<br>de tu <em>presencia.</em></h2>
+        <p class="reveal d2">Analizamos en detalle cómo aparece el estudio en Google, qué hace la competencia local y qué cambios generarían más consultas. El diagnóstico es gratuito, personalizado y sin obligación de contratar.</p>
         <div class="contact-rows reveal d3">
           <div class="contact-row">
             <svg viewBox="0 0 16 16"><path d="M2 4h12v9H2zM2 4l6 5 6-5"/></svg>
-            <a href="mailto:agenciaveredicto@gmail.com">agenciaveredicto@gmail.com</a>
-          </div>
-          <div class="contact-row">
-            <svg viewBox="0 0 16 16"><path d="M11 9.5c.5.5.5 1.5 0 2l-.5.5c-1.5 1.5-5.5-2-7-4S1.5 3.5 3 2l.5-.5c.5-.5 1.5-.5 2 0L7 3c.5.5.5 1 .2 1.5-.2.5-.7 1-.7 1.5 0 1 3.5 4.5 4.5 4.5.5 0 1-.5 1.5-.7.5-.3 1-.3 1.5.2l1 1z"/></svg>
-            <span>WhatsApp <a href="https://wa.me/5493518695534">+54 351 869 5534</a> · <a href="https://wa.me/5493518792024">+54 351 879 2024</a></span>
-          </div>
-          <div class="contact-row">
-            <svg viewBox="0 0 16 16"><path d="M11 9.5c.5.5.5 1.5 0 2l-.5.5c-1.5 1.5-5.5-2-7-4S1.5 3.5 3 2l.5-.5c.5-.5 1.5-.5 2 0L7 3c.5.5.5 1 .2 1.5-.2.5-.7 1-.7 1.5 0 1 3.5 4.5 4.5 4.5.5 0 1-.5 1.5-.7.5-.3 1-.3 1.5.2l1 1z"/></svg>
-            <span>Teléfono <a href="tel:+5493518745951">+54 9 351 874 5951</a></span>
+            <span><a href="mailto:agenciaveredicto@gmail.com">agenciaveredicto@gmail.com</a><span class="contact-hours">Lunes a viernes, 9 a 18 h</span></span>
           </div>
           <div class="contact-row">
             <svg viewBox="0 0 16 16"><circle cx="8" cy="7" r="2.5"/><path d="M8 1.5C5.5 1.5 3.5 3.4 3.5 5.8c0 3.5 4.5 8.7 4.5 8.7s4.5-5.2 4.5-8.7C12.5 3.4 10.5 1.5 8 1.5z"/></svg>
@@ -1286,10 +1262,10 @@
       </div>
 
       <div class="contact-form reveal d2">
-        <div class="form-head"><span class="es-only">Diagnóstico gratuito</span><span class="en-only">Free Audit</span></div>
+        <div class="form-head">Diagnóstico gratuito</div>
         <form id="ctaForm">
           <div class="form-row">
-            <label for="nombre"><span class="es-only">Nombre completo</span><span class="en-only">Full name</span></label>
+            <label for="nombre">Nombre completo</label>
             <input type="text" id="nombre" name="nombre" placeholder="Dr. / Dra. …" required autocomplete="name">
           </div>
           <div class="form-row">
@@ -1297,7 +1273,7 @@
             <input type="email" id="email" name="email" placeholder="mail@firm.com" required autocomplete="email">
           </div>
           <div class="form-row">
-            <label for="plan"><span class="es-only">¿Qué plan le interesa?</span><span class="en-only">Which plan interests you?</span></label>
+            <label for="plan">¿Qué plan le interesa?</label>
             <select id="plan" name="plan">
               <option value="">Seleccionar una opción</option>
               <option value="plan1">Plan 01 · Landing Profesional ($190.000 único)</option>
@@ -1311,11 +1287,11 @@
             </select>
           </div>
           <div class="form-row">
-            <label for="situacion"><span class="es-only">Situación actual del estudio</span><span class="en-only">Current firm situation</span></label>
+            <label for="situacion">Situación actual del estudio</label>
             <textarea id="situacion" name="situacion" placeholder="¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…"></textarea>
           </div>
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
-          <button type="submit" class="btn-submit" id="submitBtn"><span class="es-only">Solicitar diagnóstico →</span><span class="en-only">Request audit →</span></button>
+          <button type="submit" class="btn-submit" id="submitBtn">Solicitar diagnóstico →</button>
         </form>
       </div>
     </div>
@@ -1335,31 +1311,31 @@
           </svg>
           <span class="name">Agencia Veredicto</span>
         </a>
-        <p><span class="es-only">Marketing jurídico para estudios de abogados. Presencia digital que genera confianza y consultas.</span><span class="en-only">Legal marketing for law firms. Digital presence that builds trust and generates inquiries.</span></p>
+        <p>Marketing jurídico para estudios de abogados. Presencia digital que genera confianza y consultas.</p>
       </div>
       <div class="footer-col">
-        <h4><span class="es-only">Servicios</span><span class="en-only">Services</span></h4>
+        <h4>Servicios</h4>
         <ul>
-          <li><a href="#servicios"><span class="es-only">Landing Profesional</span><span class="en-only">Professional Landing</span></a></li>
-          <li><a href="#servicios"><span class="es-only">Sitio Completo + SEO</span><span class="en-only">Full Site + SEO</span></a></li>
-          <li><a href="#servicios"><span class="es-only">Gestión de Redes Sociales</span><span class="en-only">Social Media Management</span></a></li>
+          <li><a href="#servicios">Landing Profesional</a></li>
+          <li><a href="#servicios">Sitio Completo + SEO</a></li>
+          <li><a href="#servicios">Gestión de Redes Sociales</a></li>
           <li><a href="#servicios">Google Business</a></li>
-          <li><a href="#servicios"><span class="es-only">Renovación de sitio web</span><span class="en-only">Website Renewal</span></a></li>
+          <li><a href="#servicios">Renovación de sitio web</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4><span class="es-only">Agencia</span><span class="en-only">Agency</span></h4>
+        <h4>Agencia</h4>
         <ul>
-          <li><a href="#proceso"><span class="es-only">Cómo trabajamos</span><span class="en-only">How We Work</span></a></li>
-          <li><a href="#porque"><span class="es-only">Por qué Veredicto</span><span class="en-only">Why Veredicto</span></a></li>
-          <li><a href="#contacto"><span class="es-only">Contacto</span><span class="en-only">Contact</span></a></li>
-          <li><a href="mailto:agenciaveredicto@gmail.com"><span class="es-only">Email directo</span><span class="en-only">Direct email</span></a></li>
+          <li><a href="#proceso">Cómo trabajamos</a></li>
+          <li><a href="#porque">Por qué Veredicto</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="mailto:agenciaveredicto@gmail.com">Email directo</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 Agencia Veredicto · Córdoba, Argentina</p>
-      <p><span class="es-only">Marketing Jurídico · Diseño y Posicionamiento para Estudios de Abogados</span><span class="en-only">Legal Marketing · Web Design and Positioning for Law Firms</span></p>
+      <p>Marketing Jurídico · Diseño y Posicionamiento para Estudios de Abogados</p>
     </div>
   </div>
 </footer>
@@ -1377,23 +1353,17 @@
 })();
 
 /* -------- HERO TITLE ANIMATION -------- */
-var heroLines = {
-  es: [
-    { segments: [{ text: 'Tus clientes están buscando.', italic: false }] },
-    { segments: [{ text: 'Nos aseguramos de que te encuentren.', italic: false }] }
-  ],
-  en: [
-    { segments: [{ text: 'Your clients are searching.', italic: false }] },
-    { segments: [{ text: 'We make sure they find you.', italic: false }] }
-  ]
-};
+var heroLines = [
+  { segments: [{ text: 'Tus clientes están buscando.', italic: false }] },
+  { segments: [{ text: 'Nos aseguramos de que te encuentren.', italic: false }] }
+];
 
-function buildHeroTitle(lang) {
+function buildHeroTitle() {
   var title = document.getElementById('heroTitle');
   title.innerHTML = '';
   var delay = 0.3;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  heroLines[lang].forEach(function(line) {
+  heroLines.forEach(function(line) {
     var wrapper = document.createElement('span');
     wrapper.style.display = 'block';
     line.segments.forEach(function(seg) {
@@ -1412,63 +1382,7 @@ function buildHeroTitle(lang) {
   });
 }
 
-buildHeroTitle('es');
-
-/* -------- LANGUAGE TOGGLE -------- */
-(function () {
-  var flagES = document.getElementById('flagES');
-  var flagEN = document.getElementById('flagEN');
-
-  function setLang(lang) {
-    var isEn = lang === 'en';
-    document.body.classList.toggle('lang-en', isEn);
-    document.documentElement.lang = lang;
-    flagES.classList.toggle('active', !isEn);
-    flagEN.classList.toggle('active', isEn);
-    buildHeroTitle(lang);
-    var ta = document.getElementById('situacion');
-    if (ta) ta.placeholder = isEn
-      ? 'Do you have a website? Do you appear on Google Maps? Any context helps…'
-      : '¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…';
-    var planOpts = [
-      ['', isEn ? 'Select an option' : 'Seleccionar una opción'],
-      ['plan1',      isEn ? 'Plan 01 · Professional Landing (USD 126 one-time)'     : 'Plan 01 · Landing Profesional ($190.000 único)'],
-      ['plan1-abono',isEn ? 'Plan 01 + Monthly mgmt (USD 126 + USD 14/mo)'          : 'Plan 01 + Gestión mensual ($190.000 + $18.000/mes)'],
-      ['plan2',      isEn ? 'Plan 02 · Full Site + SEO (USD 207 one-time)'          : 'Plan 02 · Sitio Completo + SEO ($310.000 único)'],
-      ['plan2-abono',isEn ? 'Plan 02 + Monthly mgmt (USD 207 + USD 22/mo)'          : 'Plan 02 + Gestión mensual ($310.000 + $28.000/mes)'],
-      ['redes',      isEn ? 'Plan 03 · Social Media Management (inquire · custom plans)' : 'Plan 03 · Gestión de Redes Sociales (consultar · planes a medida)'],
-      ['gbusiness',  isEn ? 'Add-on · Google Business (USD 42)'                     : 'Adicional · Google Business ($55.000)'],
-      ['renovacion', isEn ? 'Website Renewal (on request)'                          : 'Renovación de sitio web (a consultar)'],
-      ['consulta',   isEn ? 'Just the free audit'                                   : 'Solo quiero el diagnóstico gratuito']
-    ];
-    var sel = document.getElementById('plan');
-    if (sel) planOpts.forEach(function(o, i) { if (sel.options[i]) sel.options[i].text = o[1]; });
-  }
-
-  var tickerItems = {
-    es: ['Marketing jurídico','Sitio web a medida','Google Maps optimizado','SEO local','Estudios de abogados','Córdoba, Argentina','Presencia digital','Agencia Veredicto'],
-    en: ['Legal Marketing','Custom website','Google Maps optimized','Local SEO','Law firms','Córdoba, Argentina','Digital presence','Agencia Veredicto']
-  };
-
-  function buildTicker(lang) {
-    var track = document.querySelector('.ticker-track');
-    if (!track) return;
-    var items = tickerItems[lang];
-    var html = '';
-    [0,1].forEach(function() {
-      items.forEach(function(t) { html += '<div class="ticker-item">' + t + '</div>'; });
-    });
-    track.innerHTML = html;
-  }
-
-  function setLangFull(lang) {
-    setLang(lang);
-    buildTicker(lang);
-  }
-
-  flagES.addEventListener('click', function() { setLangFull('es'); });
-  flagEN.addEventListener('click', function() { setLangFull('en'); });
-})();
+buildHeroTitle();
 
 /* -------- NAV SCROLL -------- */
 const nav = document.getElementById('mainNav');
@@ -1594,8 +1508,7 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
   const btn  = document.getElementById('submitBtn');
   const data = new FormData(this);
 
-  var isEn = document.body.classList.contains('lang-en');
-  btn.textContent = isEn ? 'Sending…' : 'Enviando…';
+  btn.textContent = 'Enviando…';
   btn.disabled    = true;
 
   fetch(FORMSPREE_ENDPOINT, {
@@ -1605,21 +1518,21 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
   })
     .then(res => {
       if (res.ok) {
-        btn.textContent      = isEn ? '✓ Audit requested! We will be in touch.' : '¡Diagnóstico solicitado! Nos contactamos pronto.';
+        btn.textContent      = '¡Diagnóstico solicitado! Nos contactamos pronto.';
         btn.style.background = 'var(--sage)';
         this.reset();
         setTimeout(() => {
-          btn.textContent      = isEn ? 'Request audit →' : 'Solicitar diagnóstico →';
+          btn.textContent      = 'Solicitar diagnóstico →';
           btn.style.background = '';
           btn.disabled         = false;
         }, 5000);
       } else {
-        btn.textContent = isEn ? 'Error sending. Write to us on WhatsApp.' : 'Error al enviar. Escribinos por WhatsApp.';
+        btn.textContent = 'Error al enviar. Escribinos por WhatsApp.';
         btn.disabled    = false;
       }
     })
     .catch(() => {
-      btn.textContent = isEn ? 'No connection. Write to us on WhatsApp.' : 'Sin conexión. Escribinos por WhatsApp.';
+      btn.textContent = 'Sin conexión. Escribinos por WhatsApp.';
       btn.disabled    = false;
     });
 });
