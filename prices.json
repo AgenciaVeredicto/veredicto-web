@@ -1,0 +1,58 @@
+{
+  "_comment": "Fuente unica de precios. Editar SOLO este archivo y correr: node build-prices.js",
+  "exchangeRate": 1508,
+  "currency": "ARS",
+  "usdRounding": 1,
+  "services": [
+    {
+      "id": "plan1",
+      "tier": "Plan 01",
+      "name": "Landing Profesional",
+      "oneTime": 190000,
+      "monthly": 18000,
+      "formLabel": "Plan 01 · Landing Profesional",
+      "schema": true
+    },
+    {
+      "id": "plan2",
+      "tier": "Plan 02",
+      "name": "Sitio Completo + SEO",
+      "oneTime": 310000,
+      "monthly": 28000,
+      "formLabel": "Plan 02 · Sitio Completo + SEO",
+      "schema": true
+    },
+    {
+      "id": "redes",
+      "tier": "Plan 03",
+      "name": "Gestión de Redes Sociales",
+      "oneTime": null,
+      "monthly": null,
+      "quoteLabel": "Consultar",
+      "formLabel": "Plan 03 · Gestión de Redes Sociales",
+      "formSuffix": "consultar · planes a medida",
+      "schema": true
+    },
+    {
+      "id": "gbusiness",
+      "tier": "Adicional",
+      "name": "Google Business",
+      "oneTime": 55000,
+      "monthly": null,
+      "formLabel": "Adicional · Google Business",
+      "schema": true
+    },
+    {
+      "id": "renovacion",
+      "tier": "Adicional",
+      "name": "Renovación de sitio web",
+      "oneTime": null,
+      "monthly": null,
+      "quoteLabel": "A consultar",
+      "quoteNote": "Depende del alcance del proyecto",
+      "formLabel": "Renovación de sitio web",
+      "formSuffix": "a consultar",
+      "schema": true
+    }
+  ]
+}
