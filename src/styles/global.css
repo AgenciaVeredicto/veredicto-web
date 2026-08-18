@@ -475,7 +475,7 @@ section { border-bottom: 1px solid var(--line); }
 .scope-col ul  { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .scope-col li  { font-size: 14px; padding-left: 22px; position: relative; color: var(--ink); line-height: 1.55; }
 .scope-col.yes li::before { content: '+'; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
-.scope-col.no  li::before { content: '–'; position: absolute; left: 0; color: #9a5a4a; font-weight: 700; }
+.scope-col.no  li::before { content: '-'; position: absolute; left: 0; color: #9a5a4a; font-weight: 700; }
 
 /* ======== CTA ======== */
 .cta-section { padding: 96px 0; border-bottom: none; }
@@ -778,7 +778,9 @@ body.menu-open { overflow: hidden; }
   font-weight: 600; line-height: 1.04; letter-spacing: -.03em;
   margin-bottom: 22px;
 }
-.page-head h1 em { font-style: italic; color: var(--sage); }
+/* Sin italica ni color distinto: el enfasis en titulos usa el mismo tono.
+   Igual criterio que h2.sec-title em y h1.hero-title em. */
+.page-head h1 em { font-style: normal; color: inherit; }
 .page-lead {
   font-size: 17.5px; color: var(--muted); max-width: 60ch;
   line-height: 1.8; margin-bottom: 20px;

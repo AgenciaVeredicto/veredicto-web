@@ -1,0 +1,154 @@
+/* Se importa DESPUES de global.css: estas reglas deben ganar la cascada. */
+
+/* ======== ENLACES EN TEXTO CORRIDO ========
+ * Sin esto, cualquier <a> dentro de un parrafo sale azul del navegador.
+ * Hereda el color del texto y se distingue por el subrayado sage.
+ */
+.detail-body a,
+.dif-text a,
+.page-intro a,
+.page-lead a,
+.fuero a,
+.pstat-desc a,
+.proceso-content a,
+.plan-desc a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--sage-l);
+  transition: color .2s, border-color .2s;
+}
+.detail-body a:hover,
+.dif-text a:hover,
+.page-intro a:hover,
+.page-lead a:hover,
+.fuero a:hover,
+.pstat-desc a:hover,
+.proceso-content a:hover,
+.plan-desc a:hover {
+  color: var(--sage);
+  border-color: var(--sage);
+}
+
+/* Sobre el fondo oscuro de #porque el sage medio no contrasta. */
+#porque .dif-text a { border-bottom-color: rgba(139,175,110,.55); }
+#porque .dif-text a:hover { color: var(--sage-l); border-color: var(--sage-l); }
+
+/* Foco visible y consistente en todo el sitio. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--sage-l);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ======== DESPLEGABLE DE AREAS EN EL NAV ========
+ * Se abre con hover y tambien con foco de teclado. En touch no hay hover:
+ * el enlace del item lleva al hub /areas/, asi que nada queda inaccesible.
+ */
+/* El panel cuelga del item, pero el item termina ANTES del borde inferior
+ * del nav (queda el padding). Sin compensar eso el panel nace dentro de la
+ * barra oscura. La variable = padding inferior del nav + 8px de aire, y se
+ * ajusta cuando el nav se encoge al hacer scroll. */
+.nav-links li.has-menu { position: relative; --menu-gap: 34px; }
+nav.scrolled .nav-links li.has-menu { --menu-gap: 27px; }
+.nav-links li.has-menu > a { display: inline-flex; align-items: center; gap: 5px; }
+.caret { width: 9px; height: 6px; flex: none; transition: transform .25s ease; opacity: .7; }
+
+.nav-menu {
+  position: absolute; top: 100%; left: 50%;
+  transform: translate(-50%, 6px);
+  margin-top: var(--menu-gap);
+  min-width: 296px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: 0 18px 44px -24px rgba(28,43,30,.42);
+  padding: 8px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .22s ease, transform .28s cubic-bezier(.16,1,.3,1), visibility .22s;
+  z-index: 210;
+}
+
+/* Puente invisible sobre el hueco: evita que se cierre al bajar el cursor. */
+.nav-menu::before {
+  content: ''; position: absolute; left: 0; right: 0;
+  top: calc(var(--menu-gap) * -1); height: var(--menu-gap);
+}
+
+.nav-menu ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.nav-menu a {
+  display: block; padding: 10px 12px; border-radius: 2px;
+  text-decoration: none; border: none;
+  transition: background .18s ease;
+}
+.nav-menu .nm-title {
+  display: block;
+  font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+  color: var(--ink); letter-spacing: .01em; margin-bottom: 2px;
+}
+.nav-menu .nm-desc {
+  display: block;
+  font-family: 'Poppins', sans-serif; font-size: 11.5px;
+  color: var(--muted); line-height: 1.45; letter-spacing: 0;
+}
+.nav-menu a:hover { background: var(--cream); }
+.nav-menu a.current { background: var(--cream); }
+.nav-menu a.current .nm-title { color: var(--sage); }
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links li.has-menu:hover .nav-menu {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+  .nav-links li.has-menu:hover .caret { transform: rotate(180deg); }
+}
+
+/* Teclado: al tabular hasta el item se abre igual que con el cursor. */
+.nav-links li.has-menu:focus-within .nav-menu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.nav-links li.has-menu:focus-within .caret { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu { transition: opacity .01ms linear, visibility .01ms linear; transform: translate(-50%, 0); }
+  .caret { transition: none; }
+}
+
+/* ======== REDES EN EL FOOTER ======== */
+.social-list { list-style: none; display: flex; gap: 10px; margin-top: 18px; }
+.social-list a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 12px 7px 10px;
+  border: 1px solid rgba(247,245,239,.18); border-radius: 2px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500;
+  color: rgba(247,245,239,.62);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.social-list svg { width: 15px; height: 15px; flex: none; }
+.social-list a:hover {
+  color: var(--cream);
+  border-color: rgba(247,245,239,.42);
+  background: rgba(247,245,239,.05);
+}
+.social-list a:active { transform: scale(.98); }
+
+/* ======== NAV EN UN SOLO RENGLON ========
+ * Entre 861 y 1024 los tres bloques quedaban a 24px de distancia, y el
+ * desplegable achica todavia mas ese aire. Debajo de 1024 va el hamburguesa.
+ */
+@media (max-width: 1024px) {
+  .nav-links, .btn-nav { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* Altura del nav por debajo de 80px (estaba en 85). */
+nav { padding: 18px 0; }
+nav.scrolled { padding: 12px 0; }
+
+/* Las anclas de los fueros no pueden quedar tapadas por el nav fijo. */
+[id] { scroll-margin-top: 96px; }

@@ -1,0 +1,42 @@
+---
+// Iconos de @tabler/icons (una sola familia en todo el proyecto, stroke 2).
+// Se leen del paquete en build; no se dibujan a mano.
+import fs from 'node:fs';
+import path from 'node:path';
+import { SITE } from '../data/site.js';
+
+const ICON_DIR = path.join(process.cwd(), 'node_modules/@tabler/icons/icons/outline');
+
+function innerSvg(nombre) {
+  const raw = fs.readFileSync(path.join(ICON_DIR, `${nombre}.svg`), 'utf8');
+  const m = raw.match(/<svg[^>]*>([\s\S]*?)<\/svg>/);
+  if (!m) throw new Error(`No se pudo leer el icono ${nombre}`);
+  return m[1].trim();
+}
+
+const redes = SITE.social.map(url => {
+  const esInstagram = url.includes('instagram');
+  return {
+    url,
+    label: esInstagram ? 'Instagram' : 'LinkedIn',
+    svg: innerSvg(esInstagram ? 'brand-instagram' : 'brand-linkedin')
+  };
+});
+---
+<ul class="social-list">
+  {redes.map(r => (
+    <li>
+      <a
+        href={r.url}
+        target="_blank"
+        rel="me noopener noreferrer"
+        aria-label={`Agencia Veredicto en ${r.label}`}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"
+             set:html={r.svg} />
+        <span>{r.label}</span>
+      </a>
+    </li>
+  ))}
+</ul>

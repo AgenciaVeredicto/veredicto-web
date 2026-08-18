@@ -158,6 +158,7 @@ export const areas = [
   {
     slug: 'abogados',
     nav: 'Abogados',
+    navDesc: 'Laboral, familia, penal, accidentes y civil',
     title: 'Marketing digital para estudios de abogados',
     description:
       'Sitios web y posicionamiento en Google para estudios jurídicos en Argentina. Trabajamos con abogados laboralistas, penalistas, de familia, sucesiones y accidentes.',
@@ -196,6 +197,7 @@ export const areas = [
   {
     slug: 'estudios-contables',
     nav: 'Estudios contables',
+    navDesc: 'Monotributo, sueldos y balances',
     title: 'Marketing digital para estudios contables y contadores',
     description:
       'Sitios web y Google Business para estudios contables en Argentina. Presencia profesional para captar monotributistas, pymes y empresas.',
@@ -213,6 +215,7 @@ export const areas = [
   {
     slug: 'escribanias',
     nav: 'Escribanías',
+    navDesc: 'Escrituras, poderes y certificaciones',
     title: 'Marketing digital para escribanías',
     description:
       'Sitios web y posicionamiento local para escribanías en Argentina. Presencia digital para escrituras, poderes y certificaciones.',
@@ -230,6 +233,7 @@ export const areas = [
   {
     slug: 'consultores',
     nav: 'Consultores',
+    navDesc: 'Gestión, RRHH y asesoramiento técnico',
     title: 'Marketing digital para consultores y servicios profesionales',
     description:
       'Sitios web y presencia digital para consultores independientes y firmas de servicios profesionales en Argentina.',

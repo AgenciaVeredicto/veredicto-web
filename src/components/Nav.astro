@@ -1,27 +1,52 @@
 ---
 import Emblem from './Emblem.astro';
+import { areas } from '../data/site.js';
 
 // El item activo sale de la ruta actual, no de una prop que haya que
 // recordar pasar en cada pagina.
 const path = Astro.url.pathname;
 const isActive = base => path === base || path.startsWith(base);
-
-const links = [
-  { href: '/servicios/', label: 'Servicios' },
-  { href: '/areas/',     label: 'A quién atendemos' },
-  { href: '/contacto/',  label: 'Contacto' }
-];
 ---
 <nav id="mainNav" aria-label="Navegación principal">
   <div class="wrap">
     <div class="nav-inner">
       <Emblem />
+
       <ul class="nav-links">
-        {links.map(l => (
-          <li><a href={l.href} class={isActive(l.href) ? 'active' : undefined}>{l.label}</a></li>
-        ))}
+        <li>
+          <a href="/servicios/" class={isActive('/servicios/') ? 'active' : undefined}>Servicios</a>
+        </li>
+
+        <!-- Se abre con hover y tambien con foco de teclado (:focus-within).
+             En touch no hay hover: el enlace lleva al hub /areas/. -->
+        <li class="has-menu">
+          <a href="/areas/" class={isActive('/areas/') ? 'active' : undefined}>
+            A quién atendemos
+            <svg class="caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+              <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav-menu">
+            <ul>
+              {areas.map(a => (
+                <li>
+                  <a href={`/areas/${a.slug}/`} class={path === `/areas/${a.slug}/` ? 'current' : undefined}>
+                    <span class="nm-title">{a.nav}</span>
+                    <span class="nm-desc">{a.navDesc}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <a href="/contacto/" class={isActive('/contacto/') ? 'active' : undefined}>Contacto</a>
+        </li>
       </ul>
+
       <a href="/contacto/" class="btn-nav">Diagnóstico gratis</a>
+
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
