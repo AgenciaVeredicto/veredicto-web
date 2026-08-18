@@ -53,7 +53,7 @@ textarea:focus-visible {
  * barra oscura. La variable = padding inferior del nav + 8px de aire, y se
  * ajusta cuando el nav se encoge al hacer scroll. */
 .nav-links li.has-menu { position: relative; --menu-gap: 34px; }
-nav.scrolled .nav-links li.has-menu { --menu-gap: 27px; }
+#mainNav.scrolled .nav-links li.has-menu { --menu-gap: 27px; }
 .nav-links li.has-menu > a { display: inline-flex; align-items: center; gap: 5px; }
 .caret { width: 9px; height: 6px; flex: none; transition: transform .25s ease; opacity: .7; }
 
@@ -147,8 +147,8 @@ nav.scrolled .nav-links li.has-menu { --menu-gap: 27px; }
 }
 
 /* Altura del nav por debajo de 80px (estaba en 85). */
-nav { padding: 18px 0; }
-nav.scrolled { padding: 12px 0; }
+#mainNav { padding: 18px 0; }
+#mainNav.scrolled { padding: 12px 0; }
 
 /* Las anclas de los fueros no pueden quedar tapadas por el nav fijo. */
 [id] { scroll-margin-top: 96px; }

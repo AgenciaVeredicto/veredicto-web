@@ -48,13 +48,16 @@ h2.sec-title em { font-style: normal; color: inherit; }
 .sec-head { padding: 76px 0 0; }
 
 /* ======== NAV ======== */
-nav {
+/* Acotado a #mainNav a proposito. Con el selector de elemento desnudo,
+   CUALQUIER <nav> de la pagina (el breadcrumb, por ejemplo) quedaba fijo
+   arriba de todo con fondo oscuro. */
+#mainNav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   padding: 22px 0;
   background: var(--ink);
   transition: padding .35s ease, background .35s ease, box-shadow .35s ease;
 }
-nav.scrolled {
+#mainNav.scrolled {
   padding: 14px 0;
   background: var(--ink);
   backdrop-filter: blur(14px);
