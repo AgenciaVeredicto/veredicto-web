@@ -1,0 +1,40 @@
+---
+import Emblem from './Emblem.astro';
+
+// El item activo sale de la ruta actual, no de una prop que haya que
+// recordar pasar en cada pagina.
+const path = Astro.url.pathname;
+const isActive = base => path === base || path.startsWith(base);
+
+const links = [
+  { href: '/servicios/', label: 'Servicios' },
+  { href: '/areas/',     label: 'A quién atendemos' },
+  { href: '/contacto/',  label: 'Contacto' }
+];
+---
+<nav id="mainNav" aria-label="Navegación principal">
+  <div class="wrap">
+    <div class="nav-inner">
+      <Emblem />
+      <ul class="nav-links">
+        {links.map(l => (
+          <li><a href={l.href} class={isActive(l.href) ? 'active' : undefined}>{l.label}</a></li>
+        ))}
+      </ul>
+      <a href="/contacto/" class="btn-nav">Diagnóstico gratis</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- El CSS escalona la aparicion de hasta 5 enlaces: no agregar mas sin
+     extender .mobile-nav.open a:nth-child(n) en global.css -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">&times;</button>
+  <a href="/" onclick="closeMobile()">Inicio</a>
+  <a href="/servicios/" onclick="closeMobile()">Servicios</a>
+  <a href="/areas/" onclick="closeMobile()">A quién atendemos</a>
+  <a href="/contacto/" onclick="closeMobile()">Contacto</a>
+</div>

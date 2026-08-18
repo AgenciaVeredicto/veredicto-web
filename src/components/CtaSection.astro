@@ -1,0 +1,22 @@
+---
+import ContactRows from './ContactRows.astro';
+import ContactForm from './ContactForm.astro';
+
+const {
+  heading = 'Diagnóstico gratuito<br>de tu <em>presencia.</em>',
+  text = 'Analizamos en detalle cómo aparece el estudio en Google, qué hace la competencia local y qué cambios generarían más consultas. El diagnóstico es gratuito, personalizado y sin obligación de contratar.',
+  preselect = ''
+} = Astro.props;
+---
+<section id="contacto" class="cta-section">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="cta-left">
+        <h2 class="reveal" set:html={heading} />
+        <p class="reveal d2">{text}</p>
+        <ContactRows />
+      </div>
+      <ContactForm preselect={preselect} />
+    </div>
+  </div>
+</section>

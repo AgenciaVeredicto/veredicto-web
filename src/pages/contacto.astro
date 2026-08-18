@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactRows from '../components/ContactRows.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site.js';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contacto',
+  url: 'https://agenciaveredicto.com/contacto/',
+  description: 'Diagnóstico gratuito de la presencia digital de tu estudio. Sin compromiso.',
+  mainEntity: {
+    '@type': 'ProfessionalService',
+    name: SITE.name,
+    email: SITE.email,
+    telephone: SITE.whatsapp.e164,
+    address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressCountry: 'AR' }
+  }
+};
+---
+<Base
+  title="Contacto"
+  description="Pedí el diagnóstico gratuito de la presencia digital de tu estudio. Analizamos cómo aparecés en Google y qué cambiar, sin compromiso."
+  schema={schema}
+>
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="page-head" style="padding-bottom:0">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span>/</span>Contacto
+      </nav>
+    </div>
+    <div class="cta-grid" style="padding-top:26px">
+      <div class="cta-left">
+        <h2 class="reveal">Diagnóstico gratuito<br>de tu <em>presencia.</em></h2>
+        <p class="reveal d2">Analizamos en detalle cómo aparece el estudio en Google, qué hace la competencia local y qué cambios generarían más consultas. El diagnóstico es gratuito, personalizado y sin obligación de contratar.</p>
+        <p class="reveal d2" style="font-size:15px;color:var(--muted);line-height:1.8;margin-top:14px">
+          Respondemos dentro del horario de atención. Si es urgente, el WhatsApp es la vía más rápida.
+        </p>
+        <ContactRows />
+      </div>
+      <ContactForm />
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Preselecciona el plan si se llego con ?plan=... desde una pagina de servicio.
+  (function () {
+    var plan = new URLSearchParams(window.location.search).get('plan');
+    if (!plan) return;
+    var sel = document.getElementById('plan');
+    if (!sel) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === plan) { sel.selectedIndex = i; break; }
+    }
+  })();
+</script>
+
+</Base>

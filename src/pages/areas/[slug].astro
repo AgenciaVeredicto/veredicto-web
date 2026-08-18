@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { areas, services, ars } from '../../data/site.js';
+
+export async function getStaticPaths() {
+  const { areas } = await import('../../data/site.js');
+  return areas.map(a => ({ params: { slug: a.slug }, props: { area: a } }));
+}
+
+const { area: a } = Astro.props;
+const others = areas.filter(x => x.slug !== a.slug);
+
+// Los dos planes principales, que son los que se ofrecen en estas paginas.
+const mainServices = services.filter(s => ['plan1', 'plan2', 'gbusiness'].includes(s.id));
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: a.title,
+  serviceType: 'Marketing digital',
+  description: a.description,
+  url: `https://agenciaveredicto.com/areas/${a.slug}/`,
+  provider: { '@type': 'ProfessionalService', name: 'Agencia Veredicto', url: 'https://agenciaveredicto.com' },
+  areaServed: [{ '@type': 'City', name: 'Córdoba' }, { '@type': 'Country', name: 'Argentina' }],
+  audience: { '@type': 'Audience', audienceType: a.nav }
+};
+---
+<Base title={a.title} description={a.description} schema={schema}>
+
+<section>
+  <div class="wrap">
+    <div class="page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span>/</span><a href="/areas/">A quién atendemos</a><span>/</span>{a.nav}
+      </nav>
+      <span class="eyebrow">A quién atendemos</span>
+      <h1 set:html={a.heading} />
+      <p class="page-lead">{a.lead}</p>
+      <p class="page-intro">{a.intro}</p>
+    </div>
+
+    {a.fueros && (
+      <div style="padding-bottom:70px">
+        <h2 class="detail-h2" style="margin-top:0">Las áreas que más trabajamos</h2>
+        <p class="detail-body" style="font-size:15.5px;color:var(--muted);line-height:1.85;max-width:62ch;margin-bottom:26px">
+          Cada fuero atrae un tipo de consulta distinto, y eso cambia qué tiene que decir el sitio y cómo tiene que estar armada la ficha de Google.
+        </p>
+        {a.fueros.map(f => (
+          <div class="fuero reveal" id={f.id}>
+            <h3>{f.name}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {a.puntos && (
+      <div style="padding-bottom:40px">
+        <h2 class="detail-h2" style="margin-top:0">Consultas que buscan tus clientes</h2>
+        <ul class="punto-list">
+          {a.puntos.map(p => <li>{p}</li>)}
+        </ul>
+      </div>
+    )}
+
+    <h2 class="detail-h2">Con qué lo resolvemos</h2>
+    <div class="card-grid" style="padding-top:12px">
+      {mainServices.map(s => (
+        <a href={s.url} class="link-card reveal">
+          <div class="lc-tier">{s.tier}</div>
+          <h3>{s.name}</h3>
+          <p>{s.lead}</p>
+          <div class="lc-foot">
+            {s.oneTime != null
+              ? <span class="lc-price">${ars(s.oneTime)}<span class="lc-cur">ARS</span></span>
+              : <span class="lc-price">{s.quoteLabel}</span>}
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="sec-head" style="padding-top:0">
+      <h2 class="sec-title reveal" style="font-size:clamp(24px,3vw,34px)">También trabajamos con</h2>
+    </div>
+    <div class="card-grid">
+      {others.map(o => (
+        <a href={`/areas/${o.slug}/`} class="link-card reveal">
+          <div class="lc-tier">{o.slug === 'abogados' ? 'Núcleo' : 'También'}</div>
+          <h3>{o.nav}</h3>
+          <p>{o.lead}</p>
+          <div class="lc-foot"><span class="lc-price">&nbsp;</span><span>Ver detalle →</span></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<CtaSection />
+
+</Base>

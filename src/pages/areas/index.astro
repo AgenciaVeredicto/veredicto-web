@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { areas } from '../../data/site.js';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'A quién atendemos',
+  url: 'https://agenciaveredicto.com/areas/',
+  description: 'Marketing digital para estudios de abogados, estudios contables, escribanías y consultores en Argentina.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: areas.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: a.nav,
+      url: `https://agenciaveredicto.com/areas/${a.slug}/`
+    }))
+  }
+};
+---
+<Base
+  title="A quién atendemos"
+  description="Marketing digital para estudios de abogados, estudios contables, escribanías y consultores en Argentina. Sitios web y posicionamiento local por profesión."
+  schema={schema}
+>
+
+<section>
+  <div class="wrap">
+    <div class="page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span>/</span>A quién atendemos
+      </nav>
+      <span class="eyebrow">A quién atendemos</span>
+      <h1>Servicios profesionales<br>que necesitan <em>que los encuentren.</em></h1>
+      <p class="page-lead">Nuestro núcleo son los estudios de abogados. Sobre esa base trabajamos también con estudios contables, escribanías y consultores.</p>
+      <p class="page-intro">Cada profesión tiene su propia forma de ser buscada. Un cliente que necesita un abogado laboralista no busca igual que uno que necesita escriturar una casa o resolver el monotributo. Por eso el trabajo no es el mismo en cada caso, aunque las herramientas se parezcan.</p>
+    </div>
+
+    <div class="card-grid">
+      {areas.map(a => (
+        <a href={`/areas/${a.slug}/`} class="link-card reveal">
+          <div class="lc-tier">{a.slug === 'abogados' ? 'Núcleo' : 'También'}</div>
+          <h3>{a.nav}</h3>
+          <p>{a.lead}</p>
+          <div class="lc-foot">
+            <span class="lc-price">&nbsp;</span>
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<CtaSection />
+
+</Base>

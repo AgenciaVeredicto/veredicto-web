@@ -1,0 +1,40 @@
+---
+import Emblem from './Emblem.astro';
+import { SITE, services, areas } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <Emblem />
+        <p>Marketing jurídico para estudios de abogados. Presencia digital que genera confianza y consultas.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          {services.map(s => <li><a href={s.url}>{s.name}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>A quién atendemos</h4>
+        <ul>
+          {areas.map(a => <li><a href={`/areas/${a.slug}/`}>{a.nav}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Agencia</h4>
+        <ul>
+          <li><a href="/#proceso">Cómo trabajamos</a></li>
+          <li><a href="/#porque">Por qué Veredicto</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+          <li><a href={`mailto:${SITE.email}`}>Email directo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} Agencia Veredicto · {SITE.city}, {SITE.country}</p>
+      <p>Marketing Jurídico · Diseño y Posicionamiento para Estudios de Abogados</p>
+    </div>
+  </div>
+</footer>

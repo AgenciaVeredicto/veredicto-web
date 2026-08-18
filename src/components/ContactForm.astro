@@ -1,0 +1,50 @@
+---
+import { services, ars } from '../data/site.js';
+
+// Las opciones salen de prices.json: no hay precios escritos a mano.
+const options = [];
+services.forEach(s => {
+  if (s.oneTime != null) {
+    options.push({ value: s.id, label: `${s.formLabel} ($${ars(s.oneTime)} único)` });
+    if (s.monthly != null) {
+      options.push({
+        value: `${s.id}-abono`,
+        label: `${s.formLabel.split(' · ')[0]} + Gestión mensual ($${ars(s.oneTime)} + $${ars(s.monthly)}/mes)`
+      });
+    }
+  } else {
+    options.push({ value: s.id, label: `${s.formLabel} (${s.formSuffix})` });
+  }
+});
+
+const { preselect = '' } = Astro.props;
+---
+<div class="contact-form reveal d2">
+  <div class="form-head">Diagnóstico gratuito</div>
+  <form id="ctaForm">
+    <div class="form-row">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Dr. / Dra. …" required autocomplete="name">
+    </div>
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="mail@estudio.com" required autocomplete="email">
+    </div>
+    <div class="form-row">
+      <label for="plan">¿Qué plan le interesa?</label>
+      <select id="plan" name="plan">
+        <option value="">Seleccionar una opción</option>
+        {options.map(o => (
+          <option value={o.value} selected={o.value === preselect ? true : undefined}>{o.label}</option>
+        ))}
+        <option value="consulta" selected={preselect === 'consulta' ? true : undefined}>Solo quiero el diagnóstico gratuito</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="situacion">Situación actual del estudio</label>
+      <textarea id="situacion" name="situacion" placeholder="¿Tiene sitio web? ¿Aparece en Google Maps? Cualquier contexto ayuda…"></textarea>
+    </div>
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none;">
+    <button type="submit" class="btn-submit" id="submitBtn">Solicitar diagnóstico →</button>
+  </form>
+</div>

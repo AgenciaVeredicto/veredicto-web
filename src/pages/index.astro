@@ -1,0 +1,276 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { SITE, services, areas, ars, usd } from '../data/site.js';
+
+const heroLines = JSON.stringify([
+  [{ text: 'Tus clientes están buscando.', italic: false }],
+  [{ text: 'Nos aseguramos de que te encuentren.', italic: false }]
+]);
+
+const priced = services.filter(s => s.oneTime != null).map(s => s.oneTime);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: SITE.name,
+  description: 'Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local.',
+  url: 'https://agenciaveredicto.com',
+  logo: 'https://agenciaveredicto.com/favicon.svg',
+  image: 'https://agenciaveredicto.com/og-image.png',
+  email: SITE.email,
+  telephone: SITE.whatsapp.e164,
+  contactPoint: [
+    { '@type': 'ContactPoint', contactType: 'customer service', telephone: SITE.whatsapp.e164, availableLanguage: 'es' },
+    ...SITE.phones.map(p => ({ '@type': 'ContactPoint', contactType: 'customer service', telephone: p.e164, availableLanguage: 'es' }))
+  ],
+  foundingDate: SITE.foundingDate,
+  sameAs: SITE.social,
+  address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.city, addressCountry: 'AR' },
+  areaServed: [{ '@type': 'City', name: SITE.city }, { '@type': 'Country', name: SITE.country }],
+  serviceType: 'Marketing jurídico',
+  priceRange: `ARS ${ars(Math.min(...priced))} - ARS ${ars(Math.max(...priced))}`,
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00'
+  },
+  knowsLanguage: 'es',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios',
+    itemListElement: services.map(s => {
+      const offer = { '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `https://agenciaveredicto.com${s.url}` } };
+      if (s.oneTime != null) { offer.price = String(s.oneTime); offer.priceCurrency = 'ARS'; }
+      return offer;
+    })
+  }
+};
+
+const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps optimizado', 'SEO local', 'Estudios de abogados', 'Córdoba, Argentina', 'Presencia digital', 'Agencia Veredicto'];
+---
+<Base
+  title="Agencia Veredicto"
+  description="Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local."
+  schema={schema}
+>
+
+<section class="hero" aria-label="Portada">
+  <div class="hero-bg-num" aria-hidden="true">V</div>
+  <div class="wrap" style="display:flex;flex-direction:column;height:100%;">
+    <div style="margin-bottom:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;">
+      <div class="eyebrow">Marketing jurídico · Córdoba, Argentina</div>
+      <div class="eyebrow" style="color:var(--muted)">Est. {SITE.foundingDate}</div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title" id="heroTitle" data-lines={heroLines} aria-label="Tus clientes están buscando. Nos aseguramos de que te encuentren."></h1>
+      <div class="hero-foot">
+        <p class="hero-desc reveal d2">
+          La mayoría de los estudios argentinos no aparece cuando el cliente busca. Hacemos un diagnóstico gratuito de tu presencia en Google y te decimos exactamente qué hay que cambiar, sin compromiso.
+        </p>
+        <div class="hero-actions reveal d3">
+          <a href="/contacto/" class="btn-primary">Diagnóstico gratuito</a>
+          <a href="/servicios/" class="btn-ghost">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-bar" aria-label="Estadísticas clave">
+      <div class="hero-bar-item reveal d1">
+        <div class="hero-bar-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
+        <div class="hero-bar-label">de personas busca<br>abogado en Google primero</div>
+      </div>
+      <div class="hero-bar-item reveal d2">
+        <div class="hero-bar-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
+        <div class="hero-bar-label">de estudios no tiene<br>presencia digital real</div>
+      </div>
+      <div class="hero-bar-item reveal d3">
+        <div class="hero-bar-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
+        <div class="hero-bar-label">más consultas con<br>Google Maps activo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    {[0, 1].map(() => tickerItems.map(t => <div class="ticker-item">{t}</div>))}
+  </div>
+</div>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title reveal">Los clientes buscan.<br>El estudio <em>no aparece.</em></h2>
+      <p class="sec-intro reveal d2">El 80% de las personas busca un abogado en Google antes de llamar. Si el estudio no aparece, o aparece mal, la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</p>
+    </div>
+
+    <div class="problema-stats">
+      <div class="pstat reveal">
+        <div class="pstat-num"><span class="counter" data-target="80">0</span><span class="accent">%</span></div>
+        <div class="pstat-label">Buscan en Google</div>
+        <p class="pstat-desc">De cada 10 personas que necesitan un abogado, 8 empiezan en Google. No en el directorio, no por recomendación directa.</p>
+      </div>
+      <div class="pstat reveal d1">
+        <div class="pstat-num"><span class="accent">+</span><span class="counter" data-target="50">0</span><span class="accent">%</span></div>
+        <div class="pstat-label">Sin presencia real</div>
+        <p class="pstat-desc">Más de la mitad de los estudios jurídicos en Argentina no tienen sitio web o tienen uno tan desactualizado que no genera confianza ni consultas.</p>
+      </div>
+      <div class="pstat reveal">
+        <div class="pstat-num"><span class="counter" data-target="3">0</span><span class="accent">×</span></div>
+        <div class="pstat-label">Más consultas con Maps</div>
+        <p class="pstat-desc">Un perfil de Google Business bien optimizado genera entre 2 y 4 veces más llamadas que uno sin optimizar o sin ficha creada.</p>
+      </div>
+      <div class="pstat reveal d1">
+        <div class="pstat-num"><span class="counter" data-target="7">0</span><span class="accent">s</span></div>
+        <div class="pstat-label">Primera impresión</div>
+        <p class="pstat-desc">El potencial cliente tarda menos de 7 segundos en decidir si un sitio transmite profesionalismo. Un mal diseño cierra la conversación antes de empezar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="declaration">
+  <div class="wrap">
+    <blockquote class="reveal">
+      "Un estudio sin presencia digital no tiene<br><em>ninguna visibilidad</em> ante el cliente moderno."
+    </blockquote>
+    <cite class="reveal d1">Agencia Veredicto · Marketing Jurídico · Córdoba, {SITE.foundingDate}</cite>
+  </div>
+</div>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">Cómo trabajamos</div>
+      <h2 class="sec-title reveal d1">Cuatro pasos.<br><em>Un estudio</em> en Google.</h2>
+      <p class="sec-intro reveal d2">No vendemos paquetes genéricos. Cada trabajo empieza con un diagnóstico honesto y termina con resultados medibles. Sin reuniones eternas, sin entregas interminables.</p>
+    </div>
+
+    <div class="proceso-list">
+      <div class="proceso-item reveal">
+        <div class="proceso-num">01</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Diagnóstico</span>
+          <h3>Evaluamos la situación real del estudio</h3>
+          <p>Antes de hacer nada, analizamos en profundidad: si tiene sitio web, cómo está posicionado en Google, qué dice el perfil de Maps, qué hace la competencia local. La verdad primero, siempre.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d1">
+        <div class="proceso-num">02</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Diseño y estrategia</span>
+          <h3>Creamos la presencia correcta para cada estudio</h3>
+          <p>Diseñamos el sitio web a medida, sin plantillas genéricas, y definimos la estrategia de posicionamiento local. Cada estudio tiene su voz; la construimos para que sea creíble y profesional.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d2">
+        <div class="proceso-num">03</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Ejecución</span>
+          <h3>Publicamos y optimizamos para que el estudio aparezca</h3>
+          <p>Ponemos el sitio online con dominio propio, SSL y hosting estable. Optimizamos Google Business: fotos, categorías, palabras clave locales, descripción y horarios. El estudio empieza a aparecer donde buscan los clientes.</p>
+        </div>
+      </div>
+      <div class="proceso-item reveal d3">
+        <div class="proceso-num">04</div>
+        <div class="proceso-content">
+          <span class="proceso-tag">Mantenimiento y seguimiento</span>
+          <h3>Mantenemos todo vivo y trabajando</h3>
+          <p>El trabajo no termina con el lanzamiento. Gestionamos reseñas, actualizamos contenido, respondemos cambios del algoritmo y reportamos mes a mes qué está pasando con la visibilidad del estudio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Servicios: en la home solo el resumen; el detalle vive en /servicios/ -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">Servicios</div>
+      <h2 class="sec-title reveal d1">Precio publicado.<br><em>Sin sorpresas.</em></h2>
+      <p class="sec-intro reveal d2">Dos planes de presencia digital completa, más servicios de posicionamiento, redes y renovación. Cada uno tiene su página con el detalle completo.</p>
+    </div>
+
+    <div class="card-grid">
+      {services.map(s => (
+        <a href={s.url} class="link-card reveal">
+          <div class="lc-tier">{s.tier}</div>
+          <h3>{s.name}</h3>
+          <p>{s.lead}</p>
+          <div class="lc-foot">
+            {s.oneTime != null
+              ? <span class="lc-price">${ars(s.oneTime)}<span class="lc-cur">ARS · USD {usd(s.oneTime)}</span></span>
+              : <span class="lc-price">{s.quoteLabel}</span>}
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="porque">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title reveal">Especialistas en el<br>sector <em>jurídico.</em> Ese es el foco.</h2>
+    </div>
+
+    <div class="dif-grid">
+      <div class="dif-text reveal">
+        <h3>Un equipo de Córdoba, con raíces en el derecho y en la tecnología.</h3>
+        <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
+        <p>Nuestro equipo reúne experiencia en desarrollo web y programación con conocimiento real del mundo jurídico argentino. Entendemos cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal.</p>
+        <p>Los estudios jurídicos son nuestro núcleo: es donde más trabajamos y donde mejor conocemos el terreno. También acompañamos a <a href="/areas/estudios-contables/">estudios contables</a>, <a href="/areas/escribanias/">escribanías</a> y <a href="/areas/consultores/">consultores</a>, que se juegan lo mismo: que los encuentren antes que al de al lado.</p>
+      </div>
+
+      <div class="dif-list">
+        <div class="dif-row reveal d1">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M8 2l1.5 3.1L13 5.7l-2.5 2.4.6 3.4L8 9.8l-3.1 1.7.6-3.4L3 5.7l3.5-.6L8 2z"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Especialistas en el sector legal</h4>
+            <p>Conocemos el vocabulario, las búsquedas y las dudas de los clientes de estudios jurídicos argentinos.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d2">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5v2.5l1.5 1.5"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Entrega rápida y sin vueltas</h4>
+            <p>El sitio publicado en días, no en semanas. Sin reuniones eternas ni revisiones que no terminan.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d3">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Transparencia total en precios</h4>
+            <p>Los planes tienen precio fijo y publicado. Los servicios a medida se cotizan antes de empezar, y ese número no cambia a mitad del proyecto.</p>
+          </div>
+        </div>
+        <div class="dif-row reveal d4">
+          <div class="dif-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5 6.5-7"/></svg>
+          </div>
+          <div class="dif-body">
+            <h4>Bajo expectativa, sobre entrega</h4>
+            <p>La regla de Veredicto: solo prometemos lo que podemos cumplir incluso con la agenda llena.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<CtaSection />
+
+</Base>

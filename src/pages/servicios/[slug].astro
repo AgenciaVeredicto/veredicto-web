@@ -1,0 +1,109 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { services, ars, usd } from '../../data/site.js';
+
+export async function getStaticPaths() {
+  const { services } = await import('../../data/site.js');
+  return services.map(s => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service: s } = Astro.props;
+const others = services.filter(x => x.id !== s.id);
+
+const offer = { '@type': 'Offer', availability: 'https://schema.org/InStock' };
+if (s.oneTime != null) { offer.price = String(s.oneTime); offer.priceCurrency = 'ARS'; }
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: s.name,
+  serviceType: s.name,
+  description: s.description,
+  url: `https://agenciaveredicto.com${s.url}`,
+  provider: { '@type': 'ProfessionalService', name: 'Agencia Veredicto', url: 'https://agenciaveredicto.com' },
+  areaServed: [{ '@type': 'City', name: 'Córdoba' }, { '@type': 'Country', name: 'Argentina' }],
+  offers: offer
+};
+---
+<Base title={s.title} description={s.description} schema={schema}>
+
+<section>
+  <div class="wrap">
+    <div class="page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span>/</span><a href="/servicios/">Servicios</a><span>/</span>{s.name}
+      </nav>
+      <span class="eyebrow">{s.tier}</span>
+      <h1>{s.name}</h1>
+      <p class="page-lead">{s.lead}</p>
+    </div>
+
+    <div class="page-grid">
+      <div class="detail-body">
+        <h2 class="detail-h2">Qué incluye</h2>
+        <p>{s.intro}</p>
+        <ul class="plan-feats" style="margin-top:20px">
+          {s.features.map(f => <li>{f}</li>)}
+        </ul>
+
+        <h2 class="detail-h2">Para quién es</h2>
+        <ul class="punto-list" style="grid-template-columns:1fr">
+          {s.forWho.map(f => <li>{f}</li>)}
+        </ul>
+
+        <h2 class="detail-h2">Cómo seguimos</h2>
+        <p>Todo empieza con un diagnóstico gratuito: miramos cómo aparece hoy el estudio en Google, qué está haciendo la competencia de la zona y qué cambios moverían la aguja. Recién ahí te decimos si este servicio es el que necesitás, o si te conviene otro.</p>
+        <p>Si avanzamos, el precio acordado es el que se factura. No hay adicionales que aparezcan a mitad del proyecto.</p>
+      </div>
+
+      <aside class="price-panel reveal">
+        {s.oneTime != null ? (
+          <>
+            <div class="split-label">Pago único</div>
+            <div class="pp-price">${ars(s.oneTime)}<span class="cur-badge">ARS</span></div>
+            <div class="price-intl">≈ <strong>USD {usd(s.oneTime)}</strong></div>
+            {s.monthly != null && (
+              <>
+                <div class="pp-sep"></div>
+                <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+                <div class="pp-price" style="font-size:26px">${ars(s.monthly)}<span class="period">/mes</span><span class="cur-badge">ARS</span></div>
+                <div class="price-intl">≈ <strong>USD {usd(s.monthly)}</strong><span class="period">/mo</span></div>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <div class="split-label">Precio</div>
+            <div class="pp-price" style="font-size:26px">{s.quoteLabel}</div>
+            {s.quoteNote && <div class="price-intl" style="opacity:.7">{s.quoteNote}</div>}
+          </>
+        )}
+        <a href={`/contacto/?plan=${s.id}`} class="btn-plan btn-plan-outline">Consultar este servicio</a>
+      </aside>
+    </div>
+
+    <div class="sec-head" style="padding-top:0">
+      <h2 class="sec-title reveal" style="font-size:clamp(24px,3vw,34px)">Otros servicios</h2>
+    </div>
+    <div class="card-grid">
+      {others.map(o => (
+        <a href={o.url} class="link-card reveal">
+          <div class="lc-tier">{o.tier}</div>
+          <h3>{o.name}</h3>
+          <p>{o.lead}</p>
+          <div class="lc-foot">
+            {o.oneTime != null
+              ? <span class="lc-price">${ars(o.oneTime)}<span class="lc-cur">ARS</span></span>
+              : <span class="lc-price">{o.quoteLabel}</span>}
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<CtaSection preselect={s.id} />
+
+</Base>

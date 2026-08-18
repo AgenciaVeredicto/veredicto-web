@@ -1,0 +1,12 @@
+# Todo converge en https://agenciaveredicto.com (el dominio del canonical).
+http://www.agenciaveredicto.com/* https://agenciaveredicto.com/:splat 301
+https://www.agenciaveredicto.com/* https://agenciaveredicto.com/:splat 301
+http://agenciaveredicto.com/* https://agenciaveredicto.com/:splat 301
+
+# El subdominio de Pages no debe competir con el dominio propio.
+https://veredicto-web-bga.pages.dev/* https://agenciaveredicto.com/:splat 301
+
+# Anclas de la home que pasaron a pagina propia.
+/servicios /servicios/ 301
+/areas /areas/ 301
+/contacto /contacto/ 301

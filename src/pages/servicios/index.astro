@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { services, ars, usd } from '../../data/site.js';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Servicios',
+  url: 'https://agenciaveredicto.com/servicios/',
+  description: 'Servicios de marketing digital para estudios de abogados y profesionales: sitios web, SEO local, Google Business, redes sociales y renovación.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: s.name,
+      url: `https://agenciaveredicto.com${s.url}`
+    }))
+  }
+};
+---
+<Base
+  title="Servicios"
+  description="Servicios de marketing digital para estudios de abogados y profesionales en Argentina: sitios web, SEO local, Google Business, redes sociales y renovación de sitios."
+  schema={schema}
+>
+
+<section>
+  <div class="wrap">
+    <div class="page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span>/</span>Servicios
+      </nav>
+      <span class="eyebrow">Servicios</span>
+      <h1>Todo lo que hace falta<br>para que <em>te encuentren.</em></h1>
+      <p class="page-lead">Dos planes de presencia digital completa, más servicios de posicionamiento, contenido y renovación. Cada uno con su precio publicado o su forma de cotización, sin letra chica.</p>
+      <p class="page-intro">Se pueden contratar por separado o combinados. Si no sabés por dónde empezar, el diagnóstico gratuito te dice qué necesita tu estudio antes de que gastes un peso.</p>
+    </div>
+
+    <div class="card-grid">
+      {services.map(s => (
+        <a href={s.url} class="link-card reveal">
+          <div class="lc-tier">{s.tier}</div>
+          <h3>{s.name}</h3>
+          <p>{s.lead}</p>
+          <div class="lc-foot">
+            {s.oneTime != null
+              ? <span class="lc-price">${ars(s.oneTime)}<span class="lc-cur">ARS · USD {usd(s.oneTime)}</span></span>
+              : <span class="lc-price">{s.quoteLabel}</span>}
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<CtaSection />
+
+</Base>
