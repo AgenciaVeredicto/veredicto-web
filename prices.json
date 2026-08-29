@@ -1,8 +1,7 @@
 {
-  "_comment": "Fuente unica de precios. Editar SOLO este archivo y correr: node build-prices.js",
+  "_comment": "Fuente unica de precios de todo el sitio. Editar SOLO este archivo y correr: npm run build. Lo consumen src/data/site.js (tarjetas, paginas de servicio, formulario) y el JSON-LD.",
   "exchangeRate": 1508,
   "currency": "ARS",
-  "usdRounding": 1,
   "services": [
     {
       "id": "plan1",
