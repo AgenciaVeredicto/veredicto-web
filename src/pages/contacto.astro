@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ContactRows from '../components/ContactRows.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { SITE } from '../data/site.js';
+import { SITE, breadcrumb } from '../data/site.js';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -18,11 +18,13 @@ const schema = {
     address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressCountry: 'AR' }
   }
 };
+
+const migas = breadcrumb([['Inicio', '/'], ['Contacto', null]]);
 ---
 <Base
   title="Contacto"
   description="Pedí el diagnóstico gratuito de la presencia digital de tu estudio. Analizamos cómo aparecés en Google y qué cambiar, sin compromiso."
-  schema={schema}
+  schema={[schema, migas]}
 >
 
 <section class="cta-section">

@@ -152,3 +152,29 @@ textarea:focus-visible {
 
 /* Las anclas de los fueros no pueden quedar tapadas por el nav fijo. */
 [id] { scroll-margin-top: 96px; }
+
+/* ======== PREGUNTAS FRECUENTES ========
+ * Dos columnas en escritorio para que no sea una lista interminable.
+ * Sin <details>: el texto tiene que estar en el HTML visible para que un
+ * rastreador de IA lo lea sin depender de un clic.
+ */
+.faq-list {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 0 44px; margin: 0 0 76px;
+}
+.faq-item {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.faq-item dt {
+  font-family: var(--body); font-size: 15px; font-weight: 600;
+  color: var(--ink); line-height: 1.5; margin-bottom: 9px;
+  letter-spacing: .005em;
+}
+.faq-item dd {
+  margin: 0; font-size: 14.5px; color: var(--muted);
+  line-height: 1.75; max-width: 54ch;
+}
+@media (max-width: 860px) {
+  .faq-list { grid-template-columns: 1fr; gap: 0; }
+}

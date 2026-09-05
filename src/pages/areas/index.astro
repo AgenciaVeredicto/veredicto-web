@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
-import { areas } from '../../data/site.js';
+import { areas, breadcrumb } from '../../data/site.js';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -19,11 +19,13 @@ const schema = {
     }))
   }
 };
+
+const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', null]]);
 ---
 <Base
   title="A quién atendemos"
   description="Marketing digital para estudios de abogados, estudios contables, escribanías y consultores en Argentina. Sitios web y posicionamiento local por profesión."
-  schema={schema}
+  schema={[schema, migas]}
 >
 
 <section>

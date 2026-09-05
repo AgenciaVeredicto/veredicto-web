@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
-import { services, ars, usd } from '../../data/site.js';
+import { services, breadcrumb } from '../../data/site.js';
 
 export async function getStaticPaths() {
   const { services } = await import('../../data/site.js');
@@ -26,8 +26,10 @@ const schema = {
   areaServed: [{ '@type': 'City', name: 'Córdoba' }, { '@type': 'Country', name: 'Argentina' }],
   offers: offer
 };
+
+const migas = breadcrumb([['Inicio', '/'], ['Servicios', '/servicios/'], [s.name, null]]);
 ---
-<Base title={s.title} description={s.description} schema={schema}>
+<Base title={s.title} description={s.description} schema={[schema, migas]}>
 
 <section>
   <div class="wrap">

@@ -2,7 +2,21 @@
 import Base from '../layouts/Base.astro';
 import CtaSection from '../components/CtaSection.astro';
 import Opiniones from '../components/Opiniones.astro';
-import { SITE, services, areas, proof } from '../data/site.js';
+import Faq from '../components/Faq.astro';
+import { SITE, services, areas, proof, faq } from '../data/site.js';
+
+// FAQPage: Google ya casi no muestra resultados enriquecidos de FAQ salvo
+// para sitios oficiales, asi que el valor aca es que los sistemas de IA
+// lean el par pregunta/respuesta ya estructurado.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a }
+  }))
+};
 
 const heroLines = JSON.stringify([
   [{ text: 'Tus clientes están buscando.', italic: false }],
@@ -33,8 +47,8 @@ const schema = {
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '09:00',
-    closes: '18:00'
+    opens: SITE.hoursOpen,
+    closes: SITE.hoursClose
   },
   knowsLanguage: 'es',
   hasOfferCatalog: {
@@ -52,7 +66,7 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
 <Base
   title="Agencia Veredicto"
   description="Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local."
-  schema={schema}
+  schema={[schema, faqSchema]}
 >
 
 <section class="hero" aria-label="Portada">
@@ -217,15 +231,15 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
 <section id="porque">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="sec-title reveal">Especialistas en el<br>sector <em>jurídico.</em> Ese es el foco.</h2>
+      <h2 class="sec-title reveal">Especialistas en cómo<br>la gente <em>elige</em> un profesional.</h2>
     </div>
 
     <div class="dif-grid">
       <div class="dif-text reveal">
-        <h3>Un equipo de Córdoba, con raíces en el derecho y en la tecnología.</h3>
-        <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios de abogados serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
-        <p>Nuestro equipo reúne experiencia en desarrollo web y programación con conocimiento real del mundo jurídico argentino. Entendemos cómo hablan los abogados, qué esperan sus clientes y qué lenguaje genera confianza en el sector legal.</p>
-        <p>Los estudios jurídicos son nuestro núcleo: es donde más trabajamos y donde mejor conocemos el terreno. También acompañamos a <a href="/areas/estudios-contables/">estudios contables</a>, <a href="/areas/escribanias/">escribanías</a> y <a href="/areas/consultores/">consultores</a>, que se juegan lo mismo: que los encuentren antes que al de al lado.</p>
+        <h3>Un equipo con raíces en el derecho y en la tecnología.</h3>
+        <p>Arrancamos Veredicto porque vimos algo que pasaba todo el tiempo: estudios serios, con años de trayectoria, que no aparecían en Google o que tenían un sitio que daba vergüenza mostrar.</p>
+        <p>Nadie contrata a un profesional como compra un producto. Antes de escribir, el cliente compara, lee opiniones, entra al sitio y decide si le inspirás confianza. Ese recorrido es el que trabajamos, y es el mismo para un <a href="/areas/abogados/">abogado</a>, un <a href="/areas/estudios-contables/">contador</a>, una <a href="/areas/escribanias/">escribanía</a> o un <a href="/areas/consultores/">consultor</a>.</p>
+        <p>Cubrimos todo el circuito: el sitio, la ficha de Google Business, el posicionamiento orgánico, las redes y ahora también el <a href="/servicios/">posicionamiento en respuestas de IA</a>, porque cada vez más gente le pregunta a un asistente antes que a un buscador.</p>
       </div>
 
       <div class="dif-list">
@@ -234,8 +248,8 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
             <svg viewBox="0 0 16 16"><path d="M8 2l1.5 3.1L13 5.7l-2.5 2.4.6 3.4L8 9.8l-3.1 1.7.6-3.4L3 5.7l3.5-.6L8 2z"/></svg>
           </div>
           <div class="dif-body">
-            <h4>Especialistas en el sector legal</h4>
-            <p>Conocemos el vocabulario, las búsquedas y las dudas de los clientes de estudios jurídicos argentinos.</p>
+            <h4>Un solo tipo de cliente</h4>
+            <p>Solo servicios profesionales. Conocemos el vocabulario, las búsquedas y las dudas de quien contrata a un abogado, un contador o una escribanía.</p>
           </div>
         </div>
         <div class="dif-row reveal d2">
@@ -261,14 +275,16 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
             <svg viewBox="0 0 16 16"><path d="M3 8.5l3.5 3.5 6.5-7"/></svg>
           </div>
           <div class="dif-body">
-            <h4>Bajo expectativa, sobre entrega</h4>
-            <p>La regla de Veredicto: solo prometemos lo que podemos cumplir incluso con la agenda llena.</p>
+            <h4>Al día con cómo se busca hoy</h4>
+            <p>Google dejó de ser el único punto de partida. Trabajamos también para que aparezcas en las respuestas de ChatGPT, Gemini y Perplexity.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<Faq />
 
 <CtaSection />
 

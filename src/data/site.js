@@ -12,7 +12,11 @@ export const SITE = {
     { display: '+54 351 869 5534', e164: '+543518695534' },
     { display: '+54 351 879 2024', e164: '+543518792024' }
   ],
-  hours: 'Lunes a viernes, 9 a 18 h',
+  // El huso va explicito: sin el, "8 a 20" es una promesa rota para
+  // cualquiera que llame desde Espana, que esta 4 o 5 horas adelante.
+  hours: 'Lunes a viernes, 8 a 20 h (GMT-3)',
+  hoursOpen: '08:00',
+  hoursClose: '20:00',
   social: [
     'https://www.instagram.com/agenciaveredicto/',
     'https://www.linkedin.com/company/agenciaveredicto/'
@@ -43,6 +47,69 @@ export const opiniones = [
   { nombre: 'Ambar Bruna',      texto: 'Muy profesionales. Excelente atención.' },
   { nombre: 'Matías Alincastro',texto: 'Muy serios y responsables.' }
 ];
+
+/* ---------- PREGUNTAS FRECUENTES ----------
+ * Redactadas desde cero. Se descartaron las del sitio de referencia que no
+ * aplican (trabajar con cualquier rubro, por ejemplo, es lo contrario de lo
+ * que hace Veredicto) y se sumaron las que salen de su realidad: el
+ * diagnostico gratuito, la especializacion y el trabajo fuera del pais.
+ */
+export const faq = [
+  {
+    q: '¿Qué es el posicionamiento en IA y por qué debería importarme?',
+    a: 'Cada vez más gente le pregunta a ChatGPT, Gemini o Perplexity en lugar de buscar en Google, y esos sistemas responden citando fuentes. El posicionamiento en IA, también llamado GEO, es el trabajo de lograr que tu estudio sea una de esas fuentes: contenido que el modelo pueda entender, datos verificables y una identidad consistente que pueda reconocer y nombrar.'
+  },
+  {
+    q: '¿Reemplaza al SEO de siempre?',
+    a: 'No, se apoya en él. Un sitio que Google no entiende tampoco lo entiende un modelo de lenguaje: la base técnica es la misma. Lo que cambia es cómo se escribe. Los buscadores premian páginas que posicionan; los modelos citan párrafos que responden una pregunta completa por sí solos, sin necesitar el resto del texto.'
+  },
+  {
+    q: '¿Cómo sé si hoy aparezco en las respuestas de IA?',
+    a: 'Se comprueba preguntando. Antes de proponer nada consultamos ChatGPT, Gemini, Perplexity y Copilot por tu especialidad y tu ciudad, y anotamos quién aparece y quién no. Ese registro es el punto de partida contra el que después se mide si algo funcionó.'
+  },
+  {
+    q: '¿Qué incluye el diagnóstico gratuito?',
+    a: 'Revisamos en qué posición aparece tu estudio para las búsquedas que te interesan, el estado de tu ficha de Google Business, la velocidad y la estructura del sitio si ya tenés uno, si figurás en respuestas de IA, y qué está haciendo la competencia de tu zona. Te devolvemos qué cambiaríamos y en qué orden. Sin compromiso de contratar nada.'
+  },
+  {
+    q: '¿Cuánto tarda en verse resultados?',
+    a: 'Las correcciones técnicas se reflejan en semanas. El posicionamiento orgánico y las menciones en IA son otra escala: entre tres y seis meses de trabajo sostenido, y depende mucho de cuánta competencia tengas en tu especialidad. Si alguien te promete el primer puesto en treinta días, te está vendiendo humo.'
+  },
+  {
+    q: '¿Trabajan con cualquier rubro?',
+    a: 'No, y es a propósito. Solo trabajamos con servicios profesionales: estudios jurídicos, estudios contables, escribanías y consultores. Es lo que nos permite conocer el vocabulario, las búsquedas y las dudas reales de tus clientes en lugar de improvisarlas en cada proyecto.'
+  },
+  {
+    q: 'Ya tengo sitio web y agencia. ¿Sirve igual?',
+    a: 'Sí, y suele ser el caso más frecuente. No hace falta rehacer nada: se puede sumar la capa de posicionamiento en IA sobre lo que ya está funcionando, o corregir lo puntual que esté frenando las consultas. Si tu proveedor actual hace bien su trabajo, trabajamos sobre eso y no en contra.'
+  },
+  {
+    q: '¿Puedo contratar solo una parte?',
+    a: 'Sí. Se puede empezar por la ficha de Google Business, por la renovación del sitio que ya tenés o por el trabajo de posicionamiento en IA por separado. El diagnóstico define qué conviene primero según tu situación, y desde ahí armamos el alcance.'
+  },
+  {
+    q: '¿Hace falta que entienda de tecnología?',
+    a: 'No. La parte técnica es nuestra y te la explicamos en castellano, no en jerga. Lo que sí necesitamos de vos es el conocimiento de tu profesión: qué consultas te llegan, qué preguntan tus clientes antes de contratarte, qué tipo de casos te interesa atraer. Eso no lo podemos inventar.'
+  },
+  {
+    q: '¿Trabajan fuera de Argentina?',
+    a: 'Sí. El trabajo es íntegramente remoto y ya atendemos fuera del país. La comunicación es por videollamada, WhatsApp y correo, de lunes a viernes de 8 a 20 (GMT-3), y coordinamos los horarios según el huso de cada cliente.'
+  }
+];
+
+/* Migas de pan en schema. Existian a la vista pero sin marcado: es lo que
+ * hace que Google muestre la ruta en el resultado en vez de la URL cruda.
+ * Recibe [['Inicio','/'], ['Servicios','/servicios/'], ['Nombre', null]].
+ */
+export const breadcrumb = pasos => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: pasos.map(([name, url], i) => {
+    const item = { '@type': 'ListItem', position: i + 1, name };
+    if (url) item.item = `https://agenciaveredicto.com${url}`;
+    return item;
+  })
+});
 
 export const TC = prices.exchangeRate;
 export const ars = n => n.toLocaleString('es-AR');

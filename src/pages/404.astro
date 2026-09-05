@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { services, areas } from '../data/site.js';
+
+// Sin este archivo, Astro no emite 404.html y Cloudflare Pages devuelve
+// la home con estado 200 para CUALQUIER ruta inexistente: un soft 404 que
+// Google penaliza y que oculta todos los enlaces rotos.
+---
+<Base
+  title="Página no encontrada"
+  description="La página que buscabas no existe o cambió de dirección."
+  noindex={true}
+>
+
+<section>
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Error 404</span>
+      <h1>Esta página no existe.</h1>
+      <p class="page-lead">
+        Puede que el enlace esté mal escrito o que la página haya cambiado de dirección.
+        Abajo está todo lo que hay en el sitio.
+      </p>
+    </div>
+
+    <h2 class="detail-h2" style="margin-top:0">Servicios</h2>
+    <div class="card-grid" style="padding-bottom:44px">
+      {services.map(s => (
+        <a href={s.url} class="link-card">
+          <div class="lc-tier">{s.tier}</div>
+          <h3>{s.name}</h3>
+          <p>{s.lead}</p>
+          <div class="lc-foot">
+            <span class="lc-price">Presupuesto a medida</span>
+            <span>Ver detalle →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="detail-h2">A quién atendemos</h2>
+    <div class="card-grid">
+      {areas.map(a => (
+        <a href={`/areas/${a.slug}/`} class="link-card">
+          <div class="lc-tier">{a.slug === 'abogados' ? 'Núcleo' : 'También'}</div>
+          <h3>{a.nav}</h3>
+          <p>{a.lead}</p>
+          <div class="lc-foot"><span class="lc-price">&nbsp;</span><span>Ver detalle →</span></div>
+        </a>
+      ))}
+    </div>
+
+    <div style="padding:10px 0 80px">
+      <a href="/" class="btn-plan btn-plan-outline">Volver al inicio</a>
+    </div>
+  </div>
+</section>
+
+</Base>

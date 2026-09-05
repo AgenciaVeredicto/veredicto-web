@@ -1,4 +1,63 @@
 User-agent: *
 Allow: /
 
+# Rastreadores de IA permitidos de forma explicita.
+# Es condicion necesaria para que estos sistemas puedan citar el sitio
+# en sus respuestas. Decision tomada: se prioriza aparecer citado por
+# encima de restringir el uso del contenido.
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Gemini y AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft (Copilot)
+User-agent: bingbot
+Allow: /
+
+# Common Crawl, fuente de entrenamiento de varios modelos
+User-agent: CCBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://agenciaveredicto.com/sitemap-index.xml

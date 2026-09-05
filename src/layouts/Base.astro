@@ -9,7 +9,8 @@ const {
   title,
   description,
   schema = null,
-  ogImage = '/og-image.png'
+  ogImage = '/og-image.png',
+  noindex = false   // solo la 404: no debe entrar al indice
 } = Astro.props;
 
 // EL canonical SE DERIVA DE LA RUTA. No se escribe a mano en ninguna pagina:
@@ -25,7 +26,7 @@ const fullTitle = title === SITE.titleBase ? title : `${title} · ${SITE.titleBa
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{fullTitle}</title>
   <meta name="description" content={description}>
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'}>
   <link rel="canonical" href={canonical}>
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -50,7 +51,9 @@ const fullTitle = title === SITE.titleBase ? title : `${title} · ${SITE.titleBa
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.svg">
 
-  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)} />}
+  {schema && (Array.isArray(schema) ? schema : [schema]).map(s => (
+    <script type="application/ld+json" set:html={JSON.stringify(s, null, 2)} />
+  ))}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

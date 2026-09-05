@@ -1,0 +1,24 @@
+---
+import { faq } from '../data/site.js';
+
+// Abierto por defecto (sin <details>): el contenido tiene que estar visible
+// para que un rastreador de IA lo lea sin depender de interaccion.
+---
+<section id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">Preguntas frecuentes</div>
+      <h2 class="sec-title reveal d1">Lo que nos preguntan<br><em>antes de empezar.</em></h2>
+      <p class="sec-intro reveal d2">Si tu duda no está acá, escribinos y la respondemos sin vueltas. El diagnóstico es gratuito y no compromete a nada.</p>
+    </div>
+
+    <dl class="faq-list">
+      {faq.map(item => (
+        <div class="faq-item reveal">
+          <dt>{item.q}</dt>
+          <dd>{item.a}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
