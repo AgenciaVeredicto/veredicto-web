@@ -26,7 +26,7 @@ const schema = {
   audience: { '@type': 'Audience', audienceType: a.nav }
 };
 
-const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', '/areas/'], [a.nav, null]]);
+const migas = breadcrumb([['Inicio', '/'], ['Sectores', '/areas/'], [a.nav, null]]);
 ---
 <Base title={a.title} description={a.description} schema={[schema, migas]}>
 
@@ -34,9 +34,9 @@ const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', '/areas/'], [a
   <div class="wrap">
     <div class="page-head">
       <nav class="breadcrumb" aria-label="Migas de pan">
-        <a href="/">Inicio</a><span>/</span><a href="/areas/">A quién atendemos</a><span>/</span>{a.nav}
+        <a href="/">Inicio</a><span>/</span><a href="/areas/">Sectores</a><span>/</span>{a.nav}
       </nav>
-      <span class="eyebrow">A quién atendemos</span>
+      <span class="eyebrow">Sectores</span>
       <h1 set:html={a.heading} />
       <p class="page-lead">{a.lead}</p>
       <p class="page-intro">{a.intro}</p>

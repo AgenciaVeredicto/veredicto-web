@@ -1,12 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import CtaSection from '../../components/CtaSection.astro';
-import { areas, breadcrumb } from '../../data/site.js';
+import { areas, otrosProfesionales, breadcrumb } from '../../data/site.js';
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'A quién atendemos',
+  name: 'Sectores',
   url: 'https://agenciaveredicto.com/areas/',
   description: 'Marketing digital para estudios de abogados, estudios contables, escribanías y consultores en Argentina.',
   mainEntity: {
@@ -20,10 +20,10 @@ const schema = {
   }
 };
 
-const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', null]]);
+const migas = breadcrumb([['Inicio', '/'], ['Sectores', null]]);
 ---
 <Base
-  title="A quién atendemos"
+  title="Sectores"
   description="Marketing digital para estudios de abogados, estudios contables, escribanías y consultores en Argentina. Sitios web y posicionamiento local por profesión."
   schema={[schema, migas]}
 >
@@ -32,9 +32,9 @@ const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', null]]);
   <div class="wrap">
     <div class="page-head">
       <nav class="breadcrumb" aria-label="Migas de pan">
-        <a href="/">Inicio</a><span>/</span>A quién atendemos
+        <a href="/">Inicio</a><span>/</span>Sectores
       </nav>
-      <span class="eyebrow">A quién atendemos</span>
+      <span class="eyebrow">Sectores</span>
       <h1>Servicios profesionales<br>que necesitan <em>que los encuentren.</em></h1>
       <p class="page-lead">Nuestro núcleo son los estudios de abogados. Sobre esa base trabajamos también con estudios contables, escribanías y consultores.</p>
       <p class="page-intro">Cada profesión tiene su propia forma de ser buscada. Un cliente que necesita un abogado laboralista no busca igual que uno que necesita escriturar una casa o resolver el monotributo. Por eso el trabajo no es el mismo en cada caso, aunque las herramientas se parezcan.</p>
@@ -52,6 +52,22 @@ const migas = breadcrumb([['Inicio', '/'], ['A quién atendemos', null]]);
           </div>
         </a>
       ))}
+    </div>
+
+    <div class="otros">
+      <div class="otros-texto">
+        <h2>Otros profesionales</h2>
+        <p>
+          Los cuatro sectores de arriba son donde más trabajamos, pero el problema
+          es el mismo para cualquier profesional que dependa de que lo encuentren y
+          le confíen antes de la primera consulta. Si tu profesión no está en la
+          lista, el diagnóstico gratuito aplica igual.
+        </p>
+        <a href="/contacto/" class="btn-plan btn-plan-outline">Consultar mi caso</a>
+      </div>
+      <ul class="otros-lista">
+        {otrosProfesionales.map(p => <li>{p}</li>)}
+      </ul>
     </div>
   </div>
 </section>

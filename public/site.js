@@ -217,12 +217,12 @@ if (!window.matchMedia('(hover: none)').matches) {
             btn.disabled = false;
           }, 5000);
         } else {
-          btn.textContent = 'Error al enviar. Escribinos por WhatsApp.';
+          btn.textContent = 'No se pudo enviar. El WhatsApp es la vía más rápida.';
           btn.disabled = false;
         }
       })
       .catch(function () {
-        btn.textContent = 'Sin conexión. Escribinos por WhatsApp.';
+        btn.textContent = 'Sin conexión. El WhatsApp es la vía más rápida.';
         btn.disabled = false;
       });
   });

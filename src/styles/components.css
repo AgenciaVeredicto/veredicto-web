@@ -178,3 +178,167 @@ textarea:focus-visible {
 @media (max-width: 860px) {
   .faq-list { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ======== OTROS PROFESIONALES ======== */
+.otros {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 44px; align-items: start;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 4px; padding: 38px 36px; margin-bottom: 76px;
+}
+.otros-texto h2 {
+  font-family: var(--display); font-size: 26px; font-weight: 700;
+  letter-spacing: -.025em; margin: 0 0 14px; line-height: 1.15;
+}
+.otros-texto p {
+  margin: 0 0 22px; font-size: 15px; color: var(--muted);
+  line-height: 1.75; max-width: 46ch;
+}
+.otros-lista { list-style: none; display: grid; gap: 0; margin: 0; padding: 0; }
+.otros-lista li {
+  font-family: var(--body); font-size: 14.5px; color: var(--ink);
+  padding: 11px 0 11px 20px; position: relative;
+  border-bottom: 1px solid var(--line);
+}
+.otros-lista li:first-child { padding-top: 0; }
+.otros-lista li:last-child { border-bottom: none; padding-bottom: 0; }
+.otros-lista li::before {
+  content: ''; position: absolute; left: 0; top: 19px;
+  width: 6px; height: 1px; background: var(--sage);
+}
+.otros-lista li:first-child::before { top: 8px; }
+@media (max-width: 860px) {
+  .otros { grid-template-columns: 1fr; gap: 28px; padding: 30px 26px; }
+}
+
+/* ======== HEADER: AFINADO ========
+ * El logotipo seguia en Poppins mientras los titulares ya eran Instrument
+ * Sans. Unificarlo es lo que mas se nota: el nav es lo primero que se lee.
+ */
+.emblem .name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .13em;
+}
+.emblem svg { width: 32px; height: 36px; }
+.emblem { gap: 11px; }
+
+.nav-links { gap: 30px; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .015em;
+  color: rgba(247,245,239,.72);
+  padding: 4px 0;
+  position: relative;
+}
+.nav-links a:hover { color: var(--cream); }
+
+/* Subrayado que crece desde el centro, en lugar del cambio de color solo */
+.nav-links a::after {
+  content: ''; position: absolute; left: 50%; right: 50%; bottom: -2px;
+  height: 1px; background: var(--sage-l);
+  transition: left .25s cubic-bezier(.16,1,.3,1), right .25s cubic-bezier(.16,1,.3,1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover::after { left: 0; right: 0; }
+}
+.nav-links a.active { color: var(--cream); }
+.nav-links a.active::after { left: 0; right: 0; background: rgba(139,175,110,.45); }
+.nav-links li.has-menu > a::after { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a::after { transition: none; }
+}
+
+.btn-nav {
+  font-size: 11.5px;
+  letter-spacing: .11em;
+  padding: 12px 20px;
+  border: 1px solid rgba(247,245,239,.22);
+  background: transparent;
+  color: var(--cream);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-nav:hover {
+    background: var(--cream); color: var(--ink);
+    border-color: var(--cream); transform: translateY(-1px);
+  }
+}
+
+/* ======== AREAS TACTILES EN MOBILE ========
+ * El hamburguesa medía 23px de alto y los enlaces de contacto 20px: en un
+ * pulgar eso se falla. Se agrandan las zonas de toque sin mover el diseño,
+ * usando padding y un pseudo-elemento que extiende el area sensible.
+ * Los enlaces dentro de parrafos quedan como estan: las guias de
+ * accesibilidad los eximen y agrandarlos rompe el interlineado.
+ */
+.hamburger {
+  min-width: 44px; min-height: 44px;
+  align-items: center; justify-content: center;
+  margin-right: -10px;   /* compensa el area extra para no correr el borde */
+}
+
+@media (max-width: 860px) {
+  .contact-row { gap: 12px; }
+  .contact-row a {
+    display: inline-block;
+    padding: 7px 0;
+    line-height: 1.35;
+  }
+  .contact-hours { margin-top: 4px; }
+
+  /* El cierre del menu tambien necesita area de toque */
+  .mobile-nav-close {
+    min-width: 44px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    top: 10px; right: 10px;
+  }
+
+  /* Enlaces del footer: son navegacion, no prosa */
+  .footer-col li a { display: inline-block; padding: 5px 0; }
+  .social-list a { padding: 10px 14px; }
+}
+
+/* ======== HERO Y TITULARES EN MOBILE ========
+ * A 375px el boton "DIAGNOSTICO GRATUITO" partia en dos lineas y el enlace
+ * "Ver servicios" tambien. Un CTA que envuelve se lee como descuido.
+ */
+@media (max-width: 560px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .btn-primary {
+    text-align: center;
+    padding: 17px 24px;
+    white-space: nowrap;
+  }
+  .btn-ghost {
+    text-align: center;
+    padding: 4px 0 6px;
+    white-space: nowrap;
+    align-self: center;
+  }
+  /* La fila superior del hero apilaba mal el eyebrow contra "Est. 2024" */
+  .hero .wrap > div:first-child { align-items: flex-start; gap: 16px; }
+}
+
+/* Reparto equilibrado de las lineas en todos los titulares.
+   El navegador evita dejar una palabra huerfana en la ultima linea. */
+h1.hero-title,
+h2.sec-title,
+.page-head h1,
+.cta-left h1,
+.cta-left h2,
+.declaration blockquote,
+.otros-texto h2,
+.link-card h3 {
+  text-wrap: balance;
+}
+
+/* Botones del sitio: nunca parten en dos lineas */
+.btn-plan, .btn-nav, .btn-submit { white-space: nowrap; }
+

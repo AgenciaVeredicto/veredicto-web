@@ -21,7 +21,7 @@ const isActive = base => path === base || path.startsWith(base);
              En touch no hay hover: el enlace lleva al hub /areas/. -->
         <li class="has-menu">
           <a href="/areas/" class={isActive('/areas/') ? 'active' : undefined}>
-            A quién atendemos
+            Sectores
             <svg class="caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
               <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -60,6 +60,6 @@ const isActive = base => path === base || path.startsWith(base);
   <button class="mobile-nav-close" id="navClose" aria-label="Cerrar menú">&times;</button>
   <a href="/" onclick="closeMobile()">Inicio</a>
   <a href="/servicios/" onclick="closeMobile()">Servicios</a>
-  <a href="/areas/" onclick="closeMobile()">A quién atendemos</a>
+  <a href="/areas/" onclick="closeMobile()">Sectores</a>
   <a href="/contacto/" onclick="closeMobile()">Contacto</a>
 </div>

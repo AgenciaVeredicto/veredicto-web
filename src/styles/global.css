@@ -156,7 +156,7 @@ h1.hero-title {
   font-family: var(--display);
   /* 68px y no 84: Instrument Sans es mas ancha que la serif que reemplazo,
      y a 84 el titular caia en 4 lineas empujando el boton fuera de vista. */
-  font-size: clamp(40px, 5.4vw, 68px);
+  font-size: clamp(36px, 5.4vw, 68px);
   font-weight: 700; line-height: 1.04; letter-spacing: -.04em;
   max-width: none; margin-bottom: 44px;
 }
@@ -494,12 +494,14 @@ section { border-bottom: 1px solid var(--line); }
   gap: 80px; align-items: start;
 }
 .cta-left .sec-num { margin-bottom: 16px; }
+.cta-left h1,
 .cta-left h2 {
   font-family: var(--display);
   font-size: clamp(26px, 3.6vw, 46px);
   font-weight: 700; line-height: 1.06; letter-spacing: -.035em;
   margin-bottom: 18px;
 }
+.cta-left h1 em,
 .cta-left h2 em { font-style: normal; color: inherit; }
 .cta-left p {
   font-size: 15.5px; color: var(--muted);

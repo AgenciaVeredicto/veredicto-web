@@ -31,7 +31,7 @@ ${areas.map(a => `- [${a.nav}](${base}/areas/${a.slug}/): ${a.description}`).joi
 
 - [Inicio](${base}/): presentación, proceso de trabajo y opiniones de clientes.
 - [Servicios](${base}/servicios/): índice de los ${services.length} servicios con su detalle.
-- [A quién atendemos](${base}/areas/): los ${areas.length} rubros profesionales que atiende.
+- [Sectores](${base}/areas/): los ${areas.length} rubros profesionales que atiende.
 - [Contacto](${base}/contacto/): formulario de diagnóstico gratuito y datos de contacto.
 
 ## Contacto

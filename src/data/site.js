@@ -69,11 +69,11 @@ export const faq = [
   },
   {
     q: '¿Qué incluye el diagnóstico gratuito?',
-    a: 'Revisamos en qué posición aparece tu estudio para las búsquedas que te interesan, el estado de tu ficha de Google Business, la velocidad y la estructura del sitio si ya tenés uno, si figurás en respuestas de IA, y qué está haciendo la competencia de tu zona. Te devolvemos qué cambiaríamos y en qué orden. Sin compromiso de contratar nada.'
+    a: 'Revisamos en qué posición aparece tu estudio para las búsquedas que te interesan, el estado de tu ficha de Google Business, la velocidad y la estructura del sitio actual si ya hay uno, si figurás en respuestas de IA, y qué está haciendo la competencia de tu zona. Te devolvemos qué cambiaríamos y en qué orden. Sin compromiso de contratar nada.'
   },
   {
     q: '¿Cuánto tarda en verse resultados?',
-    a: 'Las correcciones técnicas se reflejan en semanas. El posicionamiento orgánico y las menciones en IA son otra escala: entre tres y seis meses de trabajo sostenido, y depende mucho de cuánta competencia tengas en tu especialidad. Si alguien te promete el primer puesto en treinta días, te está vendiendo humo.'
+    a: 'Las correcciones técnicas se reflejan en semanas. El posicionamiento orgánico y las menciones en IA son otra escala: entre tres y seis meses de trabajo sostenido, y depende mucho de cuánta competencia haya en tu especialidad. Si alguien te promete el primer puesto en treinta días, te está vendiendo humo.'
   },
   {
     q: '¿Trabajan con cualquier rubro?',
@@ -85,11 +85,11 @@ export const faq = [
   },
   {
     q: '¿Puedo contratar solo una parte?',
-    a: 'Sí. Se puede empezar por la ficha de Google Business, por la renovación del sitio que ya tenés o por el trabajo de posicionamiento en IA por separado. El diagnóstico define qué conviene primero según tu situación, y desde ahí armamos el alcance.'
+    a: 'Sí. Se puede empezar por la ficha de Google Business, por la renovación del sitio actual o por el trabajo de posicionamiento en IA por separado. El diagnóstico define qué conviene primero según tu situación, y desde ahí armamos el alcance.'
   },
   {
     q: '¿Hace falta que entienda de tecnología?',
-    a: 'No. La parte técnica es nuestra y te la explicamos en castellano, no en jerga. Lo que sí necesitamos de vos es el conocimiento de tu profesión: qué consultas te llegan, qué preguntan tus clientes antes de contratarte, qué tipo de casos te interesa atraer. Eso no lo podemos inventar.'
+    a: 'No. La parte técnica es nuestra y te la explicamos en castellano, no en jerga. Lo que sí hace falta es el conocimiento de tu profesión: qué consultas te llegan, qué preguntan tus clientes antes de contratarte, qué tipo de casos te interesa atraer. Eso no lo podemos inventar.'
   },
   {
     q: '¿Trabajan fuera de Argentina?',
@@ -145,12 +145,12 @@ const serviceMeta = {
   },
   plan2: {
     slug: 'sitio-web-completo-seo',
-    title: 'Sitio web completo con SEO para abogados',
+    title: 'Sitio web completo con SEO y posicionamiento en IA',
     description:
-      'Sitio multipágina para estudios jurídicos con posicionamiento en Google: SEO on-page, indexación, blog y Google Business optimizado.',
-    lead: 'Para el estudio que quiere aparecer en Google cuando sus clientes lo buscan.',
+      'Sitio multipágina para estudios profesionales con posicionamiento en Google y en respuestas de IA: SEO on-page, datos estructurados, blog y Google Business optimizado.',
+    lead: 'Para el estudio que quiere aparecer cuando sus clientes buscan, en Google y en las respuestas de IA.',
     intro:
-      'Tener sitio no es lo mismo que aparecer. Este plan agrega lo que hace que Google entienda de qué trabaja el estudio y lo muestre cuando alguien busca en la zona: estructura de varias páginas, SEO local y una ficha de Google Business trabajada.',
+      'Tener sitio no es lo mismo que aparecer. Este plan agrega lo que hace que Google entienda de qué trabaja el estudio y lo muestre cuando alguien busca en la zona. Y desde ahora incluye la preparación para que también lo puedan citar ChatGPT, Gemini y Perplexity, que es por donde cada vez más gente empieza a buscar.',
     features: [
       'Todo lo incluido en el Plan Landing',
       'Múltiples páginas: Inicio · Áreas · Sobre el estudio · Blog · Contacto',
@@ -159,7 +159,9 @@ const serviceMeta = {
       'Perfil de Google Business creado y optimizado',
       'Blog listo para publicar, con la primera entrada cargada',
       'Integración con WhatsApp y redes del estudio',
-      'Capacitación para que el estudio cargue su propio contenido'
+      'Capacitación para que el estudio cargue su propio contenido',
+      'Preparación para búsqueda con IA: datos estructurados, contenido citable y archivo llms.txt',
+      'Informe inicial de visibilidad en ChatGPT, Gemini, Perplexity y Copilot'
     ],
     forWho: [
       'Estudios que compiten con otros por las mismas búsquedas',
@@ -342,3 +344,19 @@ export const areas = [
 ];
 
 export const areaBySlug = slug => areas.find(a => a.slug === slug);
+
+/* ---------- OTROS PROFESIONALES ----------
+ * Se listan como "el mismo trabajo aplica", no como clientes actuales:
+ * afirmar lo segundo seria inventar. Suma superficie de busqueda sin crear
+ * una pagina fina por profesion, que seria doorway.
+ */
+export const otrosProfesionales = [
+  'Arquitectos y estudios de arquitectura',
+  'Ingenieros y peritos',
+  'Martilleros y corredores inmobiliarios',
+  'Traductores públicos',
+  'Psicólogos y consultorios',
+  'Despachantes de aduana',
+  'Agrimensores',
+  'Asesores de seguros'
+];
