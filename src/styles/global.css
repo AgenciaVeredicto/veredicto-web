@@ -7,6 +7,11 @@
   --paper:  #FFFFFF;
   --line:   #E4E1D7;
   --muted:  #5d6b5f;
+
+  /* Tipografia. La display se cambia SOLO aca: antes estaba repetida
+     en 18 reglas y cualquier cambio implicaba tocarlas todas. */
+  --display: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* ======== RESET ======== */
@@ -35,9 +40,9 @@ body {
   margin-bottom: 20px;
 }
 h2.sec-title {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: clamp(30px, 4.5vw, 58px);
-  font-weight: 600; line-height: 1.06; letter-spacing: -.03em;
+  font-weight: 700; line-height: 1.04; letter-spacing: -.035em;
   margin-bottom: 20px;
 }
 h2.sec-title em { font-style: normal; color: inherit; }
@@ -114,7 +119,7 @@ h2.sec-title em { font-style: normal; color: inherit; }
 }
 .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); }
 .mobile-nav a {
-  font-family: 'Lora', serif; font-size: 30px; font-weight: 600;
+  font-family: var(--display); font-size: 30px; font-weight: 600;
   color: var(--ink); text-decoration: none; letter-spacing: -.01em;
   opacity: 0; transform: translateY(14px);
   transition: opacity .3s ease, transform .38s cubic-bezier(.16,1,.3,1), color .15s;
@@ -148,9 +153,11 @@ h2.sec-title em { font-style: normal; color: inherit; }
 }
 .hero-eyebrow { margin-bottom: 36px; }
 h1.hero-title {
-  font-family: 'Lora', Georgia, serif;
-  font-size: clamp(44px, 6.5vw, 84px);
-  font-weight: 600; line-height: 1.02; letter-spacing: -.04em;
+  font-family: var(--display);
+  /* 68px y no 84: Instrument Sans es mas ancha que la serif que reemplazo,
+     y a 84 el titular caia en 4 lineas empujando el boton fuera de vista. */
+  font-size: clamp(40px, 5.4vw, 68px);
+  font-weight: 700; line-height: 1.04; letter-spacing: -.04em;
   max-width: none; margin-bottom: 44px;
 }
 h1.hero-title em { font-style: normal; color: inherit; }
@@ -187,7 +194,7 @@ h1.hero-title em { font-style: normal; color: inherit; }
 .hero-bg-num {
   position: absolute; right: -20px; top: 50%;
   transform: translateY(-50%);
-  font-family: 'Lora', serif;
+  font-family: var(--display);
   font-size: clamp(160px, 24vw, 320px);
   font-weight: 600; color: transparent;
   -webkit-text-stroke: 1.5px var(--line);
@@ -212,7 +219,7 @@ h1.hero-title em { font-style: normal; color: inherit; }
 }
 .hero-bar-item:last-child { border-right: none; }
 .hero-bar-num {
-  font-family: 'Lora', serif; font-size: 28px; font-weight: 600;
+  font-family: var(--display); font-size: 28px; font-weight: 600;
   color: var(--ink); letter-spacing: -.02em; flex: none;
 }
 .hero-bar-num span { color: var(--sage); }
@@ -267,7 +274,7 @@ section { border-bottom: 1px solid var(--line); }
   border-bottom: 1px solid var(--line);
 }
 .pstat-num {
-  font-family: 'Lora', serif;
+  font-family: var(--display);
   font-size: clamp(52px, 8vw, 88px);
   font-weight: 600; line-height: 1; letter-spacing: -.03em;
   color: var(--ink); margin-bottom: 14px;
@@ -289,9 +296,9 @@ section { border-bottom: 1px solid var(--line); }
   border-bottom: none;
 }
 .declaration blockquote {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: clamp(22px, 3.4vw, 42px);
-  font-weight: 600; line-height: 1.18; letter-spacing: -.02em;
+  font-weight: 600; line-height: 1.16; letter-spacing: -.03em;
   max-width: 22ch; margin-bottom: 28px;
   color: var(--cream);
 }
@@ -313,7 +320,7 @@ section { border-bottom: 1px solid var(--line); }
 }
 .proceso-item:last-child { border-bottom: 1px solid var(--line); }
 .proceso-num {
-  font-family: 'Lora', serif; font-size: 52px; font-weight: 600;
+  font-family: var(--display); font-size: 52px; font-weight: 600;
   color: var(--line); letter-spacing: -.03em; line-height: 1;
   padding-top: 2px;
   transition: color .4s cubic-bezier(.16,1,.3,1);
@@ -328,7 +335,7 @@ section { border-bottom: 1px solid var(--line); }
   padding: 4px 10px; border-radius: 2px; margin-bottom: 13px;
 }
 .proceso-content h3 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: 22px; font-weight: 600;
   margin-bottom: 10px; letter-spacing: -.02em; line-height: 1.2;
 }
@@ -432,7 +439,7 @@ section { border-bottom: 1px solid var(--line); }
   gap: 60px; padding-bottom: 72px; align-items: start;
 }
 .dif-text h3 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: clamp(21px, 3vw, 30px); font-weight: 600;
   letter-spacing: -.02em; margin-bottom: 18px; line-height: 1.22;
 }
@@ -488,9 +495,9 @@ section { border-bottom: 1px solid var(--line); }
 }
 .cta-left .sec-num { margin-bottom: 16px; }
 .cta-left h2 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: clamp(26px, 3.6vw, 46px);
-  font-weight: 600; line-height: 1.08; letter-spacing: -.03em;
+  font-weight: 700; line-height: 1.06; letter-spacing: -.035em;
   margin-bottom: 18px;
 }
 .cta-left h2 em { font-style: normal; color: inherit; }
@@ -530,7 +537,7 @@ section { border-bottom: 1px solid var(--line); }
   width: 100%; background: var(--cream);
   border: 1px solid var(--line); border-radius: 2px;
   padding: 12px 14px;
-  font-family: 'Lora', serif; font-size: 15px; color: var(--ink);
+  font-family: var(--display); font-size: 15px; color: var(--ink);
   outline: none; transition: border-color .2s; -webkit-appearance: none;
 }
 .form-row input:focus,
@@ -646,36 +653,55 @@ footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
 .plan-unico-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
 .plan-unico-right .split-label { text-align: right; }
 
-/* ======== PRUEBA SOCIAL / CASOS ======== */
-.casos-grid {
+/* ======== OPINIONES ======== */
+.proof-bar {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border: 1px solid var(--line); border-radius: 4px;
+  background: var(--paper); margin-bottom: 52px; overflow: hidden;
+}
+.proof-item {
+  flex: 1 1 150px; padding: 20px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.proof-item:last-child { border-right: none; }
+.proof-num {
+  font-family: var(--display); font-size: 34px; font-weight: 700;
+  letter-spacing: -.035em; line-height: 1; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.proof-label {
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+
+.op-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 20px; padding-bottom: 72px;
+  gap: 18px; padding-bottom: 76px;
 }
-.caso-card {
+.op-card {
   background: var(--paper); border: 1px solid var(--line);
-  border-radius: 4px; padding: 32px 26px;
-  display: flex; flex-direction: column;
+  border-radius: 4px; padding: 26px 24px;
+  display: flex; flex-direction: column; margin: 0;
 }
-.caso-tipo {
-  font-family: 'Poppins', sans-serif; font-size: 10px;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--sage); font-weight: 600; margin-bottom: 14px;
+.op-stars {
+  color: var(--sage); font-size: 13px; letter-spacing: .16em;
+  margin-bottom: 14px; line-height: 1;
 }
-.caso-resultado {
-  font-size: clamp(18px, 2.2vw, 22px); font-weight: 600;
-  line-height: 1.25; letter-spacing: -.01em; margin-bottom: 20px;
+.op-text {
+  flex: 1; margin: 0 0 18px; font-size: 15px;
+  line-height: 1.72; color: var(--ink);
 }
-.caso-resultado em { font-style: normal; color: inherit; }
-.caso-quote {
-  flex: 1; font-size: 14.5px; color: var(--muted); line-height: 1.78;
-  padding-top: 18px; border-top: 1px solid var(--line);
-  font-style: italic;
+.op-firma {
+  border-top: 1px solid var(--line); padding-top: 13px;
+  display: flex; flex-direction: column; gap: 2px;
 }
-.caso-firma {
-  font-family: 'Poppins', sans-serif; font-size: 11px;
-  letter-spacing: .04em; color: var(--muted); font-weight: 500;
-  margin-top: 14px; padding-top: 14px;
-  border-top: 1px solid var(--line); font-style: normal;
+.op-nombre {
+  font-family: var(--body); font-size: 12.5px;
+  font-weight: 600; color: var(--ink); letter-spacing: .01em;
+}
+.op-fuente {
+  font-family: var(--body); font-size: 11px; color: var(--muted); letter-spacing: .02em;
 }
 
 /* ======== SECCIÓN OSCURA (#porque) ======== */
@@ -715,7 +741,9 @@ footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
   .pstat:nth-child(1), .pstat:nth-child(2) { border-bottom: none; }
   .pstat { border-top: 1px solid var(--line); }
 
-  .casos-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .op-grid { grid-template-columns: repeat(2, 1fr); }
+  .proof-item { flex-basis: 100%; border-right: none; border-bottom: 1px solid var(--line); }
+  .proof-item:last-child { border-bottom: none; }
   .servicios-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .plan-unico { grid-template-columns: 1fr; gap: 20px; }
   .plan-unico-right { align-items: flex-start; }
@@ -730,6 +758,7 @@ footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
 }
 
 @media (max-width: 560px) {
+  .op-grid { grid-template-columns: 1fr; }
   .wrap { padding: 0 20px; }
   .declaration { padding: 72px 0; }
   .cta-section { padding: 72px 0; }
@@ -776,9 +805,9 @@ body.menu-open { overflow: hidden; }
 .page-head { padding: 152px 0 0; }
 .page-head .eyebrow { margin-bottom: 18px; display: block; }
 .page-head h1 {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--display);
   font-size: clamp(32px, 5vw, 62px);
-  font-weight: 600; line-height: 1.04; letter-spacing: -.03em;
+  font-weight: 700; line-height: 1.02; letter-spacing: -.04em;
   margin-bottom: 22px;
 }
 /* Sin italica ni color distinto: el enfasis en titulos usa el mismo tono.
@@ -827,7 +856,7 @@ body.menu-open { overflow: hidden; }
   color: var(--sage); font-weight: 600; margin-bottom: 12px;
 }
 .link-card h3 {
-  font-family: 'Lora', Georgia, serif; font-size: 23px;
+  font-family: var(--display); font-size: 23px;
   font-weight: 600; letter-spacing: -.01em; margin-bottom: 10px; line-height: 1.2;
 }
 .link-card p {
@@ -848,7 +877,7 @@ body.menu-open { overflow: hidden; }
   gap: 56px; align-items: start; padding-bottom: 80px;
 }
 .detail-h2 {
-  font-family: 'Lora', Georgia, serif; font-size: 26px;
+  font-family: var(--display); font-size: 26px;
   font-weight: 600; letter-spacing: -.01em; margin: 40px 0 16px;
 }
 .detail-h2:first-child { margin-top: 0; }
@@ -861,7 +890,7 @@ body.menu-open { overflow: hidden; }
 }
 .price-panel .split-label { margin-bottom: 8px; }
 .price-panel .pp-price {
-  font-family: 'Lora', Georgia, serif; font-size: 34px;
+  font-family: var(--display); font-size: 34px;
   font-weight: 600; letter-spacing: -.02em; line-height: 1;
 }
 .price-panel .pp-sep { height: 1px; background: var(--line); margin: 20px 0; }
@@ -874,7 +903,7 @@ body.menu-open { overflow: hidden; }
 .fuero { padding: 26px 0; border-top: 1px solid var(--line); }
 .fuero:last-of-type { border-bottom: 1px solid var(--line); }
 .fuero h3 {
-  font-family: 'Lora', Georgia, serif; font-size: 21px;
+  font-family: var(--display); font-size: 21px;
   font-weight: 600; margin-bottom: 8px; letter-spacing: -.01em;
 }
 .fuero p { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 64ch; }

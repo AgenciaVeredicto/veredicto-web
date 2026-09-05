@@ -1,0 +1,39 @@
+---
+import { proof, opiniones } from '../data/site.js';
+---
+<section id="opiniones">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num reveal">Lo que dicen</div>
+      <h2 class="sec-title reveal d1">Más de {proof.clientes} estudios<br>ya pasaron por acá.</h2>
+
+      <div class="proof-bar reveal d2">
+        <div class="proof-item">
+          <span class="proof-num">+{proof.clientes}</span>
+          <span class="proof-label">Clientes asesorados</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">{proof.puntaje}</span>
+          <span class="proof-label">Puntaje en Google</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">{proof.opiniones}</span>
+          <span class="proof-label">Opiniones publicadas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="op-grid">
+      {opiniones.map(o => (
+        <figure class="op-card reveal">
+          <div class="op-stars" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote class="op-text">{o.texto}</blockquote>
+          <figcaption class="op-firma">
+            <span class="op-nombre">{o.nombre}</span>
+            <span class="op-fuente">Opinión en Google</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

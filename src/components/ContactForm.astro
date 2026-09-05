@@ -4,16 +4,12 @@ import { services, ars } from '../data/site.js';
 // Las opciones salen de prices.json: no hay precios escritos a mano.
 const options = [];
 services.forEach(s => {
-  if (s.oneTime != null) {
-    options.push({ value: s.id, label: `${s.formLabel} ($${ars(s.oneTime)} único)` });
-    if (s.monthly != null) {
-      options.push({
-        value: `${s.id}-abono`,
-        label: `${s.formLabel.split(' · ')[0]} + Gestión mensual ($${ars(s.oneTime)} + $${ars(s.monthly)}/mes)`
-      });
-    }
-  } else {
-    options.push({ value: s.id, label: `${s.formLabel} (${s.formSuffix})` });
+  options.push({ value: s.id, label: s.formLabel });
+  if (s.monthly != null) {
+    options.push({
+      value: `${s.id}-abono`,
+      label: `${s.formLabel.split(' · ')[0]} + Gestión mensual`
+    });
   }
 });
 

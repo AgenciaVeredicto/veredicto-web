@@ -20,6 +20,30 @@ export const SITE = {
   foundingDate: '2024'
 };
 
+/* ---------- PRUEBA SOCIAL ----------
+ * Opiniones textuales del perfil de Google Business, transcritas literalmente.
+ * Lo unico que se toco es la mayuscula inicial donde faltaba.
+ * Las 6 restantes del perfil son solo estrellas, sin texto: cuentan para el
+ * total pero no pueden ir como testimonio.
+ *
+ * No se marca AggregateRating en el JSON-LD: Google no admite calificaciones
+ * que un negocio publica sobre si mismo en su propio sitio.
+ */
+export const proof = {
+  clientes: 65,
+  opiniones: 13,
+  puntaje: '5,0'
+};
+
+export const opiniones = [
+  { nombre: 'Pilar Arguello',   texto: 'Excelente trabajo, muy predispuestos y un trato muy personal para la necesidad de cada estudio.' },
+  { nombre: 'Francisco Tagle',  texto: 'Este es mi segundo mes y la verdad 0 quejas, solo puedo decir que gracias por el servicio.' },
+  { nombre: 'Brisa Armando',    texto: 'Totalmente recomendado. Los chicos súper comprometidos y atentos.' },
+  { nombre: 'Lautaro Alladio',  texto: 'Muy buena agencia, siempre respondiendo con mucha amabilidad. Excelente.' },
+  { nombre: 'Ambar Bruna',      texto: 'Muy profesionales. Excelente atención.' },
+  { nombre: 'Matías Alincastro',texto: 'Muy serios y responsables.' }
+];
+
 export const TC = prices.exchangeRate;
 export const ars = n => n.toLocaleString('es-AR');
 export const usd = n => Math.round(n / TC);

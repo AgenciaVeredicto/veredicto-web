@@ -11,8 +11,9 @@ export async function getStaticPaths() {
 const { service: s } = Astro.props;
 const others = services.filter(x => x.id !== s.id);
 
+// Sin precio publicado, el schema tampoco lo declara: si el JSON-LD dijera
+// un importe que la pagina no muestra, seria una senal contradictoria.
 const offer = { '@type': 'Offer', availability: 'https://schema.org/InStock' };
-if (s.oneTime != null) { offer.price = String(s.oneTime); offer.priceCurrency = 'ARS'; }
 
 const schema = {
   '@context': 'https://schema.org',
@@ -58,25 +59,14 @@ const schema = {
       </div>
 
       <aside class="price-panel reveal">
-        {s.oneTime != null ? (
+        <div class="split-label">Presupuesto</div>
+        <div class="pp-price" style="font-size:26px">A medida</div>
+        <div class="price-intl" style="opacity:.75">Cada estudio parte de una situación distinta. El diagnóstico define el alcance, y el alcance define el precio.</div>
+        {s.monthly != null && (
           <>
-            <div class="split-label">Pago único</div>
-            <div class="pp-price">${ars(s.oneTime)}<span class="cur-badge">ARS</span></div>
-            <div class="price-intl">≈ <strong>USD {usd(s.oneTime)}</strong></div>
-            {s.monthly != null && (
-              <>
-                <div class="pp-sep"></div>
-                <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
-                <div class="pp-price" style="font-size:26px">${ars(s.monthly)}<span class="period">/mes</span><span class="cur-badge">ARS</span></div>
-                <div class="price-intl">≈ <strong>USD {usd(s.monthly)}</strong><span class="period">/mo</span></div>
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            <div class="split-label">Precio</div>
-            <div class="pp-price" style="font-size:26px">{s.quoteLabel}</div>
-            {s.quoteNote && <div class="price-intl" style="opacity:.7">{s.quoteNote}</div>}
+            <div class="pp-sep"></div>
+            <div class="split-label">Gestión mensual <span style="font-size:10px;opacity:.7">(opcional)</span></div>
+            <div class="price-intl" style="opacity:.75">Se puede sumar al proyecto o contratar después.</div>
           </>
         )}
         <a href={`/contacto/?plan=${s.id}`} class="btn-plan btn-plan-outline">Consultar este servicio</a>
@@ -93,9 +83,7 @@ const schema = {
           <h3>{o.name}</h3>
           <p>{o.lead}</p>
           <div class="lc-foot">
-            {o.oneTime != null
-              ? <span class="lc-price">${ars(o.oneTime)}<span class="lc-cur">ARS</span></span>
-              : <span class="lc-price">{o.quoteLabel}</span>}
+            <span class="lc-price">Presupuesto a medida</span>
             <span>Ver detalle →</span>
           </div>
         </a>

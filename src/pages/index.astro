@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaSection from '../components/CtaSection.astro';
-import { SITE, services, areas, ars, usd } from '../data/site.js';
+import Opiniones from '../components/Opiniones.astro';
+import { SITE, services, areas, proof } from '../data/site.js';
 
 const heroLines = JSON.stringify([
   [{ text: 'Tus clientes están buscando.', italic: false }],
@@ -29,7 +30,6 @@ const schema = {
   address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.city, addressCountry: 'AR' },
   areaServed: [{ '@type': 'City', name: SITE.city }, { '@type': 'Country', name: SITE.country }],
   serviceType: 'Marketing jurídico',
-  priceRange: `ARS ${ars(Math.min(...priced))} - ARS ${ars(Math.max(...priced))}`,
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -42,7 +42,6 @@ const schema = {
     name: 'Servicios',
     itemListElement: services.map(s => {
       const offer = { '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `https://agenciaveredicto.com${s.url}` } };
-      if (s.oneTime != null) { offer.price = String(s.oneTime); offer.priceCurrency = 'ARS'; }
       return offer;
     })
   }
@@ -188,6 +187,8 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
   </div>
 </section>
 
+<Opiniones />
+
 <!-- Servicios: en la home solo el resumen; el detalle vive en /servicios/ -->
 <section id="servicios">
   <div class="wrap">
@@ -204,9 +205,7 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
           <h3>{s.name}</h3>
           <p>{s.lead}</p>
           <div class="lc-foot">
-            {s.oneTime != null
-              ? <span class="lc-price">${ars(s.oneTime)}<span class="lc-cur">ARS · USD {usd(s.oneTime)}</span></span>
-              : <span class="lc-price">{s.quoteLabel}</span>}
+            <span class="lc-price">Presupuesto a medida</span>
             <span>Ver detalle →</span>
           </div>
         </a>
@@ -253,8 +252,8 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
             <svg viewBox="0 0 16 16"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
           </div>
           <div class="dif-body">
-            <h4>Transparencia total en precios</h4>
-            <p>Los planes tienen precio fijo y publicado. Los servicios a medida se cotizan antes de empezar, y ese número no cambia a mitad del proyecto.</p>
+            <h4>Presupuesto cerrado antes de empezar</h4>
+            <p>Sabés el número exacto antes de que arranquemos, y ese número no cambia a mitad del proyecto. Sin adicionales que aparecen después.</p>
           </div>
         </div>
         <div class="dif-row reveal d4">
