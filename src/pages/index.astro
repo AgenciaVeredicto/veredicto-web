@@ -29,7 +29,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: SITE.name,
-  description: 'Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local.',
+  description: 'Marketing para servicios profesionales: sitios web, posicionamiento en Google y en respuestas de IA para estudios de abogados, contables, escribanías, consultorios y consultores.',
   url: 'https://agenciaveredicto.com',
   logo: 'https://agenciaveredicto.com/favicon.svg',
   image: 'https://agenciaveredicto.com/og-image.png',
@@ -43,7 +43,7 @@ const schema = {
   sameAs: SITE.social,
   address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.city, addressCountry: 'AR' },
   areaServed: [{ '@type': 'City', name: SITE.city }, { '@type': 'Country', name: SITE.country }],
-  serviceType: 'Marketing jurídico',
+  serviceType: 'Marketing para servicios profesionales',
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -61,19 +61,20 @@ const schema = {
   }
 };
 
-const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps optimizado', 'SEO local', 'Estudios de abogados', 'Córdoba, Argentina', 'Presencia digital', 'Agencia Veredicto'];
+const tickerItems = ['Marketing para profesionales', 'Sitio web a medida', 'Google Maps optimizado', 'SEO local', 'Posicionamiento en IA', 'Estudios y consultorios', 'Presencia digital', 'Agencia Veredicto'];
 ---
 <Base
   title="Agencia Veredicto"
-  description="Marketing jurídico para estudios de abogados en Argentina. Sitios web profesionales, Google Maps optimizado y posicionamiento local."
+  description="Marketing para servicios profesionales: sitios web, posicionamiento en Google y en respuestas de IA para estudios de abogados, contables, escribanías, consultorios y consultores."
   schema={[schema, faqSchema]}
 >
 
 <section class="hero" aria-label="Portada">
+  <div class="hero-canvas" id="heroCanvas" aria-hidden="true"></div>
   <div class="hero-bg-num" aria-hidden="true">V</div>
   <div class="wrap" style="display:flex;flex-direction:column;height:100%;">
     <div style="margin-bottom:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;">
-      <div class="eyebrow">Marketing jurídico · Córdoba, Argentina</div>
+      <div class="eyebrow">Marketing para servicios profesionales</div>
       <div class="eyebrow" style="color:var(--muted)">Est. {SITE.foundingDate}</div>
     </div>
 
@@ -119,7 +120,7 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
   <div class="wrap">
     <div class="sec-head">
       <h2 class="sec-title reveal">Los clientes buscan.<br>El estudio <em>no aparece.</em></h2>
-      <p class="sec-intro reveal d2">El 80% de las personas busca un abogado en Google antes de llamar. Si el estudio no aparece, o aparece mal, la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</p>
+      <p class="sec-intro reveal d2">Las cifras que siguen son del sector jurídico, que es donde nacimos y donde más trabajamos. El patrón se repite en cualquier profesión que dependa de que la encuentren: si el estudio no aparece, o aparece mal, la consulta se va a la competencia. No porque sean mejores. Porque aparecen primero.</p>
     </div>
 
     <div class="problema-stats">
@@ -152,7 +153,7 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
     <blockquote class="reveal">
       "Un estudio sin presencia digital no tiene<br><em>ninguna visibilidad</em> ante el cliente moderno."
     </blockquote>
-    <cite class="reveal d1">Agencia Veredicto · Marketing Jurídico · Córdoba, {SITE.foundingDate}</cite>
+    <cite class="reveal d1">Agencia Veredicto · Córdoba, {SITE.foundingDate}</cite>
   </div>
 </div>
 
@@ -208,7 +209,7 @@ const tickerItems = ['Marketing jurídico', 'Sitio web a medida', 'Google Maps o
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-num reveal">Servicios</div>
-      <h2 class="sec-title reveal d1">Precio publicado.<br><em>Sin sorpresas.</em></h2>
+      <h2 class="sec-title reveal d1">Presupuesto cerrado.<br><em>Sin sorpresas.</em></h2>
       <p class="sec-intro reveal d2">Dos planes de presencia digital completa, más servicios de posicionamiento, redes y renovación. Cada uno tiene su página con el detalle completo.</p>
     </div>
 

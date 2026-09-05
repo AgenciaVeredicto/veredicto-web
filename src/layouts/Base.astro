@@ -40,7 +40,7 @@ const fullTitle = title === SITE.titleBase ? title : `${title} · ${SITE.titleBa
   <meta property="og:image"        content={ogImageUrl}>
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt"    content="Agencia Veredicto · Marketing Jurídico · Córdoba, Argentina">
+  <meta property="og:image:alt"    content="Agencia Veredicto · Marketing para servicios profesionales">
 
   <!-- Twitter -->
   <meta name="twitter:card"        content="summary_large_image">
@@ -70,6 +70,7 @@ const fullTitle = title === SITE.titleBase ? title : `${title} · ${SITE.titleBa
 <Footer />
 
 <script is:inline src="/site.js"></script>
+{Astro.url.pathname === '/' && <script is:inline src="/hero-anim.js"></script>}
 
 </body>
 </html>

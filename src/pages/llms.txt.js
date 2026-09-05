@@ -10,11 +10,11 @@ export async function GET() {
 
   const txt = `# ${SITE.name}
 
-> Agencia de marketing jurídico. Sitios web, posicionamiento en Google y gestión de Google Business para estudios de abogados, estudios contables, escribanías y consultores. Con sede en ${SITE.city}, ${SITE.country}, desde ${SITE.foundingDate}.
+> Agencia de marketing para servicios profesionales. Sitios web, posicionamiento en Google y en respuestas de IA, y gestión de Google Business para estudios de abogados, estudios contables, escribanías, consultorios y consultores. Los estudios jurídicos son el núcleo de su trabajo y el origen de la agencia. Con sede en ${SITE.city}, ${SITE.country}, desde ${SITE.foundingDate}.
 
 ## Qué hace
 
-Veredicto construye la presencia digital de estudios profesionales: sitio web a medida, SEO local, ficha de Google Business optimizada, gestión de redes y renovación de sitios desactualizados. El trabajo empieza siempre con un diagnóstico gratuito de cómo aparece el estudio en Google.
+Veredicto construye la presencia digital de estudios y consultorios profesionales: sitio web a medida, SEO local, ficha de Google Business optimizada, gestión de redes y renovación de sitios desactualizados. El trabajo empieza siempre con un diagnóstico gratuito de cómo aparece el estudio en Google.
 
 - Clientes asesorados: más de ${proof.clientes}
 - Opiniones en Google: ${proof.opiniones}, con puntaje ${proof.puntaje} sobre 5

@@ -342,3 +342,48 @@ h2.sec-title,
 /* Botones del sitio: nunca parten en dos lineas */
 .btn-plan, .btn-nav, .btn-submit { white-space: nowrap; }
 
+
+/* "Otros profesionales" cierra el desplegable: se separa del resto para que
+   se lea como categoria aparte y no como un quinto sector. */
+.nav-menu .nm-otros { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 6px; }
+.nav-menu .nm-otros .nm-title { color: var(--sage); }
+
+/* ======== FONDO ANIMADO DEL HERO ========
+ * Va detras de todo y no intercepta clics. El canvas lo crea el JS: si el
+ * script no corre, este contenedor queda vacio y el hero se ve igual.
+ */
+.hero-canvas {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.hero-canvas canvas { display: block; }
+.hero > .wrap { position: relative; z-index: 1; }
+.hero-bg-num { z-index: 0; }
+
+/* ======== PROCESO DENTRO DE UNA PAGINA DE SERVICIO ======== */
+.plazo-nota {
+  font-size: 14px; color: var(--muted);
+  background: var(--paper); border: 1px solid var(--line);
+  border-left: 3px solid var(--sage);
+  border-radius: 3px; padding: 12px 16px; margin: 0 0 26px;
+}
+.plazo-nota strong { color: var(--ink); font-weight: 600; }
+
+.proceso-pasos { list-style: none; counter-reset: paso; margin: 0 0 12px; padding: 0; }
+.proceso-pasos li {
+  counter-increment: paso;
+  display: grid; grid-template-columns: 30px 1fr; gap: 0 16px;
+  padding: 16px 0; border-top: 1px solid var(--line);
+}
+.proceso-pasos li:last-child { border-bottom: 1px solid var(--line); }
+.proceso-pasos li::before {
+  content: counter(paso, decimal-leading-zero);
+  font-family: var(--display); font-size: 13px; font-weight: 700;
+  color: var(--sage); letter-spacing: .02em; padding-top: 2px;
+}
+.pp-titulo {
+  display: block; font-family: var(--body); font-size: 14.5px;
+  font-weight: 600; color: var(--ink); margin-bottom: 4px;
+}
+.pp-texto { display: block; font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 60ch; }

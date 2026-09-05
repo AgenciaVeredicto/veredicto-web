@@ -121,9 +121,9 @@ export const usd = n => Math.round(n / TC);
 const serviceMeta = {
   plan1: {
     slug: 'landing-profesional',
-    title: 'Landing Profesional para estudios jurídicos',
+    title: 'Landing Profesional para estudios y consultorios',
     description:
-      'Sitio web de una página para estudios de abogados: diseño a medida, textos propios, dominio y hosting incluidos. Publicado en menos de 7 días hábiles.',
+      'Sitio web de una página para estudios y consultorios: diseño a medida, textos propios, dominio y hosting incluidos. Publicado en menos de 7 días hábiles.',
     lead: 'Para el estudio que quiere una presencia digital sólida y en funcionamiento en días.',
     intro:
       'Una página bien resuelta rinde más que un sitio grande a medio terminar. Diseñamos la landing completa del estudio: quiénes son, qué hacen, por qué confiar y cómo contactarlos. Sin plantillas genéricas y sin textos de relleno.',
@@ -171,12 +171,12 @@ const serviceMeta = {
   },
   redes: {
     slug: 'gestion-de-redes-sociales',
-    title: 'Gestión de redes sociales para estudios jurídicos',
+    title: 'Gestión de redes sociales para servicios profesionales',
     description:
-      'Contenido y comunidad para estudios de abogados: diseño de publicaciones, calendario de contenidos y métricas mensuales.',
+      'Contenido y comunidad para estudios y consultorios: diseño de publicaciones, calendario de contenidos y métricas mensuales.',
     lead: 'Contenido y comunidad para tu estudio.',
     intro:
-      'Gestionamos la presencia del estudio en redes sociales con contenido profesional y una estrategia pensada para el sector jurídico. Trabajamos con distintos planes según los objetivos, las redes y el volumen de contenido.',
+      'Gestionamos la presencia del estudio en redes sociales con contenido profesional y una estrategia pensada para servicios profesionales. Trabajamos con distintos planes según los objetivos, las redes y el volumen de contenido.',
     features: [
       'Diseño de publicaciones',
       'Calendario de contenidos',
@@ -234,11 +234,120 @@ const serviceMeta = {
   }
 };
 
+/* ---------- PROFUNDIDAD POR SERVICIO ----------
+ * Proceso, plazos, que aporta el cliente y preguntas propias.
+ * Es lo que hace que una pagina de servicio compita: responde lo que la
+ * persona realmente pregunta antes de contratar, y son respuestas
+ * autocontenidas, que es el formato que citan los sistemas de IA.
+ */
+export const detalle = {
+  plan1: {
+    plazo: '7 días hábiles desde que recibimos los textos y las fotos.',
+    proceso: [
+      ['Diagnóstico', 'Revisamos cómo aparece hoy el estudio y qué necesita la página para convertir. Sale un documento con la propuesta de estructura.'],
+      ['Contenido', 'Redactamos todos los textos. No hace falta que los escriba el cliente: se hacen a partir de una entrevista de una hora.'],
+      ['Diseño y desarrollo', 'Se arma la página completa, con versión móvil desde el primer día. Se muestra en un enlace privado para revisar antes de publicar.'],
+      ['Publicación', 'Dominio, hosting y certificado de seguridad configurados. La página queda online y el formulario probado.']
+    ],
+    aportas: [
+      'Una hora de entrevista para entender el estudio',
+      'Logo si existe, o lo diseñamos aparte',
+      'Fotos del equipo y del lugar, si las hay'
+    ],
+    faq: [
+      { q: '¿Sirve una sola página o conviene un sitio completo?', a: 'Para un estudio que hoy no tiene nada, una página bien resuelta rinde más que un sitio grande a medio terminar. Si el objetivo es competir por búsquedas en Google, ahí sí conviene el Plan 02, que agrega estructura de varias páginas y trabajo de posicionamiento.' },
+      { q: '¿Qué pasa después de los 12 meses de hosting?', a: 'Se renueva el hosting y el dominio a precio de costo, o se puede migrar el sitio a la cuenta del estudio sin cargo. La página es del cliente, no queda atada a nosotros.' },
+      { q: '¿Puedo editar los textos yo después?', a: 'Sí. Se entrega con acceso y una capacitación corta para cambiar textos, fotos y datos de contacto sin depender de nadie.' }
+    ]
+  },
+  plan2: {
+    plazo: '3 a 4 semanas. El posicionamiento empieza a moverse a partir del tercer mes.',
+    proceso: [
+      ['Diagnóstico y palabras clave', 'Analizamos qué busca la gente en la zona y en la especialidad, y qué está haciendo la competencia. De ahí sale la estructura de páginas.'],
+      ['Arquitectura y contenido', 'Una página por área de práctica o servicio, escritas para responder lo que la gente pregunta. Es lo que permite competir por más de una búsqueda.'],
+      ['Desarrollo y datos estructurados', 'Sitio completo, con schema, sitemap y la preparación para que los sistemas de IA puedan citarlo.'],
+      ['Indexación y Google Business', 'Alta en Search Console, ficha de Google Business optimizada y medición configurada.'],
+      ['Medición', 'Informe inicial de posiciones y de visibilidad en ChatGPT, Gemini, Perplexity y Copilot, contra el que se compara después.']
+    ],
+    aportas: [
+      'Dos horas de entrevista, en una o dos sesiones',
+      'Acceso a la ficha de Google Business si ya existe',
+      'Fotos del equipo y del lugar',
+      'Definir qué tipo de consultas interesa atraer'
+    ],
+    faq: [
+      { q: '¿En cuánto tiempo aparezco primero en Google?', a: 'Nadie puede garantizar una posición ni una fecha. Lo que sí se puede decir: las correcciones técnicas se reflejan en semanas, y el posicionamiento orgánico se mueve entre el tercer y el sexto mes, según cuánta competencia haya en la especialidad y la ciudad.' },
+      { q: '¿Qué diferencia hay con el Plan 01?', a: 'El Plan 01 es una página que presenta al estudio. El Plan 02 es una estructura pensada para competir por búsquedas: varias páginas, trabajo de palabras clave, datos estructurados, Google Business y preparación para búsqueda con IA.' },
+      { q: '¿Incluye escribir el blog todos los meses?', a: 'No. Incluye el blog listo para publicar y la primera entrada cargada, más la capacitación para que el estudio publique. La redacción mensual es parte de la gestión, que se contrata aparte.' },
+      { q: '¿Qué es el posicionamiento en IA que incluye?', a: 'Dejamos el sitio en condiciones de que ChatGPT, Gemini o Perplexity puedan entenderlo y citarlo: datos estructurados, contenido que responde preguntas de forma autónoma, identidad consistente entre el sitio y los perfiles, y un archivo llms.txt. Y entregamos el informe de dónde aparece hoy el estudio en esos sistemas.' }
+    ]
+  },
+  redes: {
+    plazo: 'El primer calendario de contenidos se entrega a los 10 días.',
+    proceso: [
+      ['Estrategia', 'Definimos a quién le hablamos, con qué tono y con qué frecuencia, según los objetivos del estudio.'],
+      ['Calendario', 'Se planifica el mes completo por adelantado y se aprueba antes de publicar. Nada sale sin revisión.'],
+      ['Producción', 'Diseño de las piezas y redacción de los textos, con la identidad visual del estudio.'],
+      ['Comunidad e informe', 'Respuesta a comentarios y mensajes, más un informe mensual de qué funcionó y qué no.']
+    ],
+    aportas: [
+      'Aprobación del calendario antes de cada mes',
+      'Material propio cuando lo haya: fotos, novedades, casos',
+      'Un canal rápido para consultas de la comunidad'
+    ],
+    faq: [
+      { q: '¿Qué redes conviene para un profesional?', a: 'Depende del cliente que se busca. Para captación de particulares suele rendir Instagram; para clientes empresa, LinkedIn. Trabajar bien una sola rinde más que sostener tres a medias.' },
+      { q: '¿Publican sin que yo revise?', a: 'No. El calendario del mes se aprueba antes de que salga la primera pieza. Si algo no convence, se cambia antes de publicar.' },
+      { q: '¿Puedo contratar redes sin tener sitio web?', a: 'Se puede, pero rinde menos. Las redes generan interés y el sitio es donde ese interés se convierte en consulta. Sin un lugar al que mandar a la gente, se pierde buena parte del esfuerzo.' }
+    ]
+  },
+  gbusiness: {
+    plazo: '5 días hábiles. La verificación de Google puede sumar 1 o 2 semanas más, y no depende de nosotros.',
+    proceso: [
+      ['Reclamo o creación', 'Si la ficha existe pero no está a nombre del estudio, se reclama. Si no existe, se crea desde cero.'],
+      ['Optimización', 'Categorías correctas, descripción trabajada con las búsquedas de la zona, horarios, servicios y preguntas frecuentes cargadas.'],
+      ['Fotos y contenido', 'Carga de imágenes del lugar y del equipo, que es lo que más incide en que alguien elija un perfil sobre otro.'],
+      ['Reseñas', 'Se deja configurado el enlace directo para pedir reseñas y se explica cómo pedirlas sin resultar invasivo.']
+    ],
+    aportas: [
+      'Acceso a la ficha si ya está creada',
+      'Fotos del lugar, la fachada y el equipo',
+      'Horarios reales de atención'
+    ],
+    faq: [
+      { q: '¿Sirve si atiendo solo con turno y no recibo gente sin aviso?', a: 'Sí. Google permite fichas de negocios que atienden con cita previa, e incluso sin dirección visible al público. Lo importante es aparecer en el mapa cuando alguien busca la especialidad en la zona.' },
+      { q: '¿Cuántas reseñas necesito?', a: 'No hay un número mágico. Lo que más pesa es que sean recientes, constantes en el tiempo y que el negocio responda. Diez reseñas repartidas en el año rinden más que treinta el mismo día.' },
+      { q: '¿Puedo hacerlo yo mismo?', a: 'Sí, la ficha es gratuita y cualquiera puede crearla. Lo que aporta el servicio es la elección de categorías, cómo se escribe la descripción y qué se carga, que es donde se define si aparecés o no en el mapa.' }
+    ]
+  },
+  renovacion: {
+    plazo: '2 a 3 semanas, según el tamaño del sitio actual.',
+    proceso: [
+      ['Auditoría', 'Revisamos qué funciona, qué está frenando las consultas y qué posiciones tiene hoy el sitio en Google. Nada se tira sin saber qué rinde.'],
+      ['Plan de migración', 'Se define qué contenido se conserva, qué se reescribe y qué URLs hay que redirigir para no perder posicionamiento.'],
+      ['Rediseño', 'Diseño nuevo con la identidad actualizada, versión móvil y velocidad de carga corregida.'],
+      ['Migración y control', 'Publicación con las redirecciones configuradas y seguimiento de las posiciones durante las semanas siguientes.']
+    ],
+    aportas: [
+      'Acceso al sitio actual y al panel del dominio',
+      'Qué del sitio viejo querés conservar',
+      'Acceso a las métricas si las hay'
+    ],
+    faq: [
+      { q: '¿Voy a perder el posicionamiento que ya tengo?', a: 'No, si la migración se hace bien. Se mapean las URLs viejas a las nuevas con redirecciones permanentes y se vigilan las posiciones después de publicar. El riesgo real de perder posiciones aparece cuando se cambia de sitio sin redirigir nada.' },
+      { q: '¿Se puede rescatar el sitio actual en vez de rehacerlo?', a: 'A veces sí, y lo decimos en la auditoría. Si el problema es de velocidad, textos o estructura, puede salir más barato corregir. Si está hecho sobre una base que no se puede sostener, rehacerlo cuesta menos que parcharlo.' },
+      { q: '¿Qué pasa con el correo del dominio?', a: 'No se toca. La renovación afecta al sitio, no a las casillas de correo, que siguen funcionando igual durante y después de la migración.' }
+    ]
+  }
+};
+
 export const services = prices.services.map(s => ({
   ...s,
   ...serviceMeta[s.id],
+  detalle: detalle[s.id] || null,
   url: `/servicios/${serviceMeta[s.id].slug}/`
 }));
+
 
 export const serviceBySlug = slug => services.find(s => s.slug === slug);
 
@@ -355,7 +464,9 @@ export const otrosProfesionales = [
   'Ingenieros y peritos',
   'Martilleros y corredores inmobiliarios',
   'Traductores públicos',
+  'Odontólogos y clínicas dentales',
   'Psicólogos y consultorios',
+  'Kinesiólogos y nutricionistas',
   'Despachantes de aduana',
   'Agrimensores',
   'Asesores de seguros'
