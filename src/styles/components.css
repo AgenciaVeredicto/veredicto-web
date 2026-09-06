@@ -387,3 +387,26 @@ h2.sec-title,
   font-weight: 600; color: var(--ink); margin-bottom: 4px;
 }
 .pp-texto { display: block; font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 60ch; }
+
+/* ======== ACCESIBILIDAD Y RASTREADORES SIN JS ========
+ * El titular del hero ahora se renderiza en el servidor y se anima con CSS.
+ * Antes el JS se encargaba de respetar movimiento reducido; al sacarlo, esa
+ * condicion tiene que vivir aca o el titular queda invisible para quien
+ * pidio menos movimiento.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-word { animation: none; opacity: 1; transform: none; }
+  .hero-bg-num { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Sin JavaScript no hay animacion de entrada, pero tampoco nada oculto:
+   el titular se ve completo desde el primer pintado. */
+.hero-linea { display: block; }
+
+/* Enlace semantico al servicio relacionado: en prosa, no como listado */
+.relacionado {
+  font-size: 15px; color: var(--muted); line-height: 1.75;
+  border-left: 2px solid var(--sage-l);
+  padding: 2px 0 2px 16px; margin: 22px 0 0; max-width: 60ch;
+}

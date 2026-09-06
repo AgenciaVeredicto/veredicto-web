@@ -57,7 +57,7 @@ export const opiniones = [
 export const faq = [
   {
     q: '¿Qué es el posicionamiento en IA y por qué debería importarme?',
-    a: 'Cada vez más gente le pregunta a ChatGPT, Gemini o Perplexity en lugar de buscar en Google, y esos sistemas responden citando fuentes. El posicionamiento en IA, también llamado GEO, es el trabajo de lograr que tu estudio sea una de esas fuentes: contenido que el modelo pueda entender, datos verificables y una identidad consistente que pueda reconocer y nombrar.'
+    a: 'El posicionamiento en IA, o GEO, es el trabajo de lograr que sistemas como ChatGPT, Gemini o Perplexity nombren a tu estudio cuando alguien les pregunta por un profesional de tu especialidad. Se consigue con contenido que el modelo pueda entender, datos verificables y una identidad consistente entre el sitio y los perfiles. Importa porque cada vez más gente le pregunta a un asistente en lugar de buscar en Google, y esos sistemas responden citando fuentes: o sos una de esas fuentes, o no aparecés.'
   },
   {
     q: '¿Reemplaza al SEO de siempre?',
@@ -341,10 +341,24 @@ export const detalle = {
   }
 };
 
+/* ---------- ENLACES SEMANTICOS ENTRE SERVICIOS ----------
+ * Cada servicio apunta al que sigue de forma natural en la conversacion
+ * con el cliente. Son enlaces en prosa, no un listado: dan contexto al
+ * lector y le dan a un modelo la relacion entre dos paginas.
+ */
+export const relacionados = {
+  plan1: { texto: 'Si además de tener presencia el objetivo es competir por búsquedas en Google, el paso siguiente es el', ancla: 'Sitio Completo + SEO', url: '/servicios/sitio-web-completo-seo/' },
+  plan2: { texto: 'Para que el estudio también aparezca en el mapa cuando alguien busca en la zona, conviene sumar el trabajo sobre', ancla: 'Google Business', url: '/servicios/google-business/' },
+  redes: { texto: 'Las redes generan interés, pero ese interés necesita un lugar donde convertirse en consulta: ahí entra el', ancla: 'Sitio Completo + SEO', url: '/servicios/sitio-web-completo-seo/' },
+  gbusiness: { texto: 'La ficha rinde mucho más cuando apunta a un sitio que sostiene la búsqueda. Si todavía no hay uno, empezá por la', ancla: 'Landing Profesional', url: '/servicios/landing-profesional/' },
+  renovacion: { texto: 'Si el sitio actual no tiene arreglo y conviene rehacerlo con posicionamiento desde cero, el camino es el', ancla: 'Sitio Completo + SEO', url: '/servicios/sitio-web-completo-seo/' }
+};
+
 export const services = prices.services.map(s => ({
   ...s,
   ...serviceMeta[s.id],
   detalle: detalle[s.id] || null,
+  relacionado: relacionados[s.id] || null,
   url: `/servicios/${serviceMeta[s.id].slug}/`
 }));
 

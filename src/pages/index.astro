@@ -18,10 +18,19 @@ const faqSchema = {
   }))
 };
 
-const heroLines = JSON.stringify([
-  [{ text: 'Tus clientes están buscando.', italic: false }],
-  [{ text: 'Nos aseguramos de que te encuentren.', italic: false }]
-]);
+// El titular se arma en el build, no en el navegador: antes el <h1> salia
+// VACIO en el HTML y los rastreadores de IA, que no ejecutan JS, no veian
+// el encabezado principal de la home.
+const heroLineas = [
+  'Tus clientes están buscando.',
+  'Nos aseguramos de que te encuentren.'
+];
+let _d = 0.3;
+const heroPalabras = heroLineas.map(l => l.split(' ').map(w => {
+  const item = { w, delay: _d.toFixed(2) };
+  _d += 0.07;
+  return item;
+}));
 
 const priced = services.filter(s => s.oneTime != null).map(s => s.oneTime);
 
@@ -51,6 +60,17 @@ const schema = {
     closes: SITE.hoursClose
   },
   knowsLanguage: 'es',
+  knowsAbout: [
+    'Posicionamiento web (SEO)',
+    'Posicionamiento en motores generativos (GEO)',
+    'SEO local',
+    'Google Business Profile',
+    'Diseño y desarrollo de sitios web',
+    'Marketing para estudios jurídicos',
+    'Marketing para estudios contables',
+    'Marketing para escribanías',
+    'Gestión de redes sociales'
+  ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Servicios',
@@ -79,7 +99,17 @@ const tickerItems = ['Marketing para profesionales', 'Sitio web a medida', 'Goog
     </div>
 
     <div class="hero-content">
-      <h1 class="hero-title" id="heroTitle" data-lines={heroLines} aria-label="Tus clientes están buscando. Nos aseguramos de que te encuentren."></h1>
+      <h1 class="hero-title" id="heroTitle">
+        {heroPalabras.map(linea => (
+          <span class="hero-linea">
+            {/* El espacio entre palabras va como nodo de texto real: sin el,
+                un extractor lee "Tusclientesestanbuscando" en una sola palabra. */}
+            {linea.map((p, i) => (
+              <>{i > 0 && ' '}<span class="hero-word" style={`animation-delay:${p.delay}s`}>{p.w}</span></>
+            ))}
+          </span>
+        ))}
+      </h1>
       <div class="hero-foot">
         <p class="hero-desc reveal d2">
           La mayoría de los estudios argentinos no aparece cuando el cliente busca. Hacemos un diagnóstico gratuito de tu presencia en Google y te decimos exactamente qué hay que cambiar, sin compromiso.

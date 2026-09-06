@@ -586,12 +586,14 @@ footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
 }
 
 /* ======== ANIMATIONS ======== */
-.reveal {
+/* Solo se ocultan si hay JS que pueda volver a mostrarlos. Sin esta
+   condicion, un rastreador que no ejecuta JS ve 60 bloques en opacity:0. */
+.js .reveal {
   opacity: 0; transform: translateY(26px);
   transition: opacity .55s cubic-bezier(.16,1,.3,1),
               transform .55s cubic-bezier(.16,1,.3,1);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.js .reveal.visible { opacity: 1; transform: translateY(0); }
 .d1 { transition-delay: .1s; }
 .d2 { transition-delay: .2s; }
 .d3 { transition-delay: .3s; }
@@ -601,9 +603,7 @@ footer { padding: 56px 0 68px; background: var(--ink); border-top: none; }
 .hero-word {
   display: inline-block; opacity: 0; transform: translateY(16px);
   animation: word-up .65s cubic-bezier(.16,1,.3,1) forwards;
-  margin-right: 0.28em;
 }
-.hero-word:last-child { margin-right: 0; }
 @keyframes word-up {
   to { opacity: 1; transform: translateY(0); }
 }

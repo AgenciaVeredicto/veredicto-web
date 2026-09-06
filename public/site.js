@@ -16,40 +16,8 @@
   }, { passive: true });
 })();
 
-/* -------- HERO TITLE ANIMATION (solo donde hay #heroTitle) -------- */
-(function () {
-  var title = document.getElementById('heroTitle');
-  if (!title) return;
-
-  // Las lineas se declaran en el HTML via data-lines, asi cada pagina
-  // anima su propio titulo sin tocar este archivo.
-  var lines;
-  try { lines = JSON.parse(title.getAttribute('data-lines') || '[]'); }
-  catch (e) { lines = []; }
-  if (!lines.length) return;
-
-  title.innerHTML = '';
-  var delay = 0.3;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  lines.forEach(function (line) {
-    var wrapper = document.createElement('span');
-    wrapper.style.display = 'block';
-    line.forEach(function (seg) {
-      String(seg.text).split(' ').forEach(function (w) {
-        var span = document.createElement('span');
-        span.className = 'hero-word';
-        if (reduced) { span.style.animation = 'none'; span.style.opacity = '1'; span.style.transform = 'none'; }
-        else { span.style.animationDelay = delay + 's'; }
-        span.textContent = w;
-        if (seg.italic) { span.style.fontStyle = 'italic'; span.style.color = 'var(--sage)'; }
-        wrapper.appendChild(span);
-        delay += 0.07;
-      });
-    });
-    title.appendChild(wrapper);
-  });
-})();
+/* El titular del hero se renderiza en el build (ver src/pages/index.astro).
+ * Antes se armaba aca y el <h1> salia vacio en el HTML servido. */
 
 /* -------- NAV SCROLL -------- */
 (function () {

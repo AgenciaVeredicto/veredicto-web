@@ -89,6 +89,12 @@ const migas = breadcrumb([['Inicio', '/'], ['Servicios', '/servicios/'], [s.name
         <p>Todo empieza con un diagnóstico gratuito: miramos cómo aparece hoy el estudio en Google, qué está haciendo la competencia de la zona y qué cambios moverían la aguja. Recién ahí te decimos si este es el servicio indicado, o si conviene otro.</p>
         <p>Si avanzamos, el presupuesto acordado es el que se factura. No hay adicionales que aparezcan a mitad del proyecto.</p>
 
+        {s.relacionado && (
+          <p class="relacionado">
+            {s.relacionado.texto} <a href={s.relacionado.url}>{s.relacionado.ancla}</a>.
+          </p>
+        )}
+
         {s.detalle && (
           <>
             <h2 class="detail-h2">Preguntas sobre este servicio</h2>
